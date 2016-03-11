@@ -14,12 +14,13 @@ class dataset {
         node iget();
         void reset();
         void shuffle();
+        int length();
     private:
-        void swap(node *, node *, node *, node*);
+        void swap(int, int, node*[]);
         int fyrand(int);
         node * head;
         node * current;
-        int length;
+        int len;
 };
 
 #endif 

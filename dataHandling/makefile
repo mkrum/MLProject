@@ -1,8 +1,8 @@
 main: test
 
-test: test.cpp readCsv.o node.o
-	g++ -g test.cpp readCsv.o node.o -o $@
-    
-%.o: %.c
+test: test.cpp dataset.o readCsv.o node.o
+	g++ -g $^ -o $@
+
+%.o: %.cpp
 	g++ -g -c $^
 

@@ -5,13 +5,15 @@
 dataset::dataset(std::string file, int col) {
     readCsv reader(file);
     head = reader.read(col);
-    length = reader.getLength();
+    current = head;
+    len = reader.getLength();
 }
 
 node dataset::get(int index){
     node * ret = head;
     int i = 0;
     while(i < index && ret->next() != NULL){
+        i++;
         ret = ret->next();
     }
     return *ret;
@@ -21,9 +23,10 @@ node dataset::iget(){
     if(current->next() != NULL){
         node * tmp = current;
         current = current->next();
-        return *current;
+        return *tmp;
     } else {
-        return NULL;
+        node * tmp = current;
+        return *tmp;
     }
 }
 
@@ -34,15 +37,16 @@ void dataset::reset() {
 //(https://github.com/mkrum/CSinglePerceptron.git)
 //Fisher-Yates Shuffle
 void dataset::shuffle(){
-    node * deck[length];
+    reset();
+    node * deck[len];
     node * tmp = head;
-    for(int i = 0; i < length; i++){
+    for(int i = 0; i < len; i++){
         deck[i] = tmp;
-        tmp = tmp->next;
+        tmp = tmp->next();
     }
-    for(int j = length - 1; j > 1; j--){
+    for(int j = len - 1; j > 1; j--){
         int z = fyrand(j + 1);
-        swap(deck[j - 1], deck[j], deck[z - 1], deck[z]);
+        swap(j, z, deck);
     }
 }
 
@@ -56,14 +60,19 @@ int dataset::fyrand(int n){
     return num % n + 1;
 }
 
-void dataset::swap(node * preval1, node * val1, node * preval2, node * val2) {
-    preval1->setNext(val2);
-    preval2->setNext(val1);
-    node * temp = val1->next();
-    val1->setNext(val2->next());
-    val2->setNext(temp);
+void dataset::swap(int j, int z, node * deck[]){
+    deck[j-1]->setNext(deck[z]);
+    deck[z-1]->setNext(deck[j]);
+    node * temp = deck[j]->next();
+    deck[j]->setNext(deck[z]->next());
+    deck[z]->setNext(temp);
+    temp = deck[z];
+    deck[z] = deck[j];
+    deck[j] = temp;
 }
 
-
+int dataset::length() {
+    return len;
+}
         
 
