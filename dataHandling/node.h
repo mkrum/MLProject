@@ -8,17 +8,21 @@
 
 class node {
     public: 
+        node();
         node(std::string identifier, std::vector<double> data, std::vector<std::string> binates);
-        node*  next();
+        node& operator=(const node &);
+        node* next();
         void setNext(node *);
-        double getData(int);
-        std::string getBinate(int);
-        std::string getIdent();
+        double getData(int) const;
+        std::string getBinate(int) const;
+        std::string getIdent() const;
+        std::vector<double> dataVector() const;
+        std::vector<std::string> binatesVector() const;
     private:
         std::string identifier;
         std::vector<double> data;
         std::vector<std::string> binates;
-        node * nextNode;
+        node* nextNode;
 };
 
         

@@ -46,9 +46,8 @@ node * readCsv::read(int column){
         std::vector<double> tmpData;
         std::vector<std::string> tmpString;
         std::string ident = readLine(line, tmpData, tmpString, column);
-        node head(ident, tmpData, tmpString);
-        node * headpt = &head;
-        node * tmp = &head;
+        node * head = new node(ident, tmpData, tmpString);
+        node * tmp = head;
         length = 0;
         while(!myStream.eof()) {
             length++;
@@ -57,11 +56,13 @@ node * readCsv::read(int column){
             std::vector<double> tmpData;
             std::vector<std::string> tmpString;
             std::string ident = readLine(line, tmpData, tmpString, column);
-            tmp->setNext(new node(ident, tmpData, tmpString));
-            tmp = tmp->next();
+            node * tmp2 = new node(ident, tmpData, tmpString);
+            tmp->setNext(tmp2);
+            tmp = tmp2;
         }
+        std::cout << ">" << head->next()->getIdent();
         myStream.close();
-        return headpt;
+        return head;
     }
     return NULL;
 }

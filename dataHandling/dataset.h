@@ -18,8 +18,8 @@ class dataset {
     private:
         void swap(int, int, node*[]);
         int fyrand(int);
-        node * head;
-        node * current;
+        node head;
+        node current;
         int len;
 };
 

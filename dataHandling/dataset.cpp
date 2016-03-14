@@ -1,34 +1,40 @@
 //Implementation for the dataset class
 //Michael Krumdick
 #include "dataset.h"
-
+#include <iostream>
 dataset::dataset(std::string file, int col) {
+    std::cout << "here" << std::endl;
     readCsv reader(file);
-    head = reader.read(col);
+    head = *reader.read(col);
+    node * tmp = &head;
+    while(head.next() != NULL){
+        std::cout << tmp->getIdent() << std::endl;
+        tmp = tmp->next();
+    }
     current = head;
     len = reader.getLength();
 }
 
 node dataset::get(int index){
-    node * ret = head;
+    node ret = head;
     int i = 0;
-    while(i < index && ret->next() != NULL){
+    while(i < index && ret.next() != NULL){
         i++;
-        ret = ret->next();
+        ret = *ret.next();
     }
-    return *ret;
+    return ret;
 }
 
 node dataset::iget(){
-    if(current->next() != NULL){
-        node * tmp = current;
-        current = current->next();
-        return *tmp;
+    if(current.next() != NULL){
+        node tmp;
+        tmp = current;
+        current = *current.next();
+        return tmp;
     } else {
-        node * tmp = current;
-        return *tmp;
+        return current;
     }
-}
+} 
 
 void dataset::reset() {
     current = head;
@@ -39,10 +45,10 @@ void dataset::reset() {
 void dataset::shuffle(){
     reset();
     node * deck[len];
-    node * tmp = head;
+    node tmp = head;
     for(int i = 0; i < len; i++){
-        deck[i] = tmp;
-        tmp = tmp->next();
+        deck[i] = &tmp;
+        tmp = *tmp.next();
     }
     for(int j = len - 1; j > 1; j--){
         int z = fyrand(j + 1);
