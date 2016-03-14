@@ -19,7 +19,11 @@ std::string readCsv::readLine(std::string line, std::vector<double> &dat, std::v
             continue;
         }
         if(isDouble(part.c_str())){
-            dat.push_back(std::stod(part));
+            std::stringstream ss;
+            ss << part;
+            double dPart;
+            ss >> dPart;
+            dat.push_back(dPart);
         } else {
             binates.push_back(part);
         }
@@ -31,13 +35,13 @@ bool readCsv::isDouble(const char* str){
     char* endptr = 0;
     std::strtod(str, &endptr);
     if(*endptr != '\0' || endptr == str)
-        return false;
+ `       return false;
     return true;
 }
 
     
 
-node * readCsv::read(int column){
+void readCsv::read(int column){
     std::ifstream myStream;
     myStream.open(filename.c_str());
     if(myStream.is_open()){
@@ -47,6 +51,7 @@ node * readCsv::read(int column){
         std::vector<std::string> tmpString;
         std::string ident = readLine(line, tmpData, tmpString, column);
         node * head = new node(ident, tmpData, tmpString);
+        std::cout << head->getIdent();
         node * tmp = head;
         length = 0;
         while(!myStream.eof()) {
@@ -58,13 +63,11 @@ node * readCsv::read(int column){
             std::string ident = readLine(line, tmpData, tmpString, column);
             node * tmp2 = new node(ident, tmpData, tmpString);
             tmp->setNext(tmp2);
-            tmp = tmp2;
+            tmp = tmp->next();
         }
-        std::cout << ">" << head->next()->getIdent();
+        std::cout << ">" << head->getIdent();
         myStream.close();
-        return head;
     }
-    return NULL;
 }
     
 int readCsv::getLength(){

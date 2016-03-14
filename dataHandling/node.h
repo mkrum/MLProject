@@ -9,7 +9,7 @@
 class node {
     public: 
         node();
-        node(std::string identifier, std::vector<double> data, std::vector<std::string> binates);
+        void setData(std::string* , std::vector<double>* , std::vector<std::string>* );
         node& operator=(const node &);
         node* next();
         void setNext(node *);
@@ -19,10 +19,10 @@ class node {
         std::vector<double> dataVector() const;
         std::vector<std::string> binatesVector() const;
     private:
-        std::string identifier;
-        std::vector<double> data;
-        std::vector<std::string> binates;
+        std::string* identifier;
         node* nextNode;
+        std::vector<double>* data;
+        std::vector<std::string>* binates;
 };
 
         

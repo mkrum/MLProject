@@ -6,12 +6,7 @@
 
 int main() {
     dataset iris("iris.csv", 5);
-    for(int i = 0; i < iris.length() - 1; i++){
-        std::cout << iris.iget().getIdent() << std::endl;
-    }
-    iris.reset(); 
     for(int i = 0; i < iris.length(); i++){
-       std::cout << iris.iget().getIdent() << std::endl;
+        std::cout << iris.iget()->getIdent();
     }
 }
-

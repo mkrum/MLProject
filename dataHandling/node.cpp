@@ -2,33 +2,34 @@
 #include "node.h"
 
 node::node(){
-    std::string ident = "empty node";
-    std::vector<double> inData;
-    std::vector<std::string> bin;
-    identifier = ident;
-    data = inData;
-    binates = bin;
+    identifier = NULL;
+    data = NULL;
+    binates = NULL;
+    nextNode = NULL;
 }
 
-node::node(std::string ident, std::vector<double> inData, std::vector<std::string> bin) {
-    identifier = ident;
+void node::setData(std::string* inIdent, std::vector<double>* inData, std::vector<std::string>* inBin) {
+    identifier = inIdent;
     data = inData;
-    binates = bin;
+    binates = inBin;
 }
 
 node& node::operator=(const node & copy){
-    this->identifier = copy.getIdent();
-    this->data = copy.dataVector();
-    this->binates = copy.binatesVector();
+    std::string* tindent = new std::string(copy.getIdent());
+    std::vector<double>* dat = new std::vector<double>(copy.dataVector());
+    std::vector<std::string>* bin = new std::vector<std::string>(copy.binatesVector());
+    data = dat;
+    identifier = tindent;
+    binates = bin;
     return *this;
 }
 
 std::vector<double> node::dataVector() const{
-    return data;
+    return *data;
 }
 
 std::vector<std::string> node::binatesVector() const{
-    return binates;
+    return *binates;
 }
 
 node* node::next() {
@@ -40,13 +41,16 @@ void node::setNext(node * inNext) {
 }
 
 double node::getData(int i) const{
-    return data[i];
+    std::vector<double> tData = *data;
+    return tData[i];
 }
 
 std::string node::getBinate(int i) const{
-    return binates[i];
+    std::vector<std::string> tBin = *binates;
+    return tBin[i];
 }
 
+
 std::string node::getIdent() const{
-    return identifier;
+    return *identifier;
 }
