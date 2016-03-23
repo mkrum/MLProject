@@ -6,7 +6,8 @@
 
 int main() {
     dataset iris("iris.csv", 5);
+    iris.shuffle();
     for(int i = 0; i < iris.length(); i++){
-        std::cout << iris.iget()->getIdent();
+        std::cout << iris.iget()->getIdent() << std::endl;
     }
 }

@@ -2,11 +2,11 @@
 //Michael Krumdick
 #include "dataset.h"
 #include <iostream>
-
+//instiaties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
     read(file, col);
 }
-
+//simple function that will get the node at a certain index i
 node dataset::get(int index){
     node* ret = head;
     int i = 0;
@@ -16,7 +16,7 @@ node dataset::get(int index){
     }
     return *ret;
 }
-
+//"Iterative get" function, use this when you are getting elements one after another
 node* dataset::iget(){
     if(current->next() != NULL){
         node* tmp = current;
@@ -26,13 +26,25 @@ node* dataset::iget(){
         return current;
     }
 }
-
+//resets the current node to the head
 void dataset::reset() {
     current = head;
 }
 //inspired by a similar function that I used for my CSinglePerceptron project
 //(https://github.com/mkrum/CSinglePerceptron.git)
 //Fisher-Yates Shuffle
+static int fyrand(int n){
+    srand(time(NULL));
+    int limit = RAND_MAX - RAND_MAX % n;
+    int num;
+    do{
+        num = rand();
+    }while(num >= limit);
+    if(num % n == 0)
+        return 1;
+    return num % n;
+}
+//randomizes the data
 void dataset::shuffle(){
     reset();
     node * deck[len];
@@ -41,22 +53,14 @@ void dataset::shuffle(){
         deck[i] = tmp;
         tmp = tmp->next();
     }
-    for(int j = len - 1; j > 1; j--){
+    for(int j = len - 1; j > 0; j--){
         int z = fyrand(j + 1);
         swap(j, z, deck);
     }
 }
 
-int dataset::fyrand(int n){
-    srand(time(NULL));
-    int limit = RAND_MAX - RAND_MAX % n;
-    int num;
-    do{
-        num = rand();
-    }while(num >= limit);
-    return num % n + 1;
-}
 
+//swap two elements in the list
 void dataset::swap(int j, int z, node * deck[]){
     deck[j-1]->setNext(deck[z]);
     deck[z-1]->setNext(deck[j]);
@@ -67,11 +71,11 @@ void dataset::swap(int j, int z, node * deck[]){
     deck[z] = deck[j];
     deck[j] = temp;
 }
-
+//return the length
 int dataset::length() {
     return len;
 }
-
+//read a single line from the csv document and create a node
 std::string dataset::readLine(std::string line, std::vector<double> &dat, std::vector<std::string> &binates, int col){
     std::stringstream sstream(line);
     std::string part;
@@ -96,7 +100,7 @@ std::string dataset::readLine(std::string line, std::vector<double> &dat, std::v
     }
     return identifier;
 }
-
+//checks if a string is in the double form
 bool dataset::isDouble(const char* str){
     char* endptr = 0;
     std::strtod(str, &endptr);
@@ -104,14 +108,14 @@ bool dataset::isDouble(const char* str){
         return false;
     return true;
 }
-
+//adds object to linked list
 void dataset::addToList(std::string* ident, std::vector<double>* tmpData, std::vector<std::string>* tmpBin){
     node * tmp = new node;
     tmp->setData(ident, tmpData, tmpBin);
     end->setNext(tmp);
     end = tmp;
 }
-
+//the csv reader, creates the linked list
 void dataset::read(std::string filename, int column){
     std::ifstream myStream;
     myStream.open(filename.c_str());
@@ -135,11 +139,6 @@ void dataset::read(std::string filename, int column){
             std::string ident = readLine(line, *tmpData, *tmpString, column);
             std::string* ide = new std::string(ident);
             addToList(ide, tmpData, tmpString);
-        }
-        node * temp = head;
-        while (temp->next() != NULL){
-            std::cout << temp->getIdent() << std::endl;
-            temp = temp->next();
         }
         myStream.close();
     }

@@ -8,11 +8,11 @@
 int main() {
     dataset cred("credit.csv", 15);
     for(int i = 0; i < cred.length(); i++){
-        std::cout << cred.iget()->getIdent();
+        std::cout << cred.iget()->getIdent() << std::endl;
     }
     cred.shuffle();
     std::cout << "shuffling order..." << std::endl;
     for(int i = 0; i < cred.length(); i++){
-        std::cout << cred.iget()->getIdent();
+        std::cout << cred.iget()->getIdent() << std::endl;
     }
 }

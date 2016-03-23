@@ -4,8 +4,11 @@
 #define DATASET_H
 
 #include "node.h"
-#include "readCsv.h"
 #include <string>
+#include <cstdlib>
+#include <vector>
+#include <sstream>
+#include <fstream>
 
 class dataset {
     public:
@@ -21,7 +24,6 @@ class dataset {
         void addToList(std::string*, std::vector<double>*, std::vector<std::string>*);
         bool isDouble(const char *);
         void swap(int, int, node*[]);
-        int fyrand(int);
         node* head;
         node* current;
         node* end;

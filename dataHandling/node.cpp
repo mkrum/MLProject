@@ -1,19 +1,22 @@
 //Node implementation
 #include "node.h"
 
+//binates are the string data
+
+//instantiate the memory
 node::node(){
     identifier = NULL;
     data = NULL;
     binates = NULL;
     nextNode = NULL;
 }
-
+//set the data
 void node::setData(std::string* inIdent, std::vector<double>* inData, std::vector<std::string>* inBin) {
     identifier = inIdent;
     data = inData;
     binates = inBin;
 }
-
+// = overload
 node& node::operator=(const node & copy){
     std::string* tindent = new std::string(copy.getIdent());
     std::vector<double>* dat = new std::vector<double>(copy.dataVector());
@@ -23,11 +26,11 @@ node& node::operator=(const node & copy){
     binates = bin;
     return *this;
 }
-
+//returns the data vector
 std::vector<double> node::dataVector() const{
     return *data;
 }
-
+//returns the binates
 std::vector<std::string> node::binatesVector() const{
     return *binates;
 }
