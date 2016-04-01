@@ -9,6 +9,9 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <map>
+#include <algorithm>
+
 
 class dataset {
     public:
@@ -24,6 +27,15 @@ class dataset {
         void addToList(std::string*, std::vector<double>*, std::vector<std::string>*);
         bool isDouble(const char *);
         void swap(int, int, node*[]);
+        void normalize();
+        std::map<std::string, double> strings;
+        std::vector<std::string> uniqueStrings;
+        void addToStrings(std::string);
+        void handleStrings();
+        int numStrings;
+        std::vector<double> maximum;
+        std::vector<double> minimum;
+        void addToExtrema(std::vector<double>);
         node* head;
         node* current;
         node* end;

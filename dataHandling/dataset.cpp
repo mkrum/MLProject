@@ -5,6 +5,7 @@
 //instiaties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
     read(file, col);
+    normalize();
 }
 //simple function that will get the node at a certain index i
 node dataset::get(int index){
@@ -95,9 +96,11 @@ std::string dataset::readLine(std::string line, std::vector<double> &dat, std::v
             ss >> dPart;
             dat.push_back(dPart);
         } else {
+            addToStrings(part);
             binates.push_back(part);
         }
     }
+    addToExtrema(dat);
     return identifier;
 }
 //checks if a string is in the double form
@@ -144,4 +147,44 @@ void dataset::read(std::string filename, int column){
     }
 
 }
-    
+
+void dataset::addToStrings(std::string inStr) {
+    if (std::find(uniqueStrings.begin(), uniqueStrings.end(), inStr) == uniqueStrings.end()){
+        uniqueStrings.push_back(inStr);
+     }
+}
+
+void dataset::addToExtrema(std::vector<double> inData){
+    if (maximum.size() == 0){
+        for(int z = 0; z < inData.size(); z++){
+            maximum.push_back(inData[z]);
+            minimum.push_back(inData[z]);
+        }
+    } else {
+        for(int z = 0; z < inData.size(); z++){
+            if(inData[z] > maximum[z]){
+                maximum[z] = inData[z];
+            } else if (inData[z] < minimum[z]){
+                minimum[z] = inData[z];
+            }
+        }
+    }
+}
+
+void dataset::normalize() {
+    std::map<std::string, double> convert;
+    for(int i = 0; i < uniqueStrings.size(); i++){
+        convert[uniqueStrings[i]] = i/(uniqueStrings.size() - 1);
+    }
+    node * temp = head;
+    while(temp->next() != NULL){
+        std::vector<std::string> bin = temp->binatesVector();
+        for(int j = 0; j < bin.size(); j++){
+            temp->addToData(convert[bin[j]]);
+        }
+        for(int z = 0; z < maximum.size(); z++){
+            (*temp)[z] = ((*temp)[z] - minimum[z])/(maximum[z] - minimum[z]);
+        }
+        temp = temp->next();
+    }
+}

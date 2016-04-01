@@ -57,3 +57,11 @@ std::string node::getBinate(int i) const{
 std::string node::getIdent() const{
     return *identifier;
 }
+
+void node::addToData(double inData){
+    data->push_back(inData);
+}
+
+double& node::operator[](int in){
+    return (*data)[in];
+}
