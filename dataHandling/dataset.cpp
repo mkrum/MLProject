@@ -1,7 +1,7 @@
 //Implementation for the dataset class
 //Michael Krumdick
 #include "dataset.h"
-#include <iostream>
+
 //instiaties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
     read(file, col);
@@ -18,13 +18,13 @@ node dataset::get(int index){
     return *ret;
 }
 //"Iterative get" function, use this when you are getting elements one after another
-node* dataset::iget(){
+node dataset::iget(){
     if(current->next() != NULL){
         node* tmp = current;
         current = current->next();
-        return tmp;
+        return *tmp;
     } else{
-        return current;
+        return *current;
     }
 }
 //resets the current node to the head
@@ -174,7 +174,7 @@ void dataset::addToExtrema(std::vector<double> inData){
 void dataset::normalize() {
     std::map<std::string, double> convert;
     for(int i = 0; i < uniqueStrings.size(); i++){
-        convert[uniqueStrings[i]] = i/(uniqueStrings.size() - 1);
+        convert[uniqueStrings[i]] = i/(uniqueStrings.size() - 1.0);
     }
     node * temp = head;
     while(temp->next() != NULL){

@@ -65,3 +65,7 @@ void node::addToData(double inData){
 double& node::operator[](int in){
     return (*data)[in];
 }
+
+double node::size() const{
+    return data->size();
+}

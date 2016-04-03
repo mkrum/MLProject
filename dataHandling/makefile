@@ -1,6 +1,6 @@
-main: test2
+main: test
 
-test2: test2.cpp dataset.o node.o
+test: test.cpp dataset.o node.o
 	g++ -g $^ -o $@
 
 %.o: %.cpp

@@ -17,7 +17,7 @@ class dataset {
     public:
         dataset(std::string, int);
         node get(int);
-        node* iget();
+        node iget();
         void reset();
         void shuffle();
         int length();

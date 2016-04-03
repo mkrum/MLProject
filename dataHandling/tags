@@ -1,0 +1,52 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+DATASET_H	dataset.h	4;"	d
+NODE_H	node.h	4;"	d
+addToData	node.cpp	/^void node::addToData(double inData){$/;"	f	class:node
+addToExtrema	dataset.cpp	/^void dataset::addToExtrema(std::vector<double> inData){$/;"	f	class:dataset
+addToList	dataset.cpp	/^void dataset::addToList(std::string* ident, std::vector<double>* tmpData, std::vector<std::string>* tmpBin){$/;"	f	class:dataset
+addToStrings	dataset.cpp	/^void dataset::addToStrings(std::string inStr) {$/;"	f	class:dataset
+binates	node.h	/^        std::vector<std::string>* binates;$/;"	m	class:node
+binatesVector	node.cpp	/^std::vector<std::string> node::binatesVector() const{$/;"	f	class:node
+current	dataset.h	/^        node* current;$/;"	m	class:dataset
+data	node.h	/^        std::vector<double>* data;$/;"	m	class:node
+dataVector	node.cpp	/^std::vector<double> node::dataVector() const{$/;"	f	class:node
+dataset	dataset.cpp	/^dataset::dataset(std::string file, int col) {$/;"	f	class:dataset
+dataset	dataset.h	/^class dataset {$/;"	c
+end	dataset.h	/^        node* end;$/;"	m	class:dataset
+fyrand	dataset.cpp	/^static int fyrand(int n){$/;"	f	file:
+get	dataset.cpp	/^node dataset::get(int index){$/;"	f	class:dataset
+getBinate	node.cpp	/^std::string node::getBinate(int i) const{$/;"	f	class:node
+getData	node.cpp	/^double node::getData(int i) const{$/;"	f	class:node
+getIdent	node.cpp	/^std::string node::getIdent() const{$/;"	f	class:node
+head	dataset.h	/^        node* head;$/;"	m	class:dataset
+identifier	node.h	/^        std::string* identifier;$/;"	m	class:node
+iget	dataset.cpp	/^node dataset::iget(){$/;"	f	class:dataset
+isDouble	dataset.cpp	/^bool dataset::isDouble(const char* str){$/;"	f	class:dataset
+len	dataset.h	/^        int len;$/;"	m	class:dataset
+length	dataset.cpp	/^int dataset::length() {$/;"	f	class:dataset
+main	test.cpp	/^int main() {$/;"	f
+main	test2.cpp	/^int main() {$/;"	f
+maximum	dataset.h	/^        std::vector<double> maximum;$/;"	m	class:dataset
+minimum	dataset.h	/^        std::vector<double> minimum;$/;"	m	class:dataset
+next	node.cpp	/^node* node::next() {$/;"	f	class:node
+nextNode	node.h	/^        node* nextNode;$/;"	m	class:node
+node	node.cpp	/^node::node(){$/;"	f	class:node
+node	node.h	/^class node {$/;"	c
+normalize	dataset.cpp	/^void dataset::normalize() {$/;"	f	class:dataset
+numStrings	dataset.h	/^        int numStrings;$/;"	m	class:dataset
+operator =	node.cpp	/^node& node::operator=(const node & copy){$/;"	f	class:node
+operator []	node.cpp	/^double& node::operator[](int in){$/;"	f	class:node
+read	dataset.cpp	/^void dataset::read(std::string filename, int column){$/;"	f	class:dataset
+readLine	dataset.cpp	/^std::string dataset::readLine(std::string line, std::vector<double> &dat, std::vector<std::string> &binates, int col){$/;"	f	class:dataset
+reset	dataset.cpp	/^void dataset::reset() {$/;"	f	class:dataset
+setData	node.cpp	/^void node::setData(std::string* inIdent, std::vector<double>* inData, std::vector<std::string>* inBin) {$/;"	f	class:node
+setNext	node.cpp	/^void node::setNext(node * inNext) {$/;"	f	class:node
+shuffle	dataset.cpp	/^void dataset::shuffle(){$/;"	f	class:dataset
+strings	dataset.h	/^        std::map<std::string, double> strings;$/;"	m	class:dataset
+swap	dataset.cpp	/^void dataset::swap(int j, int z, node * deck[]){$/;"	f	class:dataset
+uniqueStrings	dataset.h	/^        std::vector<std::string> uniqueStrings;$/;"	m	class:dataset

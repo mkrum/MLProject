@@ -20,6 +20,7 @@ class node {
         std::vector<double> dataVector() const;
         std::vector<std::string> binatesVector() const;
         void addToData(double);
+        double size() const;
     private:
         std::string* identifier;
         node* nextNode;

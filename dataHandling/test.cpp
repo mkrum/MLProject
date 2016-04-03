@@ -5,9 +5,13 @@
 #include <string>
 
 int main() {
-    dataset iris("iris.csv", 5);
+    dataset iris("iris.csv", 1);
     iris.shuffle();
     for(int i = 0; i < iris.length(); i++){
-        std::cout << iris.iget()->getIdent() << std::endl;
+       node temp = iris.iget();
+       for(int j = 0; j < temp.size(); j++){
+            std::cout << temp[j] << " ";
+       }
+       std::cout << std::endl;
     }
 }
