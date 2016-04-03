@@ -31,20 +31,7 @@ node dataset::iget(){
 void dataset::reset() {
     current = head;
 }
-//inspired by a similar function that I used for my CSinglePerceptron project
-//(https://github.com/mkrum/CSinglePerceptron.git)
 //Fisher-Yates Shuffle
-static int fyrand(int n){
-    srand(time(NULL));
-    int limit = RAND_MAX - RAND_MAX % n;
-    int num;
-    do{
-        num = rand();
-    }while(num >= limit);
-    if(num % n == 0)
-        return 1;
-    return num % n;
-}
 //randomizes the data
 void dataset::shuffle(){
     reset();
@@ -55,7 +42,7 @@ void dataset::shuffle(){
         tmp = tmp->next();
     }
     for(int j = len - 1; j > 0; j--){
-        int z = fyrand(j + 1);
+        int z = rand() % len + 1;
         swap(j, z, deck);
     }
 }
