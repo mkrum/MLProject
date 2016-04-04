@@ -11,16 +11,20 @@
 #include <fstream>
 #include <map>
 #include <algorithm>
-
+#include <time.h>
 
 class dataset {
     public:
         dataset(std::string, int);
         node get(int);
         node iget();
+        node tget();
         void reset();
         void shuffle();
+        void split();
         int length();
+        void setPercent(double);
+        int tlength();
     private:
         void read(std::string, int);
         std::string readLine(std::string, std::vector<double>&, std::vector<std::string>&, int);
@@ -39,7 +43,11 @@ class dataset {
         node* head;
         node* current;
         node* end;
+        node* testHead;
+        node* testCurrent;
         int len;
+        int num;
+        double percentage;
 };
 
 #endif 

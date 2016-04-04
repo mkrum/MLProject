@@ -1,11 +1,13 @@
 //Implementation for the dataset class
 //Michael Krumdick
 #include "dataset.h"
-
+#include <iostream>
 //instiaties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
+    percentage = .8;   //default percentage is 80
     read(file, col);
     normalize();
+    reset();
 }
 //simple function that will get the node at a certain index i
 node dataset::get(int index){
@@ -19,22 +21,36 @@ node dataset::get(int index){
 }
 //"Iterative get" function, use this when you are getting elements one after another
 node dataset::iget(){
-    if(current->next() != NULL){
+    if(current != testHead){
         node* tmp = current;
         current = current->next();
         return *tmp;
     } else{
+        std::cout << "TRIGGGERED" << std::endl;
         return *current;
+    }
+}
+//the test get function
+node dataset::tget(){
+   if(testCurrent->next() != NULL){
+        node* tmp = current;
+        current = current->next();
+        return *tmp;
+    } else{
+        return *testCurrent;
     }
 }
 //resets the current node to the head
 void dataset::reset() {
     current = head;
+    shuffle();
+    split();
 }
 //Fisher-Yates Shuffle
 //randomizes the data
 void dataset::shuffle(){
-    reset();
+    srand(time(NULL));
+    current = head;
     node * deck[len];
     node * tmp = head;
     for(int i = 0; i < len; i++){
@@ -42,7 +58,7 @@ void dataset::shuffle(){
         tmp = tmp->next();
     }
     for(int j = len - 1; j > 0; j--){
-        int z = rand() % len + 1;
+        int z = rand() % j + 1;
         swap(j, z, deck);
     }
 }
@@ -61,7 +77,11 @@ void dataset::swap(int j, int z, node * deck[]){
 }
 //return the length
 int dataset::length() {
-    return len;
+    return num;
+}
+//return the length of the test set
+int dataset::tlength() {
+    return len - num;
 }
 //read a single line from the csv document and create a node
 std::string dataset::readLine(std::string line, std::vector<double> &dat, std::vector<std::string> &binates, int col){
@@ -174,4 +194,18 @@ void dataset::normalize() {
         }
         temp = temp->next();
     }
+}
+
+void dataset::split(){
+    num = len * percentage;
+    node *temp = head;
+    for(int i = 0; i < num; i++){
+        temp = temp->next();
+    }
+    testHead = temp;
+    testCurrent = testHead;
+}
+
+void dataset::setPercent(double perc){
+    percentage = perc;
 }
