@@ -15,18 +15,18 @@
 
 class dataset {
     public:
-        dataset(std::string, int);
-        node get(int);
-        node iget();
-        node tget();
-        void reset();
-        void shuffle();
-        void split();
-        int length();
-        void setPercent(double);
-        int tlength();
+        dataset(std::string, int); //constructor, enter the file name and the row you want to predict
+        node iget();    //"iterative" get, use this when youre going through the learning data
+        node tget();    //test get, use this to iterate through the test data
+        void reset();   //call this after you iterate
+        int length();   //length of the learning data
+        void setPercent(double);    //use this to set the percentge for your split
+        int tlength();  //length of the test data
     private:
         void read(std::string, int);
+        node get(int);  
+        void shuffle(); 
+        void split();
         std::string readLine(std::string, std::vector<double>&, std::vector<std::string>&, int);
         void addToList(std::string*, std::vector<double>*, std::vector<std::string>*);
         bool isDouble(const char *);
