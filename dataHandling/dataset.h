@@ -13,11 +13,15 @@
 #include <algorithm>
 #include <time.h>
 #include "iterator.h"
+#include <functional>
+
 
 
 class dataset {
     public:
         dataset(std::string, int); //constructor, enter the file name and the row you want to predict
+        void learn(std::function<void (node)>, std::function<void (node)>);
+   private:
         node iget();    //"iterative" get, use this when youre going through the learning data
         node tget();    //test get, use this to iterate through the test data
         void reset();   //call this after you iterate
@@ -28,7 +32,6 @@ class dataset {
         iterator end();
         iterator tbegin();
         iterator tend();
-    private:
         void read(std::string, int);
         node get(int);  
         void shuffle(); 

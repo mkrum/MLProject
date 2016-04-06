@@ -226,3 +226,9 @@ iterator dataset::tend() {
 iterator dataset::tbegin() {
     return testHead;
 }
+
+void dataset::learn(std::function<void (node)> learn, std::function<void (node)> test){
+    std::for_each(begin(), end(), learn);
+    std::for_each(tbegin(), tend(), test);
+    reset();
+}
