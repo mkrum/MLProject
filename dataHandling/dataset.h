@@ -12,6 +12,8 @@
 #include <map>
 #include <algorithm>
 #include <time.h>
+#include "iterator.h"
+
 
 class dataset {
     public:
@@ -22,6 +24,10 @@ class dataset {
         int length();   //length of the learning data
         void setPercent(double);    //use this to set the percentge for your split
         int tlength();  //length of the test data
+        iterator begin();
+        iterator end();
+        iterator tbegin();
+        iterator tend();
     private:
         void read(std::string, int);
         node get(int);  
@@ -42,7 +48,8 @@ class dataset {
         void addToExtrema(std::vector<double>);
         node* head;
         node* current;
-        node* end;
+        node* last;
+        node* learnEnd;
         node* testHead;
         node* testCurrent;
         int len;

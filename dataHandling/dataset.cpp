@@ -112,9 +112,9 @@ std::string dataset::readLine(std::string line, std::vector<double> &dat, std::v
 }
 //checks if a string is in the double form
 bool dataset::isDouble(const char* str){
-    char* endptr = 0;
-    std::strtod(str, &endptr);
-    if(*endptr != '\0' || endptr == str)
+    char* lastptr = 0;
+    std::strtod(str, &lastptr);
+    if(*lastptr != '\0' || lastptr == str)
         return false;
     return true;
 }
@@ -122,8 +122,8 @@ bool dataset::isDouble(const char* str){
 void dataset::addToList(std::string* ident, std::vector<double>* tmpData, std::vector<std::string>* tmpBin){
     node * tmp = new node;
     tmp->setData(ident, tmpData, tmpBin);
-    end->setNext(tmp);
-    end = tmp;
+    last->setNext(tmp);
+    last = tmp;
 }
 //the csv reader, creates the linked list
 void dataset::read(std::string filename, int column){
@@ -137,7 +137,7 @@ void dataset::read(std::string filename, int column){
         std::string *ident = new std::string(readLine(line, *tmpData, *tmpString, column));
         head = new node;
         head->setData(ident, tmpData, tmpString);
-        end = head;
+        last = head;
         current = head;
         len = 0;
         while(!myStream.eof()) {
@@ -199,13 +199,30 @@ void dataset::normalize() {
 void dataset::split(){
     num = len * percentage;
     node *temp = head;
-    for(int i = 0; i < num; i++){
+    for(int i = 0; i < num - 1; i++){
         temp = temp->next();
     }
-    testHead = temp;
+    learnEnd = temp;
+    testHead = temp->next();
     testCurrent = testHead;
 }
 
 void dataset::setPercent(double perc){
     percentage = perc;
+}
+
+iterator dataset::end() {
+    return learnEnd;
+}
+
+iterator dataset::begin() {
+    return head;
+}
+
+iterator dataset::tend() {
+    return last;
+}
+
+iterator dataset::tbegin() {
+    return testHead;
 }

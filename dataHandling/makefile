@@ -1,10 +1,10 @@
 main: test
 
 test: test.cpp dataset.o node.o
-	g++ -g $^ -o $@
+	g++ -std=c++11 -static-libstdc++ -g $^ -o $@
 
 %.o: %.cpp
-	g++ -g -c $^
+	g++ -std=c++11 -static-libstdc++ -g -c $^
 
 clean:
 	rm -rf test *.o
