@@ -20,10 +20,12 @@
 class dataset {
     public:
         dataset(std::string, int); //constructor, enter the file name and the row you want to predict
-        void learn(std::function<void (node)>, std::function<void (node)>);
-   private:
         node iget();    //"iterative" get, use this when youre going through the learning data
         node tget();    //test get, use this to iterate through the test data
+        void learn(std::function<void (node)>, std::function<void (node)>, int);
+        std::vector<std::string> classes(); //returns the string values for the things you are trying to classify
+        int columns();  //returns the number of columns(number of datapoints per object)
+   private:
         void reset();   //call this after you iterate
         int length();   //length of the learning data
         void setPercent(double);    //use this to set the percentge for your split

@@ -2,7 +2,7 @@
 //Michael Krumdick
 #include "dataset.h"
 #include <iostream>
-//instiaties a dataset from the csv file, col should be the column you want to predict
+//instanties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
     percentage = .8;   //default percentage is 80
     read(file, col);
@@ -26,7 +26,6 @@ node dataset::iget(){
         current = current->next();
         return *tmp;
     } else{
-        std::cout << "TRIGGGERED" << std::endl;
         return *current;
     }
 }
@@ -227,8 +226,19 @@ iterator dataset::tbegin() {
     return testHead;
 }
 
-void dataset::learn(std::function<void (node)> learn, std::function<void (node)> test){
-    std::for_each(begin(), end(), learn);
-    std::for_each(tbegin(), tend(), test);
-    reset();
+void dataset::learn(std::function<void (node)> learn, std::function<void (node)> test, int tests){
+    for(int i = 0; i < tests; i++){
+        std::for_each(begin(), end(), learn);
+        std::for_each(tbegin(), tend(), test);
+        reset();
+    }
 }
+
+std::vector<std::string> dataset::classes(){
+    return uniqueStrings;
+}
+
+int dataset::columns(){
+    return head->size();
+}
+
