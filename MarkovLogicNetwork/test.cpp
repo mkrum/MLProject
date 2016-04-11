@@ -4,5 +4,6 @@
 
 int main() {
     mln net = mln("iris.csv", 5);
+    net.test();
 }
 
