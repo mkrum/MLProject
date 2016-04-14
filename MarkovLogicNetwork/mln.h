@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <map>
 
 using std::string;
 using std::vector;
@@ -24,7 +25,7 @@ class mln {
         void learnWeights(node);
         void evolve();
         vector<string> objects;
-        vector<insight> knowledge;
+        vector< vector<insight> > knowledge;
 
 };
 

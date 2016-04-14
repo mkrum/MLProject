@@ -21,6 +21,8 @@ class insight {
         bool check(node);
         void print() const;
         double weight() const;
+        string ident() const;
+        int column() const;
     private:
         int attempts;
         int successes;
@@ -28,6 +30,8 @@ class insight {
         vector<double> constants;
         vector<std::function<bool(double, double)>> comparisions;
         vector<std::function<bool(bool, bool)>> connectors;
+        vector<int> compOrder;
+        vector<int> connectOrder;
         string identifier;
         void vectorInit();
 };
