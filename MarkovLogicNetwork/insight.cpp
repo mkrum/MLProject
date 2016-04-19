@@ -2,8 +2,7 @@
 //Michael Krumdick
 
 #include "insight.h"
-#include <iostream>
-
+   
 insight::insight(int len, string in) : identifier(in), attempts(0), successes(0){
     std::random_device rd;
     std::default_random_engine gen(rd());
@@ -78,17 +77,16 @@ int insight::column() const {
     return order[0];
 }
 
-void insight::print() const{
+ostream& operator<<(ostream & os, const insight in){
     vector<string> comp {">", "<"};
     vector<string> con {"and", "or"};
-    for(int i = 0; i < order.size(); i++){
-        std::cout << "( Data[" << order[i] << "] " << comp[compOrder[i]] << " " << constants[i] << " ) ";
+    for(int i = 0; i < in.order.size(); i++){
+        os << "( Data[" << in.order[i] << "] " << comp[in.compOrder[i]] << " " << in.constants[i] << " ) ";
         if(i > 0) {
-            std::cout << con[connectOrder[i - 1]] << " ";
+            os << con[in.connectOrder[i - 1]] << " ";
         }
     }
-    std::cout << "is : " << identifier << std::endl;
 }
-        
+   
 
 

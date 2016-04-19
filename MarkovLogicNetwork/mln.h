@@ -14,7 +14,6 @@
 using std::string;
 using std::vector;
 
-
 class mln {
     public:
         mln(std::string, int);
@@ -22,10 +21,13 @@ class mln {
     private:
         dataset data;
         void debug();
+        void updateKB(vector<insight>);
         void learnWeights(node);
         void evolve();
         vector<string> objects;
-        vector< vector<insight> > knowledge;
+        std::map< string, vector<insight> > kb;
+        vector<vector<insight> > knowledge; //information that is being tested 
+        std::map< string, double > lowerBound;
 
 };
 

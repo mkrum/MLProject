@@ -9,9 +9,11 @@
 #include <random>
 #include <functional>
 #include <string>
+#include <iostream>
 
 using std::string;
 using std::vector;
+using std::ostream;
     
 class insight {
     public:
@@ -19,10 +21,10 @@ class insight {
         insight(int, int, string); //constructor for an insight that compares two columns
         insight(const insight &, const insight &);  //mating, two parents
         bool check(node);
-        void print() const;
         double weight() const;
         string ident() const;
         int column() const;
+        friend ostream& operator<<(ostream &, const insight); 
     private:
         int attempts;
         int successes;

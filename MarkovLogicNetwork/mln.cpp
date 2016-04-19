@@ -10,7 +10,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-mln::mln(string file, int index):data(file, index), objects(data.classes()){
+mln::mln(string file, int index):data(file, index), objects(data.classes()) {
     for(int i = 0; i < objects.size(); i++){
         for(int j = 0; j < data.columns(); j++){
             vector<insight> temp;
@@ -19,6 +19,7 @@ mln::mln(string file, int index):data(file, index), objects(data.classes()){
                 temp.push_back(insert);
             }
             knowledge.push_back(temp);
+            lowerBound[objects[i]] = 0;
         }
     }   
 }
@@ -31,53 +32,65 @@ void mln::learnWeights(node n){
     }
 }
 
-void mln::debug(){
-    for(int i = 0; i < knowledge.size(); i++){
-        for(int j = 0; j < knowledge[i].size(); j++){
-            cout << knowledge[i][j].weight() << " ";
-            knowledge[i][j].print();
+void mln::updateKB(vector<insight> newInfo){
+    string ident = newInfo[0].ident();
+    vector<insight> base = kb[ident];
+    for(auto add : newInfo){
+        double tweight = add.weight();
+        if(tweight <= lowerBound[ident]){
+            break;
         }
+        for(int i = 0; i < base.size(); i++){
+            if(tweight > base[i].weight()){
+                base.insert(base.begin() + i, add);
+                if(base.size() > 10){
+                    base.pop_back();
+                }
+                if(i == base.size() - 1){
+                    lowerBound[ident] = tweight;
+                }
+                break;
+            }
+        }
+    }
+}
+
+void mln::debug(){
+    for(auto item : kb){
+        cout << item.second.size() << " " <<  item.first << endl;
     }
 }
 
 void mln::evolve(){
-    vector<vector<insight> > nextGen;
-    std::map<double, int> compare;
-    vector<vector<double> > values;
-    for(int i = 0; i < knowledge.size(); i++){
-        vector<double> valTemp;
-        for(int j = 0; j < knowledge.size(); j++){
-            valTemp.push_back(knowledge[i][j].weight());
-            compare[knowledge[i][j].weight()] = i;
+    for(auto &know : knowledge){
+        vector<insight> nextGen;
+        std::map<double, int> compare;
+        vector<double> values;
+        for(int i = 0; i < know.size(); i++){
+            values.push_back(know[i].weight());
+            compare[know[i].weight()] = i;
         }
-        values.push_back(valTemp);
-    }
-    for(auto &val : values){
-        std::sort(val.begin(), val.end(), std::greater<double>());
-    }
-    int survivors = values[0].size()/10;
-    for(int z = 0; z < knowledge.size(); z++){
-        vector<insight> nextGenTemp;
-        for(int i = 0; i < survivors; i++){
-            insight temp(data.columns(), "test");// = knowledge[z][compare[values[z][i]]];
-            nextGenTemp.push_back(temp);
-            for(int j = 0; j < 10; j++){
-                insight mutate(data.columns(), temp.ident());
-                nextGenTemp.push_back(mutate);
+        std::sort(values.begin(), values.end(), std::greater<double>());
+        int survivors = values.size()/10;
+        for(int z = 0; z < know.size(); z++){
+            for(int i = 0; i < survivors; i++){
+                insight temp = know[compare[values[i]]];
+                nextGen.push_back(temp);
+                for(int j = 0; j < INSIGHTS; j++){
+                    insight mutate(data.columns(), temp.ident());
+                    nextGen.push_back(mutate);
+                }
             }
-            nextGen.push_back(nextGenTemp);
         }
+        updateKB(nextGen);
+        know = nextGen;
     }
-    knowledge = nextGen;
-}  
+}
 
 void mln::test(){
-    debug();
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < 2; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1));
-        std::cout << i << std::endl;
         evolve();
     }
     debug();
 }
-
