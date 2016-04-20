@@ -7,5 +7,5 @@
 
 int main() {
     dataset iris("iris.csv", 5);
-    iris.learn([](node temp){std::cout << temp.getIdent() << std::endl;}, [](node temp){std::cout << temp.getIdent() << std::endl;}, 2);
+
 }

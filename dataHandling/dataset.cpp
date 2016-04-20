@@ -2,6 +2,7 @@
 //Michael Krumdick
 #include "dataset.h"
 #include <iostream>
+
 //instanties a dataset from the csv file, col should be the column you want to predict
 dataset::dataset(std::string file, int col) {
     percentage = .8;   //default percentage is 80
@@ -93,6 +94,7 @@ std::string dataset::readLine(std::string line, std::vector<double> &dat, std::v
         i++;
         if(i == col){
             identifier = part;
+            identifiers.insert(part);
             continue;
         }
         if(isDouble(part.c_str())){
@@ -181,6 +183,7 @@ void dataset::normalize() {
     std::map<std::string, double> convert;
     for(int i = 0; i < uniqueStrings.size(); i++){
         convert[uniqueStrings[i]] = i/(uniqueStrings.size() - 1.0);
+        std::cout << uniqueStrings[i];
     }
     node * temp = head;
     while(temp->next() != NULL){
@@ -226,16 +229,23 @@ iterator dataset::tbegin() {
     return testHead;
 }
 
-void dataset::learn(std::function<void (node)> learn, std::function<void (node)> test, int tests){
+void dataset::learn(std::function<void (node)> learn, int tests){
     for(int i = 0; i < tests; i++){
-        std::for_each(begin(), end(), learn);
-        std::for_each(tbegin(), tend(), test);
+        std::for_each(begin(), tend(), learn);
         reset();
     }
 }
 
+void dataset::learn(std::function<void (node)> learn, std::function<void ()> endFunc, int tests){
+    for(int i = 0; i < tests; i++){
+        std::for_each(begin(), tend(), learn);
+        reset();
+        endFunc();
+    }
+}
 std::vector<std::string> dataset::classes(){
-    return uniqueStrings;
+    std::vector<std::string> out (identifiers.begin(), identifiers.end());
+    return out;
 }
 
 int dataset::columns(){
