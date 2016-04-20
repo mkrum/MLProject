@@ -27,6 +27,7 @@ class dataset {
         void learn(std::function<void (node)>, std::function<void ()>, int);
         std::vector<std::string> classes(); //returns the string values for the things you are trying to classify
         int columns();  //returns the number of columns(number of datapoints per object)
+        node get(int);
    private:
         void reset();   //call this after you iterate
         int length();   //length of the learning data
@@ -37,7 +38,7 @@ class dataset {
         iterator tbegin();
         iterator tend();
         void read(std::string, int);
-        node get(int);  
+        //node get(int);  
         void shuffle(); 
         void split();
         std::string readLine(std::string, std::vector<double>&, std::vector<std::string>&, int);
