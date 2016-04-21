@@ -3,7 +3,7 @@
 
 #include "insight.h"
    
-insight::insight(int len, string in) : identifier(in), attempts(0), successes(0){
+insight::insight(int len, string in) : identifier(in), attempts(0), successes(0), length(len){
     std::random_device rd;
     std::default_random_engine gen(rd());
     std::uniform_int_distribution<int> d(0,1);
@@ -13,12 +13,6 @@ insight::insight(int len, string in) : identifier(in), attempts(0), successes(0)
     connectOrder.push_back(d(gen));
     std::uniform_real_distribution<double> dist(0.0, 1.0);
     constants.push_back(dist(gen));
-    vectorInit();
-}
-
-insight::insight(int i, int j, string in): identifier(in), attempts(0), successes(0) {
-    order.push_back(i);
-    constants.push_back(-j);
     vectorInit();
 }
 

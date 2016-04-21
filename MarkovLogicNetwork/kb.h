@@ -18,15 +18,16 @@ class kb{
     public:
         kb(vector<string>, int);
         friend std::ostream& operator<<(std::ostream &, const kb); 
-        void update(vector<insight>, string);
-        void generate(int, string, vector<insight>&);
-        insight mutate(insight);
+        void update(vector<insight*>, string);
+        void generate(int, string, vector<insight*>&);
+        insight* mutate(insight);
     private:
-        std::map<string, vector<insight>> base;
+        std::map<string, vector<insight*>> base;
+        std::default_random_engine generator;
         std::map<string, double> lower;
         int size;
         vector<string> classes;
-        void insert(insight, string);
+        void insert(insight*, string);
 
 };  
 

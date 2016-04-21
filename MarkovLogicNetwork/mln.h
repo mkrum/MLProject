@@ -26,7 +26,7 @@ class mln {
         void learnWeights(node);
         void evolve();
         vector<string> objects;
-        vector<vector<insight> > knowledge; //information that is being tested 
+        vector<vector<insight*> > knowledge; //information that is being tested 
 
 };
 

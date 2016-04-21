@@ -13,9 +13,9 @@ using std::endl;
 mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
     for(int i = 0; i < objects.size(); i++){
         for(int j = 0; j < data.columns(); j++){
-            vector<insight> temp;
+            vector<insight*> temp;
             for(int z = 0; z < INSIGHTS; z++){
-                insight insert(data.columns(), objects[i]);
+                insight *insert = new insight(data.columns(), objects[i]);
                 temp.push_back(insert);
             }
             knowledge.push_back(temp);
@@ -26,7 +26,7 @@ mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb
 void mln::learnWeights(node n){
     for(auto &objects : knowledge){
         for(auto &in : objects){
-            in.check(n); 
+            in->check(n); 
         }
     }
 }
@@ -37,13 +37,13 @@ void mln::debug(){
 
 void mln::evolve(){
     for(auto &know : knowledge){
-        dkb.update(know, know[0].ident());
-        dkb.generate(INSIGHTS, know[0].ident(), know);
+        dkb.update(know, know[0]->ident());
+        dkb.generate(INSIGHTS, know[0]->ident(), know);
     }
 }
 
 void mln::test(){
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < 2; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
