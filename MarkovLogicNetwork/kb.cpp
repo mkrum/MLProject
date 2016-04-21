@@ -40,27 +40,34 @@ void kb::generate(int length, string ident, vector<insight*>& generation){
     std::uniform_int_distribution<int> distribution(0, base[ident].size() - 1);
     int rand = distribution(generator);
     for(int i = 0; i < generation.size(); i++){
-  //      generation[i] = mutate(*base[ident][rand]);
+        mutate(generation[i], base[ident][rand]);
     }
 }
 
-insight* kb::mutate(insight in){
-    insight *temp = new insight(in);
+void kb::mutate(insight *dst, insight *in){
     std::uniform_int_distribution<int> distribution(0, 1);
     if(distribution(generator)){
+        dst->order          = in->order;
+        dst->compOrder      = in->compOrder;
+        dst->connectOrder   = in->connectOrder;
+        dst->constants      = in->constants;
         std::uniform_real_distribution<double> dist(-.1, .1);
-        double delta = dist(generator);
-        for(auto &constant : temp->constants){
-            constant = constant + delta;
+        for(int i = 0; i < in->constants.size(); i++){
+            double delta = dist(generator);
+            double shifted = in->constants[i] + delta;
+            if(shifted > 0 && shifted < 1){
+                dst->constants[i] = in->constants[i] + delta;
+            }
         }
     } else {
-        std::uniform_int_distribution<int> d1(0, in.length);
+        std::uniform_int_distribution<int> d1(0, in->order.size() - 1);
         std::uniform_int_distribution<int> d2(0, 1);
-        temp->order.push_back(d1(generator));
-        temp->compOrder.push_back(d2(generator));
-        temp->connectOrder.push_back(d2(generator));
+        double ord = d1(generator);
+        dst->order.push_back(in->order[ord]);
+        dst->compOrder.push_back(in->compOrder[ord]);
+        dst->connectOrder.push_back(d2(generator));
+        dst->constants.push_back(in->constants[ord]);
     }
-    return temp;
 }
 
 std::ostream& operator<<(std::ostream & os, const kb test){

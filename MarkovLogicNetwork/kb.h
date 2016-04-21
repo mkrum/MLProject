@@ -20,7 +20,7 @@ class kb{
         friend std::ostream& operator<<(std::ostream &, const kb); 
         void update(vector<insight*>, string);
         void generate(int, string, vector<insight*>&);
-        insight* mutate(insight);
+        void mutate(insight *, insight*);
     private:
         std::map<string, vector<insight*>> base;
         std::default_random_engine generator;

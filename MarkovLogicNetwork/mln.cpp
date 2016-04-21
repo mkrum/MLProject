@@ -43,7 +43,7 @@ void mln::evolve(){
 }
 
 void mln::test(){
-    for(int i = 0; i < 2; i++){
+    for(int i = 0; i < 3; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
