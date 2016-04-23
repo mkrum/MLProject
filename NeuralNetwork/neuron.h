@@ -16,6 +16,8 @@ class Neuron{
     public:
         Neuron();
         double getRandomWeight();
+        void setOutput(double);
+        double getOutput();
     private:
         double output;
         vector<Connection> outputWeights;
