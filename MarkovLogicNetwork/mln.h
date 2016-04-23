@@ -6,6 +6,7 @@
 
 #include "dataset.h"
 #include "insight.h"
+#include "kb.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -14,18 +15,18 @@
 using std::string;
 using std::vector;
 
-
 class mln {
     public:
         mln(std::string, int);
         void test();
     private:
         dataset data;
+        kb dkb; //dynamic knowledge base
         void debug();
         void learnWeights(node);
         void evolve();
         vector<string> objects;
-        vector< vector<insight> > knowledge;
+        vector<vector<insight*> > knowledge; //information that is being tested 
 
 };
 

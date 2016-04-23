@@ -10,6 +10,7 @@
 #include <sstream>
 #include <fstream>
 #include <map>
+#include <set>
 #include <algorithm>
 #include <time.h>
 #include "iterator.h"
@@ -22,9 +23,11 @@ class dataset {
         dataset(std::string, int); //constructor, enter the file name and the row you want to predict
         node iget();    //"iterative" get, use this when youre going through the learning data
         node tget();    //test get, use this to iterate through the test data
-        void learn(std::function<void (node)>, std::function<void (node)>, int);
+        void learn(std::function<void (node)>, int);
+        void learn(std::function<void (node)>, std::function<void ()>, int);
         std::vector<std::string> classes(); //returns the string values for the things you are trying to classify
         int columns();  //returns the number of columns(number of datapoints per object)
+        node get(int);
    private:
         void reset();   //call this after you iterate
         int length();   //length of the learning data
@@ -35,7 +38,7 @@ class dataset {
         iterator tbegin();
         iterator tend();
         void read(std::string, int);
-        node get(int);  
+        //node get(int);  
         void shuffle(); 
         void split();
         std::string readLine(std::string, std::vector<double>&, std::vector<std::string>&, int);
@@ -60,6 +63,7 @@ class dataset {
         int len;
         int num;
         double percentage;
+        std::set<std::string> identifiers;
 };
 
 #endif 

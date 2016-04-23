@@ -2,24 +2,16 @@
 //Michael Krumdick
 
 #include "insight.h"
-#include <iostream>
-
-insight::insight(int len, string in) : identifier(in), attempts(0), successes(0){
+   
+insight::insight(int len, string in) : identifier(in), attempts(0), successes(0), length(len){
     std::random_device rd;
     std::default_random_engine gen(rd());
     std::uniform_int_distribution<int> d(0,1);
     std::uniform_int_distribution<int> d1(0, len);
     order.push_back(d1(gen));
     compOrder.push_back(d(gen));
-    connectOrder.push_back(d(gen));
     std::uniform_real_distribution<double> dist(0.0, 1.0);
     constants.push_back(dist(gen));
-    vectorInit();
-}
-
-insight::insight(int i, int j, string in): identifier(in), attempts(0), successes(0) {
-    order.push_back(i);
-    constants.push_back(-j);
     vectorInit();
 }
 
@@ -34,26 +26,25 @@ double insight::weight() const{
 bool insight::check(node n) {
     attempts++;
     vector<bool> results;
+    std::cout << "******" << order.size() << " " << compOrder.size() << " " << connectOrder.size() << std::endl;
     for(int i = 0; i < order.size(); i++){
-        if (constants[i] > 0){
-            results.push_back(comparisions[compOrder[i]](n[order[i]], constants[i]));
-        } else {
-            results.push_back(comparisions[compOrder[i]](n[order[i]], n[-constants[i]]));
-        }
+        std::cout << n[i] <<  " " << constants[i] << std::endl;
+        results.push_back(comparisions[compOrder[i]](n[order[i]], constants[i]));
     }
-    for(int j = results.size(); j > 1; j++){
-        results[j - 1] = connectors[connectOrder[j]](results[j], results[j-1]);
+    bool final = results[results.size() - 1];
+    for(int j = results.size() - 2; j >= 0; j--){
+        final = connectors[connectOrder[j]](results[j], final);
     }
     
     if(identifier.compare(n.getIdent())){
-       if(results[0]){
+       if(final){
            successes++;
            return true;
        } else {
            return false;
        }
     } else {
-        if(results[0]){
+        if(final){
             return false;
         } else {
             successes++;
@@ -78,17 +69,16 @@ int insight::column() const {
     return order[0];
 }
 
-void insight::print() const{
+ostream& operator<<(ostream & os, const insight in){
     vector<string> comp {">", "<"};
     vector<string> con {"and", "or"};
-    for(int i = 0; i < order.size(); i++){
-        std::cout << "( Data[" << order[i] << "] " << comp[compOrder[i]] << " " << constants[i] << " ) ";
+    for(int i = 0; i < in.order.size(); i++){
+        os << "( Data[" << in.order[i] << "] " << comp[in.compOrder[i]] << " " << in.constants[i] << " ) ";
         if(i > 0) {
-            std::cout << con[connectOrder[i - 1]] << " ";
+            os << con[in.connectOrder[i - 1]] << " ";
         }
     }
-    std::cout << "is : " << identifier << std::endl;
 }
-        
+   
 
 

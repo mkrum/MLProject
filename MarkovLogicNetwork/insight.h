@@ -9,23 +9,25 @@
 #include <random>
 #include <functional>
 #include <string>
+#include <iostream>
 
 using std::string;
 using std::vector;
+using std::ostream;
     
 class insight {
+    friend class kb;
     public:
         insight(int, string);  //base constructor, starts with a single column for a column
-        insight(int, int, string); //constructor for an insight that compares two columns
-        insight(const insight &, const insight &);  //mating, two parents
         bool check(node);
-        void print() const;
         double weight() const;
         string ident() const;
         int column() const;
+        friend ostream& operator<<(ostream &, const insight); 
     private:
         int attempts;
         int successes;
+        int length;
         vector<int> order;
         vector<double> constants;
         vector<std::function<bool(double, double)>> comparisions;
