@@ -9,6 +9,8 @@
 using namespace std;
 
 int main(){
-    Neuron a();
-
+    Neuron a;
+    for(int i=0; i<5; i++){
+        cout << a.getRandomWeight() << endl;
+    }
 }
