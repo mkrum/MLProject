@@ -9,7 +9,7 @@
 using namespace std;
 
 Neuron::Neuron(){
-
+    srand(time(NULL));
 }
 
 double Neuron::getRandomWeight(){
