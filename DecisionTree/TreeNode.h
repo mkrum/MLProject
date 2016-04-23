@@ -22,15 +22,18 @@ class TreeNode {
   string getLabel();
   TreeNode<T> getLeftChild();
   TreeNode<T> getRightChild();
+  TreeNode<T> getParent();
   void setParent();
   void setLabel(string s){label = s;}
-  void setData(int a){data = a;}
+  void setData(double a){data = a;}
 
  private:
   T data;           // data for linked list node 
   string label;
+  map <double> numOfResults;
   TreeNode<T> *nextl;    // pointers to next object
   TreeNode<T> *nextr;
+  TreeNode<T> *parent;
 };
 
 // NOTE:  all of the functions are in the .h file to overcome issues with
@@ -79,5 +82,12 @@ TreeNode<T> TreeNode<T>::getRightChild()
 {
 	return *nextr;
 }
+
+template<typename T>
+TreeNode<T> TreeNode<T>::getParent()
+{
+	return *parent;
+}
+
 
 #endif

@@ -28,11 +28,12 @@ class dataset {
         std::vector<std::string> classes(); //returns the string values for the things you are trying to classify
         int columns();  //returns the number of columns(number of datapoints per object)
         node get(int);
+        int tlength();  //length of the test data
    private:
         void reset();   //call this after you iterate
         int length();   //length of the learning data
         void setPercent(double);    //use this to set the percentge for your split
-        int tlength();  //length of the test data
+        //int tlength();  //length of the test data
         iterator begin();
         iterator end();
         iterator tbegin();

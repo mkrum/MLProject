@@ -16,12 +16,15 @@ class dt {
         double getOdds();
         int getHighestAttribute();
         void createTree();
-        void traverseTree(); 
+        void traverseTree();
+        dataset getData(){return data;};
+        int getIndexOfLearn(){return indexofLearn;}; 
     private:
         dataset data;
         int pred;
         int numAttributes;
         double predOdds;
+        int indexOfLearn;
 };
 
 #endif
