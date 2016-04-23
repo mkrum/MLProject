@@ -14,12 +14,13 @@ class dt {
         dt(string, int);
         int getPrediction();
         double getOdds();
-        int getHighestAttributec();
+        int getHighestAttribute();
         void createTree();
         void traverseTree(); 
     private:
         dataset data;
         int pred;
+        int numAttributes;
         double predOdds;
 };
 
