@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <time.h>
 using namespace std;
 
 struct Connection{
@@ -14,10 +15,10 @@ struct Connection{
 class Neuron{
     public:
         Neuron();
+        double getRandomWeight();
     private:
         double output;
         vector<Connection> outputWeights;
-        double getRandomWeight();
 };
 
 
