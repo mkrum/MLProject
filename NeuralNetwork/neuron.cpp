@@ -16,13 +16,6 @@ double Neuron::getRandomWeight(){
     return rand()/double(RAND_MAX);
 }
 
-void Neuron::setOutput(double num){
-    output=num;
-}
-
-double Neuron::getOutput(){
-    return output;
-}
 
 
 

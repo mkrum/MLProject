@@ -5,22 +5,21 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
+#include "dataset.h"
 using namespace std;
 
-struct Connection{
-    double weight;
-    double deltaWeight;
-};
 
 class Neuron{
     public:
-        Neuron();
-        double getRandomWeight();
+        Neuron(vector<double> inputs); //inputs comes from the vector of nodes
         void setOutput(double);
         double getOutput();
+        void trainData(vector<double>);
+        double sigmoid(double);
+        void backPropogate(double error);
     private:
-        double output;
-        vector<Connection> outputWeights;
+        vector<double> weights;
+        double getRandomWeight(); //returns a random weight
 };
 
 
