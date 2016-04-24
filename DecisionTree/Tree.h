@@ -53,7 +53,7 @@ void Tree::findDataVal(int a, TreeNode<int> c, int j)
 
 int Tree::getNumLevels() { return numLevels; }
 
-void Tree::buildNode(vector<double>)
+void Tree::buildNode(vector<double> a)
 {
 	treeNode n = findNextNode();
 	TreeNode nextOne;
@@ -61,7 +61,10 @@ void Tree::buildNode(vector<double>)
 	if(leftNode(n))
 		n->nextl = nextOne;
 	else n->nextr = nextOne;
-	double average;
+	double average, sum=0;
+	for(int i=0;i<a.size();i++)
+		sum += a[i];
+	average=sum/a.size()
 	nextOne.setData(average);
 }
 
