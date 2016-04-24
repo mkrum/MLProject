@@ -23,6 +23,7 @@ class mln {
     private:
         dataset data;
         kb dkb; //dynamic knowledge base
+        int num;
         void debug();
         void learnWeights(node);
         void evolve();
