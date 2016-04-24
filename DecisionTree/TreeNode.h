@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <map>
 using namespace std;
 
 //template<typename T> class LinkedList; // forward declaration of List

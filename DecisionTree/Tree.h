@@ -11,7 +11,7 @@ using namespace std;
 class Tree {
 
 	public:
-		Tree(string);
+		Tree(int);
 		TreeNode<int> getFirst();
 		void findDataVal(int, TreeNode<int>,int);
 		void buildNode();
@@ -24,8 +24,9 @@ class Tree {
 };
 
 
-Tree::Tree(string s)
-{	
+Tree::Tree(int i)
+{
+	numLevels = i;
 }
 
 TreeNode<int> Tree::getFirst()

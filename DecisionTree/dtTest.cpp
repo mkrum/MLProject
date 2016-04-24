@@ -21,6 +21,10 @@ int main() {
     {
     	swag.push_back(iris.get(i).getData(0));
     }
+    
+    cout << swag[10] << endl;
+    
+    cout << iris.get(0).getData(5) << endl;
 }
 
 
