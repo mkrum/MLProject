@@ -23,6 +23,7 @@ class insight {
         double weight() const;
         string ident() const;
         int column() const;
+        int size() const;
         bool condense(vector<bool>);
         friend ostream& operator<<(ostream &, insight); 
     private:
