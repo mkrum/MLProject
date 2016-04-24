@@ -23,7 +23,7 @@ class insight {
         double weight() const;
         string ident() const;
         int column() const;
-        friend ostream& operator<<(ostream &, const insight); 
+        friend ostream& operator<<(ostream &, insight); 
     private:
         int attempts;
         int successes;

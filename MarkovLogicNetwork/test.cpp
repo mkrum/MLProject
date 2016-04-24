@@ -3,7 +3,8 @@
 #include "mln.h"
 
 int main() {
-    mln net = mln("iris.csv", 5);
+//    mln net = mln("breastcancer.csv", 2);
+    net.learn();
     net.test();
 }
 
