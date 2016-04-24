@@ -8,11 +8,13 @@
 #include "neuron.h"
 using namespace std;
 
-Neuron::Neuron(vector<double> inputs){
+Neuron::Neuron(vector<double> Inputs){
+    inputs=Inputs; 
     srand(time(NULL));
     trainData(inputs);
     numWeights=inputs.size();
     setWeights();
+    summate();
 }
 
 void Neuron::trainData(vector<double> inputs){
@@ -34,7 +36,18 @@ void Neuron::setWeights(){
     }
 }
 
+double Neuron::summate(){
+    double total=0;
+    for(int i=0; i<numWeights; i++){
+        total+=weights[i]*inputs[i];
+    }
+    return sigmoid(total);
+}
 
+void Neuron::backPropogate(double error){
+    double step=.01;
+
+}
 
 
 
