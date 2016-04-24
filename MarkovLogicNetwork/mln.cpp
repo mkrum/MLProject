@@ -2,7 +2,6 @@
 //Michael Krumdick
 
 #include "mln.h"
-#include <iostream>
 
 
 using std::string;
@@ -18,9 +17,18 @@ mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb
                 temp.push_back(insert);
             }
             knowledge.push_back(temp);
-    }   
+    }
+}
+
+std::pair<double, double> mln::execute(){ 
+    std::pair<double, double> ret;
+    std::clock_t begin = std::clock();
     learn();
-    test();
+    std::clock_t end = std::clock();
+    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    ret.first = double(elapsed_secs);
+    ret.second = test();
+    return ret;
 }
 
 void mln::learnWeights(node n){
@@ -47,15 +55,15 @@ void mln::learn(){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
-    debug();
+//    debug();
 }
 
 void mln::classify(node n){
     dkb.classify(n);
 }
 
-void mln::test(){
+double mln::test(){
     data.test(std::bind(&mln::classify, this, std::placeholders::_1));
-    cout << dkb.rate() << endl;
+    return dkb.rate();
 }
 
