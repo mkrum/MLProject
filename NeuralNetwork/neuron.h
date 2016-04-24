@@ -18,6 +18,8 @@ class Neuron{
         double sigmoid(double);
         void backPropogate(double error);
     private:
+        int numWeights;
+        void setWeights();
         vector<double> weights;
         double getRandomWeight(); //returns a random weight
 };

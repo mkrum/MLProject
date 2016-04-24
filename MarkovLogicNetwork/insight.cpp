@@ -26,9 +26,7 @@ double insight::weight() const{
 bool insight::check(node n) {
     attempts++;
     vector<bool> results;
-    std::cout << "******" << order.size() << " " << compOrder.size() << " " << connectOrder.size() << std::endl;
     for(int i = 0; i < order.size(); i++){
-        std::cout << n[i] <<  " " << constants[i] << std::endl;
         results.push_back(comparisions[compOrder[i]](n[order[i]], constants[i]));
     }
     bool final = results[results.size() - 1];
@@ -36,7 +34,7 @@ bool insight::check(node n) {
         final = connectors[connectOrder[j]](results[j], final);
     }
     
-    if(identifier.compare(n.getIdent())){
+    if(identifier.compare(n.getIdent()) == 0){
        if(final){
            successes++;
            return true;
@@ -48,7 +46,7 @@ bool insight::check(node n) {
             return false;
         } else {
             successes++;
-            return true;
+            return false;
         }
     }
 }
@@ -69,15 +67,16 @@ int insight::column() const {
     return order[0];
 }
 
-ostream& operator<<(ostream & os, const insight in){
+ostream& operator<<(ostream & os, insight in){
     vector<string> comp {">", "<"};
     vector<string> con {"and", "or"};
-    for(int i = 0; i < in.order.size(); i++){
+    for(int i = 0; i < 1; i++){
         os << "( Data[" << in.order[i] << "] " << comp[in.compOrder[i]] << " " << in.constants[i] << " ) ";
-        if(i > 0) {
-            os << con[in.connectOrder[i - 1]] << " ";
+        if(in.connectOrder.size() > 0 && i < in.order.size() - 1) {
+            os << con[in.connectOrder[i]] << " ";
         }
     }
+    return os;
 }
    
 

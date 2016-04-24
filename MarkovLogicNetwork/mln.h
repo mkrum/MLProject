@@ -18,6 +18,7 @@ using std::vector;
 class mln {
     public:
         mln(std::string, int);
+        void learn();
         void test();
     private:
         dataset data;
@@ -25,6 +26,7 @@ class mln {
         void debug();
         void learnWeights(node);
         void evolve();
+        void classify(node);
         vector<string> objects;
         vector<vector<insight*> > knowledge; //information that is being tested 
 

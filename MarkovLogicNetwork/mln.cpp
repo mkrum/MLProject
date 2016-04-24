@@ -4,7 +4,7 @@
 #include "mln.h"
 #include <iostream>
 
-#define INSIGHTS 10 //this determines the initial number of random insights, tweaked to perfection
+#define INSIGHTS 20 //this determines the initial number of random insights, tweaked to perfection
 
 using std::string;
 using std::cout;
@@ -15,7 +15,7 @@ mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb
         for(int j = 0; j < data.columns(); j++){
             vector<insight*> temp;
             for(int z = 0; z < INSIGHTS; z++){
-                insight *insert = new insight(data.columns(), objects[i]);
+                insight *insert = new insight(data.columns() - 1, objects[i]);
                 temp.push_back(insert);
             }
             knowledge.push_back(temp);
@@ -42,10 +42,20 @@ void mln::evolve(){
     }
 }
 
-void mln::test(){
-    for(int i = 0; i < 3; i++){
+void mln::learn(){
+    for(int i = 0; i < 10; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
     debug();
 }
+
+void mln::classify(node n){
+    dkb.classify(n);
+}
+
+void mln::test(){
+    data.test(std::bind(&mln::classify, this, std::placeholders::_1));
+    cout << dkb.rate() << endl;
+}
+

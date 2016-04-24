@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include <random>
+#include <functional>
 
 using std::string;
 using std::vector;
@@ -21,6 +22,8 @@ class kb{
         void update(vector<insight*>, string);
         void generate(int, string, vector<insight*>&);
         void mutate(insight *, insight*);
+        void classify(node);
+        double rate() const;
     private:
         std::map<string, vector<insight*>> base;
         std::default_random_engine generator;
@@ -28,6 +31,8 @@ class kb{
         int size;
         vector<string> classes;
         void insert(insight*, string);
+        int successes;
+        int trials;
 
 };  
 

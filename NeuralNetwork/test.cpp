@@ -9,8 +9,13 @@
 using namespace std;
 
 int main(){
-    Neuron a;
-    for(int i=0; i<5; i++){
-        cout << a.getRandomWeight() << endl;
-    }
+    int cols=5;
+    vector<double> temp;
+    temp.push_back(5.1);
+    temp.push_back(3.5);
+    temp.push_back(1.4);
+    temp.push_back(0.2);
+
+    Neuron a(temp);
+    cout << a.sigmoid(3) << endl;
 }
