@@ -20,7 +20,7 @@ void dt::createTree()
 	while (b>0)
 	{
 		vector<double> stats;
-		for(int j=0;j<data.tlength();j++)
+		for(int j=0;j<getData.tlength();j++)
 		{
 			stats.push_back(getData().get(j).getData(i));
 		}
@@ -66,7 +66,7 @@ void dt::setMapVal(vector<double> vals, TreeNode a, int i) //assign values to ma
 		if (a.getLeftChild() != NULL)
 			setMap(vals,a.getLeftChild(),i+1);
 		else
-			a.getMap()[vals[i]]++;
+			a.getMap()[vals[i]]++; //this might need to be indexOfLearn
 	}
 	else
 	{	
