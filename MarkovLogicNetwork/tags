@@ -1,0 +1,59 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+FLAGS	makefile	/^FLAGS=-std=c++11 -static-libstdc++$/;"	m
+INSIGHTS	mln.cpp	7;"	d	file:
+INSIGHT_H	insight.h	5;"	d
+KB_H	kb.h	5;"	d
+LINK	makefile	/^LINK=-I ..\/dataHandling -L ..\/dataHandling$/;"	m
+MLN_H	mln.h	5;"	d
+attempts	insight.h	/^        int attempts;$/;"	m	class:insight
+base	kb.h	/^        std::map<string, vector<insight*>> base;$/;"	m	class:kb
+check	insight.cpp	/^bool insight::check(node n) {$/;"	f	class:insight
+classes	kb.h	/^        vector<string> classes;$/;"	m	class:kb
+classify	kb.cpp	/^void kb::classify(node n){$/;"	f	class:kb
+classify	mln.cpp	/^void mln::classify(node n){$/;"	f	class:mln
+column	insight.cpp	/^int insight::column() const {$/;"	f	class:insight
+compOrder	insight.h	/^        vector<int> compOrder;$/;"	m	class:insight
+comparisions	insight.h	/^        vector<std::function<bool(double, double)>> comparisions;$/;"	m	class:insight
+connectOrder	insight.h	/^        vector<int> connectOrder;$/;"	m	class:insight
+connectors	insight.h	/^        vector<std::function<bool(bool, bool)>> connectors;$/;"	m	class:insight
+constants	insight.h	/^        vector<double> constants;$/;"	m	class:insight
+data	mln.h	/^        dataset data;$/;"	m	class:mln
+debug	mln.cpp	/^void mln::debug(){$/;"	f	class:mln
+dkb	mln.h	/^        kb dkb; \/\/dynamic knowledge base$/;"	m	class:mln
+evolve	mln.cpp	/^void mln::evolve(){$/;"	f	class:mln
+generate	kb.cpp	/^void kb::generate(int length, string ident, vector<insight*>& generation){$/;"	f	class:kb
+generator	kb.h	/^        std::default_random_engine generator;$/;"	m	class:kb
+ident	insight.cpp	/^string insight::ident() const {$/;"	f	class:insight
+identifier	insight.h	/^        string identifier;$/;"	m	class:insight
+insert	kb.cpp	/^void kb::insert(insight *info, string ident){$/;"	f	class:kb
+insight	insight.cpp	/^insight::insight(int len, string in) : identifier(in), attempts(0), successes(0), length(len){$/;"	f	class:insight
+insight	insight.h	/^class insight {$/;"	c
+kb	kb.cpp	/^kb::kb(vector<string> inClasses, int inSiz):classes(inClasses), size(inSiz), successes(0), trials(0){$/;"	f	class:kb
+kb	kb.h	/^class kb{$/;"	c
+knowledge	mln.h	/^        vector<vector<insight*> > knowledge; \/\/information that is being tested $/;"	m	class:mln
+learn	mln.cpp	/^void mln::learn(){$/;"	f	class:mln
+learnWeights	mln.cpp	/^void mln::learnWeights(node n){$/;"	f	class:mln
+length	insight.h	/^        int length;$/;"	m	class:insight
+lower	kb.h	/^        std::map<string, double> lower;$/;"	m	class:kb
+main	test.cpp	/^int main() {$/;"	f
+mln	mln.cpp	/^mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {$/;"	f	class:mln
+mln	mln.h	/^class mln {$/;"	c
+mutate	kb.cpp	/^void kb::mutate(insight *dst, insight *in){$/;"	f	class:kb
+objects	mln.h	/^        vector<string> objects;$/;"	m	class:mln
+operator <<	insight.cpp	/^ostream& operator<<(ostream & os, const insight in){$/;"	f
+operator <<	kb.cpp	/^std::ostream& operator<<(std::ostream & os, const kb test){$/;"	f
+order	insight.h	/^        vector<int> order;$/;"	m	class:insight
+rate	kb.cpp	/^double kb::rate() const{$/;"	f	class:kb
+size	kb.h	/^        int size;$/;"	m	class:kb
+successes	insight.h	/^        int successes;$/;"	m	class:insight
+successes	kb.h	/^        int successes;$/;"	m	class:kb
+test	mln.cpp	/^void mln::test(){$/;"	f	class:mln
+trials	kb.h	/^        int trials;$/;"	m	class:kb
+update	kb.cpp	/^void kb::update(vector<insight*> newInfo, string ident){$/;"	f	class:kb
+vectorInit	insight.cpp	/^void insight::vectorInit(){$/;"	f	class:insight
+weight	insight.cpp	/^double insight::weight() const{$/;"	f	class:insight

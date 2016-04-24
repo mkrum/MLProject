@@ -25,6 +25,7 @@ class dataset {
         node tget();    //test get, use this to iterate through the test data
         void learn(std::function<void (node)>, int);
         void learn(std::function<void (node)>, std::function<void ()>, int);
+        void test(std::function<void (node)>);
         std::vector<std::string> classes(); //returns the string values for the things you are trying to classify
         int columns();  //returns the number of columns(number of datapoints per object)
         node get(int);

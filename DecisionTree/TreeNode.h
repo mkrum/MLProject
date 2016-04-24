@@ -23,9 +23,10 @@ class TreeNode {
   TreeNode<T> getLeftChild();
   TreeNode<T> getRightChild();
   TreeNode<T> getParent();
-  void setParent();
+  map getMap(){return numOfResults;}
   void setLabel(string s){label = s;}
   void setData(double a){data = a;}
+  double getMostPopularResult();
 
  private:
   T data;           // data for linked list node 
@@ -56,20 +57,6 @@ T TreeNode<T>::getData(void) const { return data; }
 template<typename T>
 string TreeNode<T>::getLabel() { return label;}
 
-template<typename T>
-void TreeNode<T>::setParent()
-{
-	if(nextl->getData() >= nextr->getData())
-	{
-		data = nextl->getData();
-		label = nextl->getLabel();
-	}
-	else
-	{
-		data = nextr->getData();
-		label = nextr->getLabel();
-	}
-}
 
 template<typename T>
 TreeNode<T> TreeNode<T>::getLeftChild()
@@ -89,5 +76,20 @@ TreeNode<T> TreeNode<T>::getParent()
 	return *parent;
 }
 
+template<typename T>
+double TreeNode<T>::getMostPopularResult()
+{
+	map<double>::iterator it = getMap().begin;
+	double popular = it->second;
+	double val = it->first;
+	for(it=getMap().begin();it!=getMap().end;it++)
+	{
+		if (it->second > popular)
+			popular = it->second;
+			val = it->first;
+	}
+	
+	return val;
+}
 
 #endif
