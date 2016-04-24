@@ -8,6 +8,8 @@ dataset::dataset(std::string file, int col) {
     percentage = .8;   //default percentage is 80
     read(file, col);
     normalize();
+    shuffle();
+    shuffle();
     reset();
 }
 //simple function that will get the node at a certain index i
@@ -43,7 +45,7 @@ node dataset::tget(){
 //resets the current node to the head
 void dataset::reset() {
     current = head;
-    shuffle();
+//    shuffle();
     split();
 }
 //Fisher-Yates Shuffle
@@ -231,10 +233,16 @@ iterator dataset::tbegin() {
 
 void dataset::learn(std::function<void (node)> learn, int tests){
     for(int i = 0; i < tests; i++){
-        std::for_each(begin(), tend(), learn);
+        std::for_each(begin(), end(), learn);
         reset();
     }
 }
+
+void dataset::test(std::function<void (node)> test){
+        std::for_each(tbegin(), tend(), test);
+        reset();
+}
+
 
 void dataset::learn(std::function<void (node)> learn, std::function<void ()> endFunc, int tests){
     for(int i = 0; i < tests; i++){
