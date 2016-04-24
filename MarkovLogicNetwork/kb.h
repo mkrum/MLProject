@@ -21,18 +21,20 @@ class kb{
         friend std::ostream& operator<<(std::ostream &, const kb); 
         void update(vector<insight*>, string);
         void generate(int, string, vector<insight*>&);
-        void mutate(insight *, insight*);
+        insight mutate(insight, insight);
         void classify(node);
         double rate() const;
     private:
         std::map<string, vector<insight*>> base;
         std::default_random_engine generator;
         std::map<string, double> lower;
+        void findDef();
         int size;
         vector<string> classes;
         void insert(insight*, string);
         int successes;
         int trials;
+        string def;
 
 };  
 

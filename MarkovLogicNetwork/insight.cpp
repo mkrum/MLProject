@@ -87,6 +87,10 @@ int insight::column() const {
     return order[0];
 }
 
+int insight::size() const {
+    return length;
+}
+
 ostream& operator<<(ostream & os, insight in){
     vector<string> comp {">", "<"};
     vector<string> con {"and", "or"};

@@ -15,7 +15,7 @@ int main(){
     temp.push_back(3.5);
     temp.push_back(1.4);
     temp.push_back(0.2);
-
-    Neuron a(temp);
+    temp.push_back(1);
+    Neuron a(temp, 3);
     cout << a.sigmoid(3) << endl;
 }
