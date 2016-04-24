@@ -20,6 +20,7 @@ Neuron::Neuron(vector<double> Inputs, int classifications){
     numWeights=inputs.size();
     setWeights();
     summate();
+    answer=Inputs.back();
 }
 
 void Neuron::createMap(){
@@ -29,8 +30,6 @@ void Neuron::createMap(){
     cout << "k" << k << endl;
     for(i=0,j=1/(numTargets*2); i<numTargets; i++,j+=1/(numTargets)){
         answers[i]=j;    
-        cout << j;
-        cout << answers[i] << endl;
     }
 }
 
