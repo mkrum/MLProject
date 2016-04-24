@@ -13,6 +13,11 @@ multiNomLogReg::multiNomLogReg(string d)
 	trainer = vector<MatrixXd>(k);
 	curr = 0;
 }
+/*
+Takes data from nodes and places them into the trainer vector of class matrices
+Also fills out the reference dictionary of string identifiers and their numerical values
+I think this might work
+*/
 void multiNomLogReg::learnData(node n)
 {
 	//Check if identifier is in the reference
@@ -37,6 +42,13 @@ void multiNomLogReg::learnData(node n)
 		addToMatrix(v, trainer.at(ref[n.getIdent()]));
 	}
 	
+}
+void multiNomLogReg::calculateBetas()
+{
+	for(int i = 0; i < k; i++)
+	{
+		betas[i] = null; //(X'X)^-1 * X'i (Formula for beta vector)
+	}
 }
 void multiNomLogReg::addToMatrix(VectorXd v, MatrixXd & m)
 {
