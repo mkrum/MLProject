@@ -46,28 +46,30 @@ void kb::generate(int length, string ident, vector<insight*>& generation){
 
 void kb::mutate(insight *dst, insight *in){
     std::uniform_int_distribution<int> distribution(0, 1);
-    if(distribution(generator)){
-        dst->order          = in->order;
-        dst->compOrder      = in->compOrder;
-        dst->connectOrder   = in->connectOrder;
-        dst->constants      = in->constants;
-        std::uniform_real_distribution<double> dist(-.1, .1);
-        for(int i = 0; i < in->constants.size(); i++){
-            double delta = dist(generator);
-            double shifted = in->constants[i] + delta;
-            if(shifted > 0 && shifted < 1){
-                dst->constants[i] = in->constants[i] + delta;
+    std::uniform_int_distribution<int> d1(0, in->order.size() - 1);
+    std::uniform_int_distribution<int> d2(0, 1);
+    int ord = d1(generator);
+    for(int i = 0; i < dst->order.size(); i++){
+        if(in->order[ord] == dst->order[i] && in->compOrder[ord] == dst->compOrder[i]){
+            dst->order          = in->order;
+            dst->compOrder      = in->compOrder;
+            dst->connectOrder   = in->connectOrder;
+            dst->constants      = in->constants;
+            std::uniform_real_distribution<double> dist(-.1, .1);
+            for(int i = 0; i < in->constants.size(); i++){
+                double delta = dist(generator);
+                double shifted = in->constants[i] + delta;
+                if(shifted > 0 && shifted < 1){
+                    dst->constants[i] = in->constants[i] + delta;
+                }
             }
+            return;
         }
-    } else {
-        std::uniform_int_distribution<int> d1(0, in->order.size() - 1);
-        std::uniform_int_distribution<int> d2(0, 1);
-        double ord = d1(generator);
-        dst->order.push_back(in->order[ord]);
-        dst->compOrder.push_back(in->compOrder[ord]);
-        dst->connectOrder.push_back(d2(generator));
-        dst->constants.push_back(in->constants[ord]);
     }
+    dst->order.push_back(in->order[ord]);
+    dst->compOrder.push_back(in->compOrder[ord]);
+    dst->connectOrder.push_back(d2(generator));
+    dst->constants.push_back(in->constants[ord]);
 }
 
 void kb::classify(node n){
@@ -107,8 +109,3 @@ std::ostream& operator<<(std::ostream & os, const kb test){
         }
    }
 }
-
-
-
-
-

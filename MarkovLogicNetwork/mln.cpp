@@ -4,7 +4,7 @@
 #include "mln.h"
 #include <iostream>
 
-#define INSIGHTS 20 //this determines the initial number of random insights, tweaked to perfection
+#define INSIGHTS 30 //this determines the initial number of random insights, tweaked to perfection
 
 using std::string;
 using std::cout;
@@ -43,7 +43,7 @@ void mln::evolve(){
 }
 
 void mln::learn(){
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 100; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
