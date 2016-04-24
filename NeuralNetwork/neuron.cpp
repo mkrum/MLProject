@@ -8,13 +8,30 @@
 #include "neuron.h"
 using namespace std;
 
-Neuron::Neuron(vector<double> Inputs){
-    inputs=Inputs; 
+Neuron::Neuron(vector<double> Inputs, int classifications){
+    for(int i=0; i<Inputs.size()-1; i++){
+        inputs.push_back(Inputs[i]);
+        
+    }
+    numTargets=classifications;
+    createMap();
     srand(time(NULL));
     trainData(inputs);
     numWeights=inputs.size();
     setWeights();
     summate();
+}
+
+void Neuron::createMap(){
+    double j=0;
+    int i=0;
+    double k=1/(numTargets*2);
+    cout << "k" << k << endl;
+    for(i=0,j=1/(numTargets*2); i<numTargets; i++,j+=1/(numTargets)){
+        answers[i]=j;    
+        cout << j;
+        cout << answers[i] << endl;
+    }
 }
 
 void Neuron::trainData(vector<double> inputs){
@@ -46,7 +63,9 @@ double Neuron::summate(){
 
 void Neuron::backPropogate(double error){
     double step=.01;
-
+    double output=summate();
+    //double delta=output*(1-output)*(targetValue-output);
+    
 }
 
 
