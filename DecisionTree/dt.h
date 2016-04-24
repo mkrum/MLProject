@@ -18,9 +18,11 @@ class dt {
         void createTree();
         void traverseTree();
         dataset getData(){return data;};
-        int getIndexOfLearn(){return indexofLearn;}; 
+        int getIndexOfLearn(){return indexofLearn;};
+        Tree getTree(){return newTree;};
     private:
         dataset data;
+        Tree newTree;
         int pred;
         int numAttributes;
         double predOdds;

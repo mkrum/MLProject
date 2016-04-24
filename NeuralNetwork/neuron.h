@@ -29,6 +29,7 @@ class Neuron{
         double getRandomWeight(); //returns a random weight
         vector<double> inputs;
         int answer;
+        void printWeights();
 };
 
 

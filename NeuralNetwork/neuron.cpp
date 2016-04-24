@@ -16,11 +16,11 @@ Neuron::Neuron(vector<double> Inputs, int classifications){
     numTargets=classifications;
     createMap();
     srand(time(NULL));
-    trainData(inputs);
     numWeights=inputs.size();
     setWeights();
     summate();
     answer=Inputs.back();
+    trainData(inputs);
 }
 
 void Neuron::createMap(){
@@ -35,6 +35,7 @@ void Neuron::createMap(){
 
 void Neuron::trainData(vector<double> inputs){
     cout << "training data" << endl;
+    backPropogate(101);
 }
 
 double Neuron::getRandomWeight(){
@@ -60,11 +61,25 @@ double Neuron::summate(){
     return sigmoid(total);
 }
 
+void Neuron::printWeights(){
+    cout << "below are the weights" << endl;
+    for(auto i : weights)
+        cout << i << endl;
+}
+
 void Neuron::backPropogate(double error){
+    double dweight;
     double step=.01;
     double output=summate();
-    //double delta=output*(1-output)*(targetValue-output);
-    
+    double delta=output*(1-output)*(answers[answer]-output);
+    printWeights();
+    for(int i=0; i<inputs.size(); i++){
+        dweight=step*delta*inputs[i];
+        cout << "dweight" << dweight << endl;
+        cout << step << "," << delta << "," << inputs[i] << endl;
+        weights[i]+=dweight;
+    }
+    printWeights();
 }
 
 

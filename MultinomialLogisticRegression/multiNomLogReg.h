@@ -4,7 +4,7 @@
 #include "dataset.h"
 #include <iostream>
 #include <string>
-#include <Eigen/Dense>
+#include "Eigen/Dense"
 #include <map>
 
 using namespace std;
@@ -14,12 +14,13 @@ using Eigen::VectorXd;
 class multiNomLogReg
 {
 	public:
-		multiNomLogReg(dataset);
+		multiNomLogReg(string, int);
 		void test();	
 	private:
-		void leanrnData(node);
+		void learnData(node);
 		void addToMatrix(VectorXd, MatrixXd &);
 		void calculateBetas();
+		void checkMats();
 		dataset dat;
 		int m; //number of explanatory variables
 		int k; //number of categories
