@@ -1,0 +1,12 @@
+main: test libdataset.a
+
+test: test3.cpp dataset.o node.o
+	g++ -std=c++11 -static-libstdc++ -g $^ -o $@
+
+%.o: %.cpp
+	g++ -std=c++11 -static-libstdc++ -c $^
+
+libdataset.a: dataset.o node.o	
+	ar rcs $@ $^
+clean:
+	rm -rf test *.o
