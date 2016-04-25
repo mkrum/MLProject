@@ -17,7 +17,7 @@ class Neuron{
         double getOutput();
         void trainData(vector<double>);
         double sigmoid(double);
-        void backPropogate();
+        void backPropagate(double);
     private:
         void createMap();
         map<double, double> answers;

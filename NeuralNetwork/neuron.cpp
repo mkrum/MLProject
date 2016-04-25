@@ -19,8 +19,8 @@ Neuron::Neuron(vector<double> Inputs, int classifications){
     numWeights=inputs.size();
     setWeights();
     summate();
-    trainData(inputs);
-    cout << "ANSWER: " << summate() << endl;
+//    trainData(inputs);
+//    cout << "ANSWER: " << summate() << endl;
 }
 
 void Neuron::createMap(){
@@ -32,13 +32,15 @@ void Neuron::createMap(){
     }
 }
 
+/*
 void Neuron::trainData(vector<double> inputs){
     cout << "training data" << endl;
     printWeights();
     for(int i=0; i<5000; i++)
-        backPropogate();
+        backPropagate();
     printWeights();
 }
+*/
 
 double Neuron::getRandomWeight(){
     return rand()/double(RAND_MAX);
@@ -68,11 +70,11 @@ void Neuron::printWeights(){
         cout << i << endl;
 }
 
-void Neuron::backPropogate(){
+void Neuron::backPropagate(double error){
     double dweight;
     double step=.10;
     double output=summate();
-    double delta=output*(1.0-output)*(answers[type]-output);
+    double delta=output*(1.0-output)*(error-output);
     for(int i=0; i<inputs.size(); i++){
         dweight=step*delta*inputs[i];
         weights[i]+=dweight;
