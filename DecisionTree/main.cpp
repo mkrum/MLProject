@@ -1,15 +1,10 @@
-1)createp dt object
-2)split dataset (maybe put this in constructor?)
-3)call createTree()
-4)for each node in the dataset, run it through setMapVal
-5)test remaining nodes on assignTreeProb
-6)check to see if node was correct
-7)print out percent correct
+
 
 //Marco Bruscia
 
 #include "dt.h"
 #include "Tree.h"
+#include "dataset.h"
 #include <string>
 #include <iostream>
 #include <map>
@@ -18,6 +13,8 @@ using namespace std;
 
 int main()
 {
+	cout << "tryna fam?" << endl;
+	
 	int numCorrect = 0, percentCorrect;
 	double actual;
 	dt("iris.csv",5) dtree;
@@ -35,7 +32,7 @@ int main()
 		setMapVal(vals,dtree.getTree().getFirst(),0,actual);
 	}
 
-		
+	/*	
 	vector<double> testStats;
 	for(int i=0;i<dtree.getData().tlength();i++)
 	{
@@ -56,4 +53,5 @@ int main()
 	
 	percentCorrect = numCorrect/double(dtree.getData().tlength());
 	cout << percentCorrect << endl;
+	*/
 }

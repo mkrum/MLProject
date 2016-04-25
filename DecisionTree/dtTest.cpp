@@ -1,5 +1,5 @@
 //Simple testing function for dataset 
-
+#include <vector>
 #include <iostream>
 #include "dataset.h"
 #include <string>
@@ -15,16 +15,16 @@ int main() {
     cout << iris.get(0).getData(0) << endl;
     cout << iris.get(0).getData(3) << endl;
     
-    vector <int> swag;
+    vector <double> swag;
     
     for(int i =0;i<10;i++)
     {
     	swag.push_back(iris.get(i).getData(0));
     }
     
-    cout << swag[10] << endl;
     
     cout << iris.get(0).getData(5) << endl;
+    cout << iris.get(75).getData(5) << endl;
 }
 
 
