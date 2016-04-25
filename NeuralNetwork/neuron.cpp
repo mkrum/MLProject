@@ -27,7 +27,7 @@ void Neuron::createMap(){
     double j=0;
     double i=0;
     double k=1/(numTargets*2);
-    for(i=0,j=1/(numTargets*2); i<numTargets; i++,j+=1/(numTargets)){
+    for(i=1,j=1/(numTargets*2); i<=numTargets; i++,j+=1/(numTargets)){
         answers[i]=j;    
     }
 }
