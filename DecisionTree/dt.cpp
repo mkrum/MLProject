@@ -6,28 +6,32 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
 using namespace std;
 
-dt::dt(string,int):data(string s, int i){}
+dt::dt(string,int):data(string s, int i)
+{
+	indexOfLearn = i;
+}
 
 void dt::createTree()
 {
 	int i=0;
 	int b = getData().columns()-1;
 	int count = 1,index = 0;
-	Tree("newTree") newTree;
+	//Tree("newTree") newTree;
 	
 	while (b>0)
 	{
 		vector<double> stats;
-		for(int j=0;j<data.tlength();j++)
+		for(int j=0;j<getData.tlength();j++)
 		{
 			stats.push_back(getData().get(j).getData(i));
 		}
 		
 		for(int k=0;k<count;k++)
 		{
-			newTree.buildNode(stats);
+			getTree().buildNode(stats);
 			if (b==1)
 			{
 				setVector();
@@ -58,7 +62,7 @@ double assignTreeProb(vector<double>vals, TreeNode a, int i) //test values by gi
 	}
 }
 
-void dt::setMapVal(vector<double> vals, TreeNode a, int i) //assign values to map at bottom nodes (set i to 0, vals equal all attributes for one node, and TreeNode to first)
+void dt::setMapVal(vector<double> vals, TreeNode a, int i, double actual) //assign values to map at bottom nodes (set i to 0, vals equal all attributes for one node, and TreeNode to first)
 {
 	
 	if(vals[i] <= a.getData())
@@ -66,14 +70,14 @@ void dt::setMapVal(vector<double> vals, TreeNode a, int i) //assign values to ma
 		if (a.getLeftChild() != NULL)
 			setMap(vals,a.getLeftChild(),i+1);
 		else
-			a.getMap()[vals[i]]++;
+			a.getMap()[actual]++;
 	}
 	else
 	{	
 		if (a.getRightChild() != NULL)
 			setMap(vals,a.getRightChild(),i+1);
 		else
-			a.getMap()[vals[i]]++;
+			a.getMap()[actual]++;
 	}
 }
 

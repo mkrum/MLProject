@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <map>
+#include <algorithm>
+#include <locale>
 using namespace std;
 
 //template<typename T> class LinkedList; // forward declaration of List
@@ -23,7 +26,7 @@ class TreeNode {
   TreeNode<T> getLeftChild();
   TreeNode<T> getRightChild();
   TreeNode<T> getParent();
-  map getMap(){return numOfResults;}
+  map<double> getMap(){return numOfResults;}
   void setLabel(string s){label = s;}
   void setData(double a){data = a;}
   double getMostPopularResult();
@@ -79,7 +82,7 @@ TreeNode<T> TreeNode<T>::getParent()
 template<typename T>
 double TreeNode<T>::getMostPopularResult()
 {
-	map<double>::iterator it = getMap().begin;
+	map <double>::iterator it = getMap().begin;
 	double popular = it->second;
 	double val = it->first;
 	for(it=getMap().begin();it!=getMap().end;it++)

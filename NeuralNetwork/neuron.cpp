@@ -8,63 +8,88 @@
 #include "neuron.h"
 using namespace std;
 
-Neuron::Neuron(vector<double> Inputs, int classifications){
+Neuron::Neuron(int numWeights){
+    /*
     for(int i=0; i<Inputs.size()-1; i++){
-        inputs.push_back(Inputs[i]);
-        
+        inputs.push_back(Inputs[i]); 
     }
-    numTargets=classifications;
-    createMap();
+    */
+//    numTargets=classifications;
+//    type=Inputs[Inputs.size()-1];
+//    createMap();
     srand(time(NULL));
-    trainData(inputs);
-    numWeights=inputs.size();
-    setWeights();
-    summate();
-    answer=Inputs.back();
+//    numWeights=inputs.size();
+    setWeights(numWeights);
+//    summate();
+//    trainData(inputs);
+//    cout << "ANSWER: " << summate() << endl;
 }
 
+Neuron::~Neuron(){
+
+}
+
+/*
 void Neuron::createMap(){
     double j=0;
-    int i=0;
+    double i=0;
     double k=1/(numTargets*2);
-    cout << "k" << k << endl;
-    for(i=0,j=1/(numTargets*2); i<numTargets; i++,j+=1/(numTargets)){
+    for(i=1,j=1/(numTargets*2); i<=numTargets; i++,j+=1/(numTargets)){
         answers[i]=j;    
     }
 }
+*/
 
+/*
 void Neuron::trainData(vector<double> inputs){
     cout << "training data" << endl;
+    printWeights();
+    for(int i=0; i<5000; i++)
+        backPropagate();
+    printWeights();
 }
+*/
 
 double Neuron::getRandomWeight(){
     return rand()/double(RAND_MAX);
 }
 
 double Neuron::sigmoid(double value){
-    return (1.0/(1+exp(-value)));
+    return (1.0/(1.0+exp(-value)));
 }
 
-void Neuron::setWeights(){
+void Neuron::setWeights(int numWeights){
     for(int i=0; i<numWeights; i++){
         weights.push_back(getRandomWeight());
-        cout << weights[i] << endl;
     }
 }
 
-double Neuron::summate(){
+//I summate from the layer and that works, but what about when I want to summate from the backpropagate function? idk
+double Neuron::summate(vector<double> Inputs){
+    inputs=Inputs;
     double total=0;
-    for(int i=0; i<numWeights; i++){
+    for(int i=0; i<weights.size(); i++){
         total+=weights[i]*inputs[i];
     }
     return sigmoid(total);
 }
 
-void Neuron::backPropogate(double error){
-    double step=.01;
-    double output=summate();
-    //double delta=output*(1-output)*(targetValue-output);
-    
+void Neuron::printWeights(){
+    cout << "below are the weights" << endl;
+    for(auto i : weights)
+        cout << i << endl;
+}
+
+//double check that these are the parameters that you want
+void Neuron::backPropagate(double error, vector<double> Inputs){
+    double dweight;
+    double step=.10;
+    double output=summate(Inputs);
+    double delta=output*(1.0-output)*(error-output);
+    for(int i=0; i<inputs.size(); i++){
+        dweight=step*delta*Inputs[i];
+        weights[i]+=dweight;
+    }
 }
 
 

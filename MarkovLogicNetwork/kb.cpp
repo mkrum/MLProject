@@ -103,7 +103,6 @@ void kb::classify(node n){
             max = score;
         }
     }
-    std::cout << iMax << " " << n.getIdent() << std::endl;
     if(iMax.compare(n.getIdent()) == 0){
         successes++;
     }
@@ -118,8 +117,6 @@ double kb::rate() const{
 std::ostream& operator<<(std::ostream & os, const kb test){
    for(auto elem : test.base){
         os << elem.first << std::endl;
-        for(auto eq : elem.second){
-            os << eq->weight() << " " << *eq << std::endl;
-        }
+        os << elem.second[0]->weight() << " " << *elem.second[0] << std::endl;
    }
 }

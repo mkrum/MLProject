@@ -5,17 +5,19 @@
 #include <string>
 #include <fstream>
 #include "TreeNode.h"
-
+#include <algorithm>
+#include <locale>
 using namespace std;
 
 class Tree {
 
 	public:
-		Tree(string);
+		Tree(int);
 		TreeNode<int> getFirst();
 		void findDataVal(int, TreeNode<int>,int);
-		void buildNode();
+		void buildNode(vector<double> );
 		int getNumLevels();
+		TreeNode<int> findNextNode();
 	private:
 		vector < TreeNode<int> > tree;
 		TreeNode<double> first;
@@ -24,8 +26,9 @@ class Tree {
 };
 
 
-Tree::Tree(string s)
-{	
+Tree::Tree(int i)
+{
+	numLevels = i;
 }
 
 TreeNode<int> Tree::getFirst()
@@ -68,7 +71,7 @@ void Tree::buildNode(vector<double> a)
 	nextOne.setData(average);
 }
 
-TreeNode<double> Tree::findNextNode();
+TreeNode<double> Tree::findNextNode()
 {
 	node a = first;
 	while(a != NULL)

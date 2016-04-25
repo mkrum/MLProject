@@ -11,6 +11,8 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <ctime>
+#include <utility>
 
 using std::string;
 using std::vector;
@@ -18,8 +20,9 @@ using std::vector;
 class mln {
     public:
         mln(std::string, int);
+        std::pair<double, double> execute();
         void learn();
-        void test();
+        double test();
     private:
         dataset data;
         kb dkb; //dynamic knowledge base
