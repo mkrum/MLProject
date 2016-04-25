@@ -8,21 +8,28 @@
 #include "neuron.h"
 using namespace std;
 
-Neuron::Neuron(vector<double> Inputs, int classifications){
+Neuron::Neuron(int numWeights){
+    /*
     for(int i=0; i<Inputs.size()-1; i++){
         inputs.push_back(Inputs[i]); 
     }
-    numTargets=classifications;
-    type=Inputs[Inputs.size()-1];
-    createMap();
+    */
+//    numTargets=classifications;
+//    type=Inputs[Inputs.size()-1];
+//    createMap();
     srand(time(NULL));
-    numWeights=inputs.size();
-    setWeights();
-    summate();
+//    numWeights=inputs.size();
+    setWeights(numWeights);
+//    summate();
 //    trainData(inputs);
 //    cout << "ANSWER: " << summate() << endl;
 }
 
+Neuron::~Neuron(){
+
+}
+
+/*
 void Neuron::createMap(){
     double j=0;
     double i=0;
@@ -31,6 +38,7 @@ void Neuron::createMap(){
         answers[i]=j;    
     }
 }
+*/
 
 /*
 void Neuron::trainData(vector<double> inputs){
@@ -50,13 +58,15 @@ double Neuron::sigmoid(double value){
     return (1.0/(1.0+exp(-value)));
 }
 
-void Neuron::setWeights(){
+void Neuron::setWeights(int numWeights){
     for(int i=0; i<numWeights; i++){
         weights.push_back(getRandomWeight());
     }
 }
 
-double Neuron::summate(){
+//I summate from the layer and that works, but what about when I want to summate from the backpropagate function? idk
+double Neuron::summate(vector<double> Inputs){
+    inputs=Inputs;
     double total=0;
     for(int i=0; i<weights.size(); i++){
         total+=weights[i]*inputs[i];
@@ -70,13 +80,14 @@ void Neuron::printWeights(){
         cout << i << endl;
 }
 
-void Neuron::backPropagate(double error){
+//double check that these are the parameters that you want
+void Neuron::backPropagate(double error, vector<double> Inputs){
     double dweight;
     double step=.10;
-    double output=summate();
+    double output=summate(Inputs);
     double delta=output*(1.0-output)*(error-output);
     for(int i=0; i<inputs.size(); i++){
-        dweight=step*delta*inputs[i];
+        dweight=step*delta*Inputs[i];
         weights[i]+=dweight;
     }
 }

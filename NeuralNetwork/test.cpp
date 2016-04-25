@@ -15,8 +15,10 @@ int main(){
     temp.push_back(.37);
     temp.push_back(.29);
     temp.push_back(0.2);
-    temp.push_back(3);
-    Neuron a(temp, 3);
+    //temp.push_back(3);
+    //Neuron a(temp, 3);
+    //Neuron a(temp);
+    Neuron(temp.size());
 }
 
 
