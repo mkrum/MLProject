@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <vector>
 #include "neuron.h"
+#include <random>
+#include <chrono>
 using namespace std;
 
 Neuron::Neuron(int numWeights){
@@ -17,7 +19,6 @@ Neuron::Neuron(int numWeights){
 //    numTargets=classifications;
 //    type=Inputs[Inputs.size()-1];
 //    createMap();
-    srand(time(NULL));
 //    numWeights=inputs.size();
     setWeights(numWeights);
 //    summate();
@@ -51,7 +52,10 @@ void Neuron::trainData(vector<double> inputs){
 */
 
 double Neuron::getRandomWeight(){
-    return rand()/double(RAND_MAX);
+    unsigned seed=chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine generator (seed);
+    uniform_real_distribution<double> distribution(0.0, 1.0);
+    return distribution(generator);
 }
 
 double Neuron::sigmoid(double value){
@@ -66,10 +70,10 @@ void Neuron::setWeights(int numWeights){
 
 //I summate from the layer and that works, but what about when I want to summate from the backpropagate function? idk
 double Neuron::summate(vector<double> Inputs){
-    inputs=Inputs;
+//    inputs=Inputs;
     double total=0;
     for(int i=0; i<weights.size(); i++){
-        total+=weights[i]*inputs[i];
+        total+=weights[i]*Inputs[i];
     }
     return sigmoid(total);
 }

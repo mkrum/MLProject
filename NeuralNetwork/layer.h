@@ -16,7 +16,8 @@ using namespace std;
 class Layer{
     public:
         Layer(vector<double>);
+        vector<double> computeLayer(); 
     private:
         vector<Neuron> neurons;
-        
+        vector<double> inputs; 
 };
