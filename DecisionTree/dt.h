@@ -7,6 +7,7 @@
 #include "dataset.h"
 #include <string>
 #include <iostream>
+#include "Tree.h"
 using namespace std;
 
 class dt {
@@ -18,8 +19,10 @@ class dt {
         void createTree();
         void traverseTree();
         dataset getData(){return data;};
-        int getIndexOfLearn(){return indexofLearn;};
+        int getIndexOfLearn(){return indexOfLearn;};
         Tree getTree(){return newTree;};
+        double assignTreeProb(vector<double>, TreeNode<double> &, int);
+        void setMapVal(vector<double>, TreeNode<double> &, int,string);
     private:
         dataset data;
         Tree newTree;

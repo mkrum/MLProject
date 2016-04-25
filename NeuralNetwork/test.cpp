@@ -11,11 +11,19 @@ using namespace std;
 int main(){
     int cols=5;
     vector<double> temp;
-    temp.push_back(5.1);
-    temp.push_back(3.5);
-    temp.push_back(1.4);
+    temp.push_back(.75);
+    temp.push_back(.37);
+    temp.push_back(.29);
     temp.push_back(0.2);
-    temp.push_back(1);
-    Neuron a(temp, 3);
-    cout << a.sigmoid(3) << endl;
+    //temp.push_back(3);
+    //Neuron a(temp, 3);
+    //Neuron a(temp);
+    Neuron(temp.size());
 }
+
+
+
+
+
+
+

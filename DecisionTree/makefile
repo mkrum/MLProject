@@ -1,13 +1,13 @@
 FLAGS=-std=c++11 -static-libstdc++
 LINK=-I ../dataHandling -L ../dataHandling
 
-main:test
+all:test
 
-test: dtTest.cpp
-	g++ $(FLAGS) $^ -o $@ $(LINK) -ldataset  
+test: main.cpp dt.o
+	g++ $(FLAGS) $^ -o $@ $(LINK) -ldataset 
 
 %.o: %.cpp
-	g++ $(FLAGS) -c $^ $(LING) -ldataset -o $@  
+	g++ $(FLAGS) -c $^ $(LINK) -ldataset -o $@  
 
 clean:
 	rm -rf test *.o

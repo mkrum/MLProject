@@ -3,7 +3,7 @@ LINK=-I ../dataHandling -L ../dataHandling
 
 main: test 
 
-test: test.cpp neuron.o 
+test: neuron.o layer.o network.o networktest.cpp 
 	g++ $(FLAGS) $^ -o $@ $(LINK) -ldataset
 
 %.o: %.cpp
