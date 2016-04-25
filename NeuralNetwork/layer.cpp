@@ -16,8 +16,12 @@ Layer::Layer(vector<double> Inputs){
     }
 }
 
+vector<double> Layer::getOutputs(){
+    return outputs;   
+}
+
 vector<double> Layer::computeLayer(){
-    vector<double> outputs;
+    outputs.clear();
     for(int i=0; i<neurons.size(); i++){
         outputs.push_back(neurons[i].summate(inputs));
     }
