@@ -17,10 +17,10 @@ class Neuron{
         double getOutput();
         void trainData(vector<double>);
         double sigmoid(double);
-        void backPropogate(double error);
+        void backPropogate();
     private:
         void createMap();
-        map<int, double> answers;
+        map<double, double> answers;
         double numTargets;
         double summate();
         int numWeights;
@@ -28,7 +28,7 @@ class Neuron{
         vector<double> weights;
         double getRandomWeight(); //returns a random weight
         vector<double> inputs;
-        int answer;
+        int type;
         void printWeights();
 };
 

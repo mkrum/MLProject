@@ -13,20 +13,20 @@ Neuron::Neuron(vector<double> Inputs, int classifications){
         inputs.push_back(Inputs[i]); 
     }
     numTargets=classifications;
+    type=Inputs[Inputs.size()-1];
     createMap();
     srand(time(NULL));
     numWeights=inputs.size();
     setWeights();
     summate();
-    answer=Inputs.back();
     trainData(inputs);
+    cout << "ANSWER: " << summate() << endl;
 }
 
 void Neuron::createMap(){
     double j=0;
-    int i=0;
+    double i=0;
     double k=1/(numTargets*2);
-    cout << "k" << k << endl;
     for(i=0,j=1/(numTargets*2); i<numTargets; i++,j+=1/(numTargets)){
         answers[i]=j;    
     }
@@ -34,7 +34,10 @@ void Neuron::createMap(){
 
 void Neuron::trainData(vector<double> inputs){
     cout << "training data" << endl;
-    backPropogate(101);
+    printWeights();
+    for(int i=0; i<5000; i++)
+        backPropogate();
+    printWeights();
 }
 
 double Neuron::getRandomWeight(){
@@ -42,19 +45,18 @@ double Neuron::getRandomWeight(){
 }
 
 double Neuron::sigmoid(double value){
-    return (1.0/(1+exp(-value)));
+    return (1.0/(1.0+exp(-value)));
 }
 
 void Neuron::setWeights(){
     for(int i=0; i<numWeights; i++){
         weights.push_back(getRandomWeight());
-        cout << weights[i] << endl;
     }
 }
 
 double Neuron::summate(){
     double total=0;
-    for(int i=0; i<numWeights; i++){
+    for(int i=0; i<weights.size(); i++){
         total+=weights[i]*inputs[i];
     }
     return sigmoid(total);
@@ -66,19 +68,15 @@ void Neuron::printWeights(){
         cout << i << endl;
 }
 
-void Neuron::backPropogate(double error){
+void Neuron::backPropogate(){
     double dweight;
-    double step=.01;
+    double step=.10;
     double output=summate();
-    double delta=output*(1-output)*(answer/(answers[answer]-output));
-    printWeights();
+    double delta=output*(1.0-output)*(answers[type]-output);
     for(int i=0; i<inputs.size(); i++){
         dweight=step*delta*inputs[i];
-        cout << "dweight" << dweight << endl;
-        cout << step << "," << delta << "," << inputs[i] << endl;
         weights[i]+=dweight;
     }
-    printWeights();
 }
 
 
