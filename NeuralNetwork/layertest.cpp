@@ -24,6 +24,9 @@ int main(){
     for(int i=0; i<outputs.size(); i++){
         cout << outputs[i] << endl;
     }
-
+    cout << "CREATING OUTPUT NEURON AND SENDING OUTPUTS TO THAT" << endl;
+    Neuron outputNeuron(outputs.size());
+    double finaloutput=outputNeuron.summate(outputs);
+    cout << "FINAL OUTPUT IS " << finaloutput << endl;
 }
 
