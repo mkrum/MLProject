@@ -185,7 +185,6 @@ void dataset::normalize() {
     std::map<std::string, double> convert;
     for(int i = 0; i < uniqueStrings.size(); i++){
         convert[uniqueStrings[i]] = i/(uniqueStrings.size() - 1.0);
-        std::cout << uniqueStrings[i];
     }
     node * temp = head;
     while(temp->next() != NULL){
