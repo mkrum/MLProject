@@ -19,3 +19,10 @@ int main(){
     Neuron a(temp, 3);
     cout << a.sigmoid(3) << endl;
 }
+
+
+
+
+
+
+

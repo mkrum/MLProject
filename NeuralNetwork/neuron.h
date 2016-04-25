@@ -20,7 +20,7 @@ class Neuron{
         void backPropogate(double error);
     private:
         void createMap();
-        map<int, int> answers;
+        map<int, double> answers;
         double numTargets;
         double summate();
         int numWeights;

@@ -10,8 +10,7 @@ using namespace std;
 
 Neuron::Neuron(vector<double> Inputs, int classifications){
     for(int i=0; i<Inputs.size()-1; i++){
-        inputs.push_back(Inputs[i]);
-        
+        inputs.push_back(Inputs[i]); 
     }
     numTargets=classifications;
     createMap();
@@ -71,7 +70,7 @@ void Neuron::backPropogate(double error){
     double dweight;
     double step=.01;
     double output=summate();
-    double delta=output*(1-output)*(answers[answer]-output);
+    double delta=output*(1-output)*(answer/(answers[answer]-output));
     printWeights();
     for(int i=0; i<inputs.size(); i++){
         dweight=step*delta*inputs[i];
