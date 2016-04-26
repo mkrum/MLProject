@@ -31,8 +31,9 @@ class TreeNode {
   void setData(double a){data = a;}
   string getMostPopularResult();
   void setParent(TreeNode<double> a){*parent = a;}
-  void setLeft(TreeNode<double> a){*nextl = a;}
-  void setRight(TreeNode<double> a){*nextr = a;}
+  void setLeft(TreeNode<double> * a){nextl = a;}
+  void setRight(TreeNode<double> * a){nextr = a;}
+  void setMap(map <string,double> a) {numOfResults = a;}
 
  private:
   T data;           // data for linked list node 
@@ -85,16 +86,21 @@ TreeNode<T> * TreeNode<T>::getParent()
 template<typename T>
 string TreeNode<T>::getMostPopularResult()
 {
-	map <string,double>::iterator it = getMap().begin();
+	map <string,double>::iterator it = numOfResults.begin();
+	cout << "literally" << endl;
 	double popular = it->second;
 	string val = it->first;
+	cout << "nah tho" << endl;
 	for(it=getMap().begin();it != getMap().end();it++)
 	{
+		cout << "fammin" << endl;
 		if (it->second > popular)
+		{
 			popular = it->second;
 			val = it->first;
+		}
 	}
-	
+	cout << "hope you like fammin too" <<endl;
 	return val;
 }
 
