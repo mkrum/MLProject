@@ -11,26 +11,14 @@
 using namespace std;
 
 Neuron::Neuron(int numWeights){
-    /*
-    for(int i=0; i<Inputs.size()-1; i++){
-        inputs.push_back(Inputs[i]); 
-    }
-    */
-//    numTargets=classifications;
-//    type=Inputs[Inputs.size()-1];
-//    createMap();
-//    numWeights=inputs.size();
     setWeights(numWeights);
-//    summate();
-//    trainData(inputs);
-//    cout << "ANSWER: " << summate() << endl;
 }
 
 Neuron::~Neuron(){
 
 }
 
-/*
+/* //PUT IN NETWORK
 void Neuron::createMap(){
     double j=0;
     double i=0;
@@ -41,73 +29,8 @@ void Neuron::createMap(){
 }
 */
 
-/*
-void Neuron::trainData(vector<double> inputs){
-    cout << "training data" << endl;
-    printWeights();
-    for(int i=0; i<5000; i++)
-        backPropagate();
-    printWeights();
-}
-*/
-
-void Neuron::calculateOutputGradients(double ans){
-    double delta=ans-output;
-    gradient=delta*sigmoidDerivative(output);
-}
-
-void Neuron::calculateHiddenGradients(Neuron n){
-    double dow=calcDOW(n);
-    gradient=dow*sigmoidDerivative(n.getOutput()); 
-}
-
-double Neuron::calcDOW(Neuron n){
-    double summation=0;
-    for(int i=0; i<n.inputs.size(); i++){
-        summation+= n.inputs[i] * n.getGradient();
-    }
-    return summation;
-}
-
-void Neuron::updateWeights(Neuron n, vector<Neuron> neurons){
-    //updates the weights
-    double eta=.15;
-    double alpha=.05;
-    for(int i=0; i<neurons.size(); i++){
-        double oldDWeight=neurons[i].dweight;
-        double newDWeight=eta*neurons[i].getOutput()*n.getGradient()+alpha*oldDWeight;
-        neurons[i].dweight=newDWeight;
-        neurons[i].setOutput(neurons[i].getOutput()+newDWeight); 
-    }
-}
-
-/*
-void Neuron::updateWeights(Neuron n){
-    double eta=.15;
-    double alpha=.05;
-    oldDweight=
-}
-*/
-
-double Neuron::getRandomWeight(){
-    unsigned seed=chrono::system_clock::now().time_since_epoch().count();
-    default_random_engine generator (seed);
-    uniform_real_distribution<double> distribution(0.0, 1.0);
-    return distribution(generator);
-}
-
 double Neuron::sigmoid(double value){
     return (1.0/(1.0+exp(-value)));
-}
-
-double Neuron::sigmoidDerivative(double value){
-    return sigmoid(value)*(1-sigmoid(value));
-}
-
-void Neuron::setWeights(int numWeights){
-    for(int i=0; i<numWeights; i++){
-        weights.push_back(getRandomWeight());
-    }
 }
 
 //I summate from the layer and that works, but what about when I want to summate from the backpropagate function? idk
@@ -120,6 +43,7 @@ double Neuron::summate(vector<double> Inputs){
     return sigmoid(total);
 }
 
+//function used to print weights during testing
 void Neuron::printWeights(){
     cout << "below are the weights" << endl;
     for(auto i : weights)
@@ -138,7 +62,23 @@ void Neuron::backPropagate(double answer){
     }
 }
 
-vector<double> Neuron::getWeights(){
-    return weights;
+void Neuron::setWeights(int numWeights){
+    for(int i=0; i<numWeights; i++){
+        weights.push_back(getRandomWeight());
+    }
 }
+
+double Neuron::getRandomWeight(){
+    unsigned seed=chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine generator (seed);
+    uniform_real_distribution<double> distribution(0.0, 1.0);
+    return distribution(generator);
+}
+
+void Neuron::feedForward(vector<double> Inputs){
+    summate(Inputs);
+}
+
+
+
 

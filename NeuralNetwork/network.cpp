@@ -24,7 +24,7 @@ void NeuralNetwork::train(){
 }
 
 void NeuralNetwork::feedForward(){
-    double output=neuron.summate(inputs);
+    neuron.feedForward(inputs);
 }
 
 
