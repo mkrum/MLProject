@@ -1,5 +1,4 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+
 
 //Marco Bruscia
 
@@ -18,41 +17,50 @@ int main()
 	int numCorrect = 0, percentCorrect;
 	string actual;
 	dt dtree("iris.csv",5);
-	for(int i=0;i<dtree.getData().tlength();i++)
+	cout << dtree.getData().tlength() << endl;
+	dtree.createTree();
+	TreeNode<double> root = dtree.getTree().getFirst();
+	for(int i=0;i<dtree.getData().tlength()*4;i++)
 	{
+		
 		vector<double> vals;
 		for(int j=0;j<dtree.getData().columns();j++)
 		{
-			if(j != dtree.getIndexOfLearn())
-				vals.push_back(dtree.getData().get(i).getData(j));
+			vals.push_back(dtree.getData().get(i).getData(j));
+			//cout << dtree.getData().get(i).getData(j) << endl;
 		}
-		actual = dtree.getData().get(i).getData(5);
-		actual = "tuddy";
-		dtree.setMapVal(vals,dtree.getTree().getFirst(),0,actual);
+		actual = dtree.getData().get(i).getIdent();
+		dtree.setMapVal(vals,root,0,actual);
+		
 	}
-
-	/*	
-	vector<double> testStats;
-	for(int i=0;i<dtree.getData().tlength();i++)
+	
+	cout << "ya boy" << endl;
+	vector<string> testStats;
+	int sizeOfTest = dtree.getData().tlength();
+	
+	for(int i=sizeOfTest*4;i<sizeOfTest*5;i++)
 	{
 		vector<double> stats;
 		for(int j=0;j<dtree.getData().columns();j++)
 		{
-			if(j != dtree.getIndexOfLearn())
-				stats.push_back(getData().get(i).getData(j)
+			//if(j != dtree.getIndexOfLearn())
+			stats.push_back(dtree.getData().get(i).getData(j));
 		}
-		testStats.push_back(assignTreeProb(stats, dtree.getTree().getFirst(),0))
+		
+		//testStats.push_back(dtree.assignTreeProb(stats, root,0));
+		cout << dtree.assignTreeProb(stats,root,0);
 	}
-	for(int i=0;i<dtree.getData().tlength();i++)
+	
+	for(int i=sizeOfTest*4;i<sizeOfTest*5;i++)
 	{
-		if(getData().get(i).getData(dtree.getIndexOfLearn()) == testStats[i])
+		if(dtree.getData().get(i).getIdent() == testStats[i])
 			numCorrect++;
 	
 	}
 	
 	percentCorrect = numCorrect/double(dtree.getData().tlength());
 	cout << percentCorrect << endl;
-	*/
+	
 	return 0;
 }
-#endif
+
