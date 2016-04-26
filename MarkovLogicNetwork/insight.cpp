@@ -3,7 +3,7 @@
 
 #include "insight.h"
    
-insight::insight(int len, string in) : identifier(in), attempts(0), successes(0), length(len){
+insight::insight(int len, string in) : identifier(in), ocur(0), verif(0), attempts(0), successes(0), failures(0), length(len){
     std::random_device rd;
     std::default_random_engine gen(rd());
     std::uniform_int_distribution<int> d(0,1);
@@ -15,17 +15,27 @@ insight::insight(int len, string in) : identifier(in), attempts(0), successes(0)
     vectorInit();
 }
 
+void insight::reset(){
+    attempts    = 0;
+    successes   = 0;
+    failures    = 0;
+    verif       = 0;
+    ocur        = 0;
+}
+
 double insight::weight() const{
-    if(attempts > 0){
-        return successes/(1.0 * attempts);
+    //Bayes
+    if (attempts > 0){
+        double SgU = 1.0*successes / (successes+ ocur);
+        double U = (1.0*successes + ocur)/ attempts;
+        double S = 1.0*verif / attempts;
+        return U;
     } else {
         return 0.0;
     }
 }
 
-bool insight::check(node n) {
-    attempts++;
-    vector<int> results;
+void insight::check(node n) {
     bool final = comparisions[compOrder[0]](n[order[0]], constants[0]);
     for(int i = 1; i < order.size(); i++){
         if (connectOrder[i] == 0){
@@ -39,21 +49,38 @@ bool insight::check(node n) {
         }
     }
 //this is overly verbose, but deal with it    
-    if(identifier.compare(n.getIdent()) == 0){
-       if(final){
-           successes++;
-           return true;
-       } else {
-           return false;
-       }
-    } else {
-        if(final){
-            return false;
-        } else {
+    attempts++;
+    if(final){
+        verif++;
+        if(identifier.compare(n.getIdent()) == 0){
             successes++;
+            return true;
+        } else {
+            failures++;
             return false;
         }
+    } else {
+         if(identifier.compare(n.getIdent()) == 0){
+            ocur++;
+            return true;
+        } 
     }
+}
+
+bool insight::evaluate(node n) {
+    bool final = comparisions[compOrder[0]](n[order[0]], constants[0]);
+    for(int i = 1; i < order.size(); i++){
+        if (connectOrder[i] == 0){
+            final = final || comparisions[compOrder[i]](n[order[i]], constants[i]);
+        } else {
+            if(final){
+                final = comparisions[compOrder[i]](n[order[i]], constants[i]);
+            } else {
+                break;
+           }
+        }
+    }
+    return final;
 }
 
 void insight::vectorInit(){
@@ -87,6 +114,3 @@ ostream& operator<<(ostream & os, insight in){
     }
     return os;
 }
-   
-
-

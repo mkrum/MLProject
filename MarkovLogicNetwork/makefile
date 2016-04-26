@@ -1,4 +1,4 @@
-FLAGS=-std=c++11 -static-libstdc++ 
+FLAGS=-std=c++11 -static-libstdc++ -pthread
 LINK=-I ../dataHandling -L ../dataHandling
 
 main:test

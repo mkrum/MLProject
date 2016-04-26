@@ -13,6 +13,7 @@
 #include <map>
 #include <ctime>
 #include <utility>
+#include <thread>
 
 using std::string;
 using std::cout;
@@ -27,12 +28,14 @@ class mln {
         void learn();
         double test();
         void example();
+        void tweaking();
     private:
         dataset data;
         kb dkb; //dynamic knowledge base
         int num;
         void debug();
         void learnWeights(node);
+        void learnVec(vector<insight*>, node);
         void evolve();
         void classify(node);
         vector<string> objects;
