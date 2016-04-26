@@ -4,7 +4,7 @@
 #include "mln.h"
 
 mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
-    num = 150/objects.size();
+    num = 500/objects.size();
     for(int i = 0; i < objects.size(); i++){
             vector<insight*> temp;
             for(int z = 0; z < num; z++){
@@ -67,6 +67,3 @@ void mln::example(){
     cout << "Here is the knowledge base that it compiled: " << endl;
     debug();
 }
-
-
-

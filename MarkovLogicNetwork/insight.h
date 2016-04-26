@@ -10,6 +10,7 @@
 #include <functional>
 #include <string>
 #include <iostream>
+#include <deque>
 
 using std::string;
 using std::vector;
@@ -24,7 +25,7 @@ class insight {
         string ident() const;
         int column() const;
         int size() const;
-        bool condense(vector<bool>);
+        bool condense(vector<int>);
         friend ostream& operator<<(ostream &, insight); 
     private:
         int attempts;

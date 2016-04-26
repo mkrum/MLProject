@@ -25,11 +25,19 @@ double insight::weight() const{
 
 bool insight::check(node n) {
     attempts++;
-    vector<bool> results;
-    for(int i = 0; i < order.size(); i++){
-        results.push_back(comparisions[compOrder[i]](n[order[i]], constants[i]));
+    vector<int> results;
+    bool final = comparisions[compOrder[0]](n[order[0]], constants[0]);
+    for(int i = 1; i < order.size(); i++){
+        if (connectOrder[i] == 0){
+            final = final || comparisions[compOrder[i]](n[order[i]], constants[i]);
+        } else {
+            if(final){
+                final = comparisions[compOrder[i]](n[order[i]], constants[i]);
+            } else {
+                break;
+           }
+        }
     }
-    bool final = condense(results);
 //this is overly verbose, but deal with it    
     if(identifier.compare(n.getIdent()) == 0){
        if(final){
@@ -46,29 +54,6 @@ bool insight::check(node n) {
             return false;
         }
     }
-}
-
-bool insight::condense(vector<bool> results){
-    vector<bool> temp;
-    bool fin = results[0];
-    for(int j = 1; j < results.size(); j++){
-        if (connectOrder[j] == 0){
-            fin = fin || results[j];
-        } else {
-            temp.push_back(fin);
-            fin = results[j];
-        }
-    }
-    bool ret;
-    if(temp.size() > 0){
-        ret = temp[0];
-        for(int i = 1; i < temp.size(); i++){
-            ret = ret && temp[i];
-        }
-    } else {
-        ret = fin;
-    }
-    return ret;
 }
 
 void insight::vectorInit(){
