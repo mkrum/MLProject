@@ -21,6 +21,7 @@ class Neuron{
         void backPropagate(double, vector<double>); //back propagates 
         double summate(vector<double>); //look at .cpp
         vector<double> getWeights();
+        double sigmoidDerivative(double); //returns the derivative of the sigmoid function
     private:
         //void createMap();
         //map<double, double> answers;

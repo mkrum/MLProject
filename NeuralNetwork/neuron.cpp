@@ -62,6 +62,10 @@ double Neuron::sigmoid(double value){
     return (1.0/(1.0+exp(-value)));
 }
 
+double Neuron::sigmoidDerivative(double value){
+    return sigmoid(value)*(1-sigmoid(value));
+}
+
 void Neuron::setWeights(int numWeights){
     for(int i=0; i<numWeights; i++){
         weights.push_back(getRandomWeight());
