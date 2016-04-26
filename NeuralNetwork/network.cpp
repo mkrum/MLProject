@@ -14,19 +14,19 @@ NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, doub
 //    inputs=Inputs;
 //    answer=Answer;
     createMap();
-    learn();
+    learnWeights();
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating
 void NeuralNetwork::train(node n){
-    getData(n);
+    inputs=n.dataVector();
     feedForward();
     for(int i=0; i<200; i++){
         neuron.backPropagate(answers[n.getIdent()]);
     }
 }
 
-void NeuralNetwork::learn(){
+void NeuralNetwork::learnWeights(){
     neuron.printWeights();
     data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
     //data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
