@@ -21,6 +21,7 @@ class Neuron{
         //FUNCTIONS USED IN THE NETWORK
         void feedForward(vector<double>);
         void backPropagate(double);
+        void printWeights(); //prints all the weights
     private:
         //PRIVATE DATA OF THE NEURON
         vector<double> weights; //vector of all the weights
@@ -31,7 +32,6 @@ class Neuron{
         //PRIVATE FUNCTIONS OF THE NEURON
         void setWeights(int); //sets all the weights
         double getRandomWeight(); //returns a random weight
-        void printWeights(); //prints all the weights
         //MATH FUNCTIONS
         double sigmoid(double); //returns the result of the sigmoid function
         double summate(vector<double>); //look at .cpp

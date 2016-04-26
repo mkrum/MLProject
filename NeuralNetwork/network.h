@@ -16,6 +16,7 @@ class NeuralNetwork{
         void feedForward(); //sends info through network
         void train(node); //function to train for a node
         Neuron neuron; //neuron for the network
+        void learn();
     private:
         void getData(node); //gets data from the node
         void createMap();

@@ -13,8 +13,8 @@ using namespace std;
 NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer):data(file, index), neuron(index-1){
 //    inputs=Inputs;
 //    answer=Answer;
-//    train();
     createMap();
+    learn();
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating
@@ -22,9 +22,15 @@ void NeuralNetwork::train(node n){
     getData(n);
     feedForward();
     for(int i=0; i<200; i++){
-        neuron.backPropagate(answer);
+        neuron.backPropagate(answers[n.getIdent()]);
     }
-    cout << neuron.getOutput() << endl;
+}
+
+void NeuralNetwork::learn(){
+    neuron.printWeights();
+    data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
+    //data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
+    neuron.printWeights();
 }
 
 void NeuralNetwork::createMap(){
@@ -41,11 +47,6 @@ void NeuralNetwork::createMap(){
         cout << it->first << " " << it->second << " " << endl;
     }
     
-}
-
-//gets data from node and 
-void NeuralNetwork::getData(node n){
-    inputs=n.dataVector();
 }
 
 //calls on neuron feed forward and sends inputs
