@@ -15,12 +15,13 @@ class Tree {
 
 	public:
 		Tree();
+		~Tree();
 		TreeNode<double> getFirst();
 		void buildNode(vector<double>, TreeNode<double> &, int);
 		int getNumLevels();
 		TreeNode<double>  findNextNode(TreeNode<double> &);
 		int leftNode(TreeNode<double> &);
-		void makeTree(int, TreeNode<double> &);
+		void makeTree(int, TreeNode<double> &, int);
 		void setLevel(int, TreeNode<double> &, double,int);
 		void setFirst (TreeNode<double> a){first = a;}
 	private:
@@ -36,7 +37,11 @@ Tree::Tree()
 	
 }
 
-void Tree::makeTree(int numLevels,TreeNode<double> &k)
+Tree::~Tree(){
+
+}
+
+void Tree::makeTree(int numLevels,TreeNode<double> &k, int firstTime)
 {
 	
 	if (numLevels > 1)
@@ -47,12 +52,11 @@ void Tree::makeTree(int numLevels,TreeNode<double> &k)
 		newNodeR = new TreeNode<double>;
 		k.setRight(newNodeR);
 		k.setLeft(newNodeL);
-		makeTree(numLevels-1,*newNodeL);
-		makeTree(numLevels-1,*newNodeR);
+		makeTree(numLevels-1,*newNodeL,0);
+		makeTree(numLevels-1,*newNodeR,0);
 	}
-	else
 		//cout << "done" << endl;
-	first = k;
+	if(firstTime == 1) first = k;
 }
 
 void Tree::setLevel(int levelNum, TreeNode<double> &k, double average, int firstTime)

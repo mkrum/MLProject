@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Tree.h"
 #include <map>
+#include <algorithm>
+#include <locale>
 using namespace std;
 
 class dt {
@@ -22,8 +24,8 @@ class dt {
         dataset getData(){return data;};
         int getIndexOfLearn(){return indexOfLearn;};
         Tree getTree(){return newTree;};
-        string assignTreeProb(vector<double>, TreeNode<double> , int);
-        void setMapVal(vector<double>, TreeNode<double> , int,string, int);
+        string assignTreeProb(vector<double>, TreeNode<double> &, int);
+        void setMapVal(vector<double>, TreeNode<double> &, int,string, int);
     private:
         dataset data;
         Tree newTree;
@@ -44,12 +46,14 @@ void dt::createTree()
 {
 	int i=0;
 	int b = getData().columns();
-	int count = 1,index = 0;
 	TreeNode<double> chill = newTree.getFirst();
 	cout << "num columns: " << b << endl;
-	newTree.makeTree(b, chill);
+	newTree.makeTree(b, chill,1);
+	chill = newTree.getFirst();
 	cout << "i'm here" << endl;
-	
+	cout << newTree.getFirst().getData() << endl;
+	cout << newTree.getFirst().getLeftChild()->getData() << endl;
+	if (b>5) b = 5;
 	while (b>0)
 	{
 		vector<double> stats;
@@ -83,18 +87,22 @@ void dt::createTree()
 	*/	
 }
 
-string dt::assignTreeProb(vector<double>vals, TreeNode<double> a, int i) //test values by giving them the best guess available
+string dt::assignTreeProb(vector<double>vals, TreeNode<double> &a, int i) //test values by giving them the best guess available
 {
+	string s;
 	if(vals[i] <= a.getData())
 	{	
 		cout << "swex" << endl;
 		if ( a.getLeftChild() != NULL)
 		{
 			cout << "tuddy" << endl;
-			assignTreeProb(vals,*a.getLeftChild(),i+1);
+			s = assignTreeProb(vals,*a.getLeftChild(),i+1);
 		}
 		else
-			return a.getMostPopularResult();
+		{
+			s = a.getMostPopularResult();
+			return s;
+		}
 	}
 	else
 	{	
@@ -102,22 +110,27 @@ string dt::assignTreeProb(vector<double>vals, TreeNode<double> a, int i) //test 
 		if ( a.getRightChild() != NULL)
 		{	
 			cout << "s" << endl;
-			assignTreeProb(vals,*a.getRightChild(),i+1);
+			s = assignTreeProb(vals,*a.getRightChild(),i+1);
 			cout << "fu" << endl;
 		}
 		else
-			return a.getMostPopularResult();
+		{
+			s = a.getMostPopularResult();
+			//cout << s << endl;
+			return s;
+		}
 	}
 	cout << "so nice" << endl;
+	return s;
 }
 
-void dt::setMapVal(vector<double> vals, TreeNode<double> a, int i, string actual, int firstTime) //assign values to map at bottom nodes (set i to 0, vals equal all attributes for one node, and TreeNode to first)
+void dt::setMapVal(vector<double> vals, TreeNode<double> &a, int i, string actual, int firstTime) //assign values to map at bottom nodes (set i to 0, vals equal all attributes for one node, and TreeNode to first)
 {
 	
 	if(firstTime == 1) a = newTree.getFirst();
 	map<string,double >::iterator it;
 	//cout << "not even here" << endl;
-	map <string,double> disMap = a.getMap();
+	//map <string,double> disMap = a.getMap();
 	if(vals[i] <= a.getData())
 	{	
 		//cout << "went left" << endl;
@@ -126,14 +139,17 @@ void dt::setMapVal(vector<double> vals, TreeNode<double> a, int i, string actual
 		else
 		{
 			//map <string,int>::iterator it;
+			map <string,double> disMap = a.getMap();
 			it = disMap.find(actual);
 			if(it != disMap.end()) //fill out map
 			{
 				disMap[actual]++;
+				//cout << "multiple here" << endl;
 			}
 			else
 			{
 				disMap[actual]=1;
+				//cout << "first timer here " << a.getData() << endl;
 			}
 			a.setMap(disMap);
 		}
@@ -145,14 +161,17 @@ void dt::setMapVal(vector<double> vals, TreeNode<double> a, int i, string actual
 			setMapVal(vals,*a.getRightChild(),i+1,actual,0);
 		else
 		{	
+			map <string,double> disMap = a.getMap();
 			it = disMap.find(actual);
 			if(it != disMap.end()) //fill out map
 			{
 				disMap[actual]++;
+				//cout << "multiple hizzere" << endl;
 			}
 			else
 			{
 				disMap[actual]=1;
+				//cout << "first timer hizere" << a.getData() << endl;
 			}
 			a.setMap(disMap);
 			

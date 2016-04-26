@@ -20,6 +20,7 @@ class TreeNode {
  public:
   TreeNode(T, string);     // constructor
   TreeNode();
+  ~TreeNode();
   TreeNode(TreeNode<T> &, TreeNode<T> &);
   T getData() const;   // get function
   string getLabel();
@@ -48,6 +49,10 @@ class TreeNode {
 //        templates and linking
 
 // constructor, using member initialization list syntax
+template<typename T>
+TreeNode<T>::~TreeNode(){
+}
+
 template<typename T>
 TreeNode<T>::TreeNode(T a,string s) :data(a),nextl(NULL),nextr(NULL),label(s){}
 
