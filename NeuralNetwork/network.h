@@ -12,15 +12,13 @@ class NeuralNetwork{
     public:
         NeuralNetwork(string, int, vector<double>, double); //remove vector later
         NeuralNetwork(vector<double>, double);
-        double feedForward();
+        void feedForward();
         void train();
-        Layer getHiddenLayer();
-        Neuron outputNeuron;
+        Neuron neuron;
         void backPropagate();
     private:
         double answer;
-        Layer hiddenlayer;
-        //dataset data; 
+        dataset data; 
         vector<double> inputs; //temporary, just for testing REMOVE
         double error;
 };

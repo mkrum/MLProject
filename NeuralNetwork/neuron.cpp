@@ -115,10 +115,9 @@ double Neuron::summate(vector<double> Inputs){
     inputs=Inputs;
     double total=0;
     for(int i=0; i<weights.size(); i++){
-        total+=weights[i]*Inputs[i];
+        total+=weights[i]*inputs[i];
     }
-    setOutput(sigmoid(total));
-    return getOutput();;
+    return sigmoid(total);
 }
 
 void Neuron::printWeights(){
@@ -127,19 +126,17 @@ void Neuron::printWeights(){
         cout << i << endl;
 }
 
-//double check that these are the parameters that you want
-/*
-void Neuron::backPropagate(double error, vector<double> Inputs){
+void Neuron::backPropagate(double answer){
     dweights.clear();
     double step=.10;
-    double outputLocal=summate(Inputs);
-    double delta=outputLocal*(1.0-outputLocal)*(error-outputLocal);
+    setOutput(summate(inputs));
+    double outputLocal=summate(inputs);
+    double delta=getOutput()*(1.0-getOutput())*(answer-getOutput());
     for(int i=0; i<inputs.size(); i++){
-        dweights.push_back(step*delta*Inputs[i]);
+        dweights.push_back(step*delta*inputs[i]);
         weights[i]+=dweights[i];
     }
 }
-*/
 
 vector<double> Neuron::getWeights(){
     return weights;

@@ -16,12 +16,6 @@ int main(){
     tmp.push_back(.8);
     tmp.push_back(.82);
     cout << "made vector" << endl;
-    //NeuralNetwork network1("iris.csv", 4, tmp);
-    NeuralNetwork network1(tmp, .2);
-    cout << "fam";
-    cout << "YOUR FEED FORWARD IS : " << network1.feedForward() << endl;
-    cout << network1.getHiddenLayer().getNeurons()[1].getWeights()[2] << endl;
-    network1.outputNeuron.getOutput();
-    network1.backPropagate();
-    network1.outputNeuron.getOutput();
+    NeuralNetwork network1("iris.csv", 5, tmp, .2);
+    
 }

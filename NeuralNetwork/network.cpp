@@ -9,51 +9,23 @@
 #include "network.h"
 using namespace std;
 
-//NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer): data(file, index), hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){ //remove inputs vector later
-NeuralNetwork::NeuralNetwork(vector<double> Inputs, double Answer): hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){
-    cout << "1";
+NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer): data(file, index), neuron(index-1){
     inputs=Inputs;
     answer=Answer;
-//    data(file, index);
-    cout << "2";
+    train();
 }
 
 void NeuralNetwork::train(){
-
-}
-
-Layer NeuralNetwork::getHiddenLayer(){
-    return hiddenlayer;
-}
-
-void NeuralNetwork::backPropagate(){
-    //Calculating the overall error over the whole network
-    error=0;
-    double delta=answer-outputNeuron.getOutput();
-    error=delta;
-    
-    //Calculating output layer gradients
-    outputNeuron.calculateOutputGradients(answer);
-
-    //Calculate hidden layer gradients
-    for(int i=0; i<hiddenlayer.getNeurons().size(); i++){
-        hiddenlayer.getNeurons()[i].calculateHiddenGradients(outputNeuron);
+    feedForward();
+    for(int i=0; i<200; i++){
+        neuron.backPropagate(answer);
     }
+    cout << neuron.getOutput() << endl;
+}
 
-    //Go from output layer to hidden layer and update connection weights
-    outputNeuron.updateWeights(outputNeuron, hiddenlayer.getNeurons()); //change weights of output layer
-    /*
-    for(int i=0; i<hiddenlayer.getNeurons().size(); i++){
-        hiddenlayer.getNeurons()[i].updateWeights(hiddenlayer.getNeurons()[i],);
-    }
-    */
-
-
+void NeuralNetwork::feedForward(){
+    double output=neuron.summate(inputs);
 }
 
 
-
-double NeuralNetwork::feedForward(){
-    return outputNeuron.summate(hiddenlayer.getOutputs());
-}
 

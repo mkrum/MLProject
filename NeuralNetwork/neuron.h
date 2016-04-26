@@ -17,7 +17,7 @@ class Neuron{
         double getOutput() { return output; }
         //void trainData(vector<double>);
         double sigmoid(double); //returns the result of the sigmoid function
-        void backPropagate(double, vector<double>); //back propagates 
+        void backPropagate(double); //back propagates 
         double summate(vector<double>); //look at .cpp
         vector<double> getWeights();
         double sigmoidDerivative(double); //returns the derivative of the sigmoid function
@@ -26,7 +26,7 @@ class Neuron{
         double getGradient() { return gradient; }
         void updateWeights(Neuron n, vector<Neuron>);
         vector<double> weights; //vector of all the weights
-        //vector<double> dweights;
+        vector<double> dweights;
         double dweight;
     private:
         //void createMap();
