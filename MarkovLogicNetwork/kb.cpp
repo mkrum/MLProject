@@ -115,8 +115,11 @@ double kb::rate() const{
 }
 
 std::ostream& operator<<(std::ostream & os, const kb test){
-   for(auto elem : test.base){
-        os << elem.first << std::endl;
-        os << elem.second[0]->weight() << " " << *elem.second[0] << std::endl;
+   for(auto elem: test.base){
+        os << "Class: " << elem.first << std::endl;
+        std::cout << "Weight   Statement" << std::endl;
+        for(auto obj : elem.second){
+            os << obj->weight() << " " << *obj << std::endl;
+        }
    }
 }

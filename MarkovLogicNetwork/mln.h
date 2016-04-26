@@ -15,14 +15,18 @@
 #include <utility>
 
 using std::string;
+using std::cout;
+using std::endl;
 using std::vector;
+
 
 class mln {
     public:
         mln(std::string, int);
-        std::pair<double, double> execute();
+        vector<double> execute();
         void learn();
         double test();
+        void example();
     private:
         dataset data;
         kb dkb; //dynamic knowledge base
