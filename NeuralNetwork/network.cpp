@@ -11,26 +11,30 @@ using namespace std;
 
 //constructor
 NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer):data(file, index), neuron(index-1){
-//    inputs=Inputs;
-//    answer=Answer;
     createMap();
     learnWeights();
+    testData();
+    for(int i=0; i<successes.size(); i++){
+        cout << successes[i] << endl;
+    }
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating
 void NeuralNetwork::train(node n){
-    inputs=n.dataVector();
-    feedForward();
+    cout << "FAM" << endl;
+    feedForward(n.dataVector());
+    cout << "fam" << endl;
     for(int i=0; i<200; i++){
         neuron.backPropagate(answers[n.getIdent()]);
     }
 }
 
 void NeuralNetwork::learnWeights(){
-    neuron.printWeights();
     data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
-    //data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
-    neuron.printWeights();
+}
+
+void NeuralNetwork::testData(){
+    data.test(std::bind(&NeuralNetwork::testNode, this, std::placeholders::_1));
 }
 
 void NeuralNetwork::createMap(){
@@ -50,9 +54,29 @@ void NeuralNetwork::createMap(){
 }
 
 //calls on neuron feed forward and sends inputs
-void NeuralNetwork::feedForward(){
-    neuron.feedForward(inputs);
+void NeuralNetwork::feedForward(vector<double> Inputs){
+    neuron.feedForward(Inputs);
 }
 
+void NeuralNetwork::testNode(node n){
+    feedForward(n.dataVector());
+    double result=neuron.getOutput();
+    cout << "RESULT " << result << endl;
+    cout << n.getIdent() << endl;
+    vector<double> difference;
+    for(int i=0; i<answerCenterPoints.size(); i++){
+        difference.push_back(abs(result-answerCenterPoints[i]));
+    }
+    for(int i=0; i<difference.size(); i++){
+        cout << difference[i] << endl;
+    } 
+    int answerIndex=min_element(difference.begin(), difference.end())-difference.begin();
+    cout << "index" << answerIndex << endl;
+    cout << answers[n.getIdent()] << endl;
+    if(answerCenterPoints[answerIndex]==answers[n.getIdent()])
+        successes.push_back(1);
+    else
+        successes.push_back(0);
+}
 
 

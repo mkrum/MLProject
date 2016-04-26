@@ -30,7 +30,7 @@ double Neuron::summate(vector<double> Inputs){
     inputs=Inputs;
     double total=0;
     for(int i=0; i<weights.size(); i++){
-        total+=weights[i]*inputs[i];
+        total+=weights[i]*Inputs[i];
     }
     return sigmoid(total);
 }
@@ -72,7 +72,7 @@ double Neuron::getRandomWeight(){
 
 //takes in inputs from the network and feeds them forward by summating
 void Neuron::feedForward(vector<double> Inputs){
-    summate(Inputs);
+    output=summate(Inputs);
 }
 
 

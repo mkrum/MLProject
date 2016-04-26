@@ -15,7 +15,7 @@ class NeuralNetwork{
     public:
         NeuralNetwork(string, int, vector<double>, double); //constructor 
         NeuralNetwork(vector<double>, double);
-        void feedForward(); //sends info through network
+        void feedForward(vector<double>); //sends info through network
         void train(node); //function to train for a node
         Neuron neuron; //neuron for the network
         void learnWeights();
@@ -27,4 +27,7 @@ class NeuralNetwork{
         vector<double> inputs; //inputs vector, gets updated with each node
         map<string, double> answers;
         vector<double> answerCenterPoints;
+        vector<int> successes;
+        void testNode(node);
+        void testData();
 };
