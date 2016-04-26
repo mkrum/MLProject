@@ -20,6 +20,7 @@ class Neuron{
         double sigmoid(double); //returns the result of the sigmoid function
         void backPropagate(double, vector<double>); //back propagates 
         double summate(vector<double>); //look at .cpp
+        vector<double> getWeights();
     private:
         //void createMap();
         //map<double, double> answers;

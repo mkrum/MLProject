@@ -17,6 +17,7 @@ class Layer{
         Layer(vector<double>);
         vector<double> computeLayer(); 
         vector<double> getOutputs();
+        vector<Neuron> getNeurons();
     private:
         vector<Neuron> neurons;
         vector<double> inputs; 

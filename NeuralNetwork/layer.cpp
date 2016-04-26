@@ -28,6 +28,10 @@ vector<double> Layer::computeLayer(){
     return outputs;
 }
 
+vector<Neuron> Layer::getNeurons(){
+    return neurons;
+}
+
 
 
 

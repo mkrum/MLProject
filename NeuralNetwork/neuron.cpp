@@ -96,5 +96,7 @@ void Neuron::backPropagate(double error, vector<double> Inputs){
     }
 }
 
-
+vector<double> Neuron::getWeights(){
+    return weights;
+}
 

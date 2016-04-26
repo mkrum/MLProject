@@ -14,8 +14,9 @@ class NeuralNetwork{
         //NeuralNetwork(vector<double>);
         double feedForward();
         void train();
+        Layer getHiddenLayer();
     private:
-        void backPropogate();
+        void backPropagate();
         Layer hiddenlayer;
         dataset data; 
         vector<double> inputs; //temporary, just for testing REMOVE

@@ -19,8 +19,14 @@ void NeuralNetwork::train(){
 
 }
 
-void NeuralNetwork::backPropogate(){
+Layer NeuralNetwork::getHiddenLayer(){
+    return hiddenlayer;
+}
 
+void NeuralNetwork::backPropagate(){
+//    double dweight;
+//    double step=.1;
+//    double output=summate(
 }
 
 double NeuralNetwork::feedForward(){
