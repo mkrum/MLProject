@@ -79,7 +79,8 @@ double Neuron::summate(vector<double> Inputs){
     for(int i=0; i<weights.size(); i++){
         total+=weights[i]*Inputs[i];
     }
-    return sigmoid(total);
+    setOutput(sigmoid(total));
+    return getOutput();;
 }
 
 void Neuron::printWeights(){
@@ -92,8 +93,8 @@ void Neuron::printWeights(){
 void Neuron::backPropagate(double error, vector<double> Inputs){
     dweights.clear();
     double step=.10;
-    double output=summate(Inputs);
-    double delta=output*(1.0-output)*(error-output);
+    double outputLocal=summate(Inputs);
+    double delta=outputLocal*(1.0-outputLocal)*(error-outputLocal);
     for(int i=0; i<inputs.size(); i++){
         dweights.push_back(step*delta*Inputs[i]);
         weights[i]+=dweights[i];

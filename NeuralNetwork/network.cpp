@@ -9,9 +9,10 @@
 #include "network.h"
 using namespace std;
 
-NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs): data(file, index), hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){ //remove inputs vector later
+NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer): data(file, index), hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){ //remove inputs vector later
 //NeuralNetwork::NeuralNetwork(vector<double> Inputs): hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){
     inputs=Inputs;
+    answer=Answer;
 //    data(file, index);
 }
 
@@ -24,10 +25,19 @@ Layer NeuralNetwork::getHiddenLayer(){
 }
 
 void NeuralNetwork::backPropagate(){
-//    double dweight;
-//    double step=.1;
-//    double output=summate(
+    //Calculating the overall error over the whole network
+    error=0;
+
+    //Calculating output layer gradients
+
+    //Calculate hidden layer gradients
+
+    //Go from output layer to hidden layer and update connection weights
+
+
 }
+
+
 
 double NeuralNetwork::feedForward(){
     return outputNeuron.summate(hiddenlayer.getOutputs());
