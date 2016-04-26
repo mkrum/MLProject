@@ -19,7 +19,9 @@ int main()
 	dt dtree("iris.csv",5);
 	cout << dtree.getData().tlength() << endl;
 	dtree.createTree();
+	cout << "where even" << endl;
 	TreeNode<double> root = dtree.getTree().getFirst();
+	
 	for(int i=0;i<dtree.getData().tlength()*4;i++)
 	{
 		
@@ -30,11 +32,17 @@ int main()
 			//cout << dtree.getData().get(i).getData(j) << endl;
 		}
 		actual = dtree.getData().get(i).getIdent();
-		dtree.setMapVal(vals,root,0,actual);
+		cout << "wat" << endl;
+		dtree.setMapVal(vals,root,0,actual,1);
+		cout << "oh" << endl;
 		
 	}
-	
+	//map <string,double>::iterator it = dtree.getTree().getFirst().getRightChild()->getRightChild()->getLeftChild()->getMap().begin();
+	cout << dtree.getTree().getFirst().getRightChild()->getRightChild()->getLeftChild()->getData() << endl;
+	//cout << it->first << " " << it->second << endl;
+	//cout << dtree.getTree().getFirst().getLeftChild()->getRightChild()->getLeftChild().getMap()
 	cout << "ya boy" << endl;
+	/*
 	vector<string> testStats;
 	int sizeOfTest = dtree.getData().tlength();
 	
@@ -62,5 +70,6 @@ int main()
 	cout << percentCorrect << endl;
 	
 	return 0;
+	*/
 }
 

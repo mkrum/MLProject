@@ -21,7 +21,8 @@ class Tree {
 		TreeNode<double>  findNextNode(TreeNode<double> &);
 		int leftNode(TreeNode<double> &);
 		void makeTree(int, TreeNode<double> &);
-		void setLevel(int, TreeNode<double> &, double);
+		void setLevel(int, TreeNode<double> &, double,int);
+		void setFirst (TreeNode<double> a){first = a;}
 	private:
 		vector < TreeNode<double> > tree;
 		TreeNode<double> first;
@@ -38,7 +39,7 @@ Tree::Tree()
 void Tree::makeTree(int numLevels,TreeNode<double> &k)
 {
 	
-	if (numLevels > 0)
+	if (numLevels > 1)
 	{
 		TreeNode<double>* newNodeL = NULL;
 		TreeNode<double>* newNodeR = NULL;
@@ -50,23 +51,24 @@ void Tree::makeTree(int numLevels,TreeNode<double> &k)
 		makeTree(numLevels-1,*newNodeR);
 	}
 	else
-		cout << "done" << endl;
+		//cout << "done" << endl;
+	first = k;
 }
 
-void Tree::setLevel(int levelNum, TreeNode<double> &k, double average)
+void Tree::setLevel(int levelNum, TreeNode<double> &k, double average, int firstTime)
 {
+	if(firstTime == 1) k=first;
 	if (levelNum > 1)
 	{
 		cout << "top" << endl;
-		setLevel(levelNum-1, *(k.getLeftChild()),average);
-		setLevel(levelNum-1, *(k.getRightChild()),average);
+		setLevel(levelNum-1, *(k.getLeftChild()),average,0);
+		setLevel(levelNum-1, *(k.getRightChild()),average,0);
 	}
 	else
 	{
 		k.setData(average);
-		first = k;
 	}
-		
+	if(firstTime == 1) first = k;	
 	
 }
 

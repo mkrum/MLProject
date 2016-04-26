@@ -33,6 +33,7 @@ class TreeNode {
   void setParent(TreeNode<double> a){*parent = a;}
   void setLeft(TreeNode<double> * a){nextl = a;}
   void setRight(TreeNode<double> * a){nextr = a;}
+  void setMap(map <string,double> a) {numOfResults = a;}
 
  private:
   T data;           // data for linked list node 
@@ -99,7 +100,7 @@ string TreeNode<T>::getMostPopularResult()
 			val = it->first;
 		}
 	}
-	
+	cout << "hope you like fammin too" <<endl;
 	return val;
 }
 
