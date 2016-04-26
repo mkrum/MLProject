@@ -1,7 +1,7 @@
 FLAGS=-std=c++11 -static-libstdc++
 LINK=-I ../dataHandling -I ./eigen-eigen-07105f7124f9 -L ../dataHandling
 
-main: test
+main: test newtest
 	
 test: test.cpp multiNomLogReg.o
 	g++ $(FLAGS) $^ $(LINK) -ldataset -o $@
