@@ -4,7 +4,7 @@
 #include "mln.h"
 
 mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
-    num = 150/objects.size();
+    num = 100/objects.size();
     for(int i = 0; i < objects.size(); i++){
             vector<insight*> temp;
             for(int z = 0; z < num; z++){
@@ -27,11 +27,20 @@ vector<double> mln::execute(){
 }
 
 void mln::learnWeights(node n){
-    for(auto &objects : knowledge){
-        for(auto &in : objects){
-            in->check(n); 
-        }
+    std::thread t[knowledge.size()];
+    for(int j = 0; j < knowledge.size(); j++){
+            t[j] = std::thread(std::bind(&mln::learnVec, this, std::placeholders::_1, std::placeholders::_2), knowledge[j], n); 
     }
+
+    for(int i = 0; i < knowledge.size(); i++){
+        t[i].join();
+    }
+}
+
+void mln::learnVec(vector<insight*> vec, node n){
+    for(auto &part : vec){
+        part->check(n);    
+    }    
 }
 
 void mln::debug(){
@@ -46,7 +55,7 @@ void mln::evolve(){
 }
 
 void mln::learn(){
-    for(int i = 0; i < 50; i++){
+    for(int i = 0; i < 1; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
@@ -68,5 +77,15 @@ void mln::example(){
     debug();
 }
 
-
-
+void mln::tweaking(){
+    data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
+    evolve();
+    debug();
+    for(int i = 0; i < 100; i++){
+        data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
+        evolve();
+        cout << test() << endl;
+    }
+    debug();
+   
+}

@@ -3,6 +3,7 @@
 
 #include "dt.h"
 #include "Tree.h"
+#include "TreeNode.h"
 #include <string>
 #include <iostream>
 #include <map>

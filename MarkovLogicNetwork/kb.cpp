@@ -76,6 +76,7 @@ insight kb::mutate(insight dst, insight in){
                     dst.constants[i] = in.constants[i] + delta;
                 }
             }
+            dst.reset();
             return dst;
         }
     }
@@ -83,6 +84,7 @@ insight kb::mutate(insight dst, insight in){
     dst.compOrder.push_back(in.compOrder[ord]);
     dst.connectOrder.push_back(d2(generator));
     dst.constants.push_back(in.constants[ord]);
+    dst.reset();
     return dst;
 }
 
@@ -94,7 +96,7 @@ void kb::classify(node n){
     for(auto classe: classes){
         score = 0;
         for(auto in : base[classe]){
-            if(in->check(n)) {
+            if(in->evaluate(n)) {
                 score += in->weight();
             }
         }

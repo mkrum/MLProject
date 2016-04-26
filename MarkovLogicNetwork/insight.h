@@ -10,6 +10,7 @@
 #include <functional>
 #include <string>
 #include <iostream>
+#include <deque>
 
 using std::string;
 using std::vector;
@@ -19,17 +20,22 @@ class insight {
     friend class kb;
     public:
         insight(int, string);  //base constructor, starts with a single column for a column
-        bool check(node);
+        void check(node);
         double weight() const;
         string ident() const;
         int column() const;
         int size() const;
-        bool condense(vector<bool>);
-        friend ostream& operator<<(ostream &, insight); 
+        bool condense(vector<int>);
+        bool evaluate(node n);
+        friend ostream& operator<<(ostream &, insight);
+        void reset();
     private:
         int attempts;
         int successes;
+        int failures;
         int length;
+        int verif;
+        int ocur;
         vector<int> order;
         vector<double> constants;
         vector<std::function<bool(double, double)>> comparisions;

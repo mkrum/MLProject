@@ -13,24 +13,28 @@ class Neuron{
     public:
         Neuron(int); //constructor that takes in the amount of weights
         ~Neuron();
-        //Neuron(vector<double>, int); //inputs comes from the vector of nodes, int is how many different classifications there are
-        void setOutput(double);
-        double getOutput();
-        //void trainData(vector<double>);
-        double sigmoid(double); //returns the result of the sigmoid function
-        void backPropagate(double, vector<double>); //back propagates 
-        double summate(vector<double>); //look at .cpp
-    private:
-        //void createMap();
-        //map<double, double> answers;
-        //double numTargets;
-        int numWeights; //number of weights
-        void setWeights(int); //sets all the weights
-        vector<double> weights; //vector of all the weights
-        double getRandomWeight(); //returns a random weight
-        vector<double> inputs; //inputs vector; gets saved in the summate function
-        //int type;
+        //GET SET FUNCTIONS
+        double getOutput() { return output; }
+        void setOutput(double op) { output=op; } //sets the output
+        vector<double> getWeights() const { return weights; }
+        vector<double> getDWeights() const { return dweights; }
+        //FUNCTIONS USED IN THE NETWORK
+        void feedForward(vector<double>);
+        void backPropagate(double);
         void printWeights(); //prints all the weights
+    private:
+        //PRIVATE DATA OF THE NEURON
+        vector<double> weights; //vector of all the weights
+        vector<double> dweights;
+        vector<double> inputs; //inputs vector; gets saved in the summate function
+        int numWeights; //number of weights
+        double output; //output of the neuron 
+        //PRIVATE FUNCTIONS OF THE NEURON
+        void setWeights(int); //sets all the weights
+        double getRandomWeight(); //returns a random weight
+        //MATH FUNCTIONS
+        double sigmoid(double); //returns the result of the sigmoid function
+        double summate(vector<double>); //look at .cpp
 };
 
 
