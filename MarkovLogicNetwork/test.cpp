@@ -6,8 +6,10 @@ using namespace std;
 int main() {
  //  mln("letterrec.csv", 1);
     mln net = mln("credit.csv", 16);
-    pair<double, double> test;
+    map<string, vector<double>> test;
     test = net.execute();
-    cout << "time: " << test.first << " rate: " << test.second;
+    for(auto elem : test){  
+        cout << "time: " << elem.first << " rate: " << elem.second[0];
+    }
 }
 

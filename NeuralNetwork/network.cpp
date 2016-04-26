@@ -5,11 +5,14 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
-#include "neuron.h"
+#include <string>
+#include "network.h"
 using namespace std;
 
-NeuralNetwork::NeuralNetwork(){
-    
+NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs): data(file, index), hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){ //remove inputs vector later
+//NeuralNetwork::NeuralNetwork(vector<double> Inputs): hiddenlayer(Inputs), outputNeuron(hiddenlayer.computeLayer().size()){
+    inputs=Inputs;
+//    data(file, index);
 }
 
 void NeuralNetwork::train(){
@@ -20,6 +23,7 @@ void NeuralNetwork::backPropogate(){
 
 }
 
-
-
+double NeuralNetwork::feedForward(){
+    return outputNeuron.summate(hiddenlayer.getOutputs());
+}
 

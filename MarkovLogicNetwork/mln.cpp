@@ -3,11 +3,6 @@
 
 #include "mln.h"
 
-
-using std::string;
-using std::cout;
-using std::endl;
-
 mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
     num = 150/objects.size();
     for(int i = 0; i < objects.size(); i++){
@@ -20,14 +15,14 @@ mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb
     }
 }
 
-std::pair<double, double> mln::execute(){ 
-    std::pair<double, double> ret;
+vector<double> mln::execute(){ 
+    vector<double> ret;
     std::clock_t begin = std::clock();
     learn();
     std::clock_t end = std::clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    ret.first = double(elapsed_secs);
-    ret.second = test();
+    ret.push_back(double(elapsed_secs));
+    ret.push_back(test());
     return ret;
 }
 

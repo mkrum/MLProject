@@ -1,4 +1,6 @@
 //Marco Bruscia
+#ifndef T_H
+#define T_H
 
 #include <iostream>
 #include <vector>
@@ -12,81 +14,59 @@ using namespace std;
 class Tree {
 
 	public:
-		Tree(int);
-		TreeNode<int> getFirst();
-		void findDataVal(int, TreeNode<int>,int);
+		Tree();
+		TreeNode<double> getFirst();
 		void buildNode(vector<double> );
 		int getNumLevels();
-		TreeNode<int> findNextNode();
+		TreeNode<double>  findNextNode(TreeNode<double> &);
+		int leftNode(TreeNode<double> &);
 	private:
-		vector < TreeNode<int> > tree;
+		vector < TreeNode<double> > tree;
 		TreeNode<double> first;
 		int numLevels;
 
 };
 
 
-Tree::Tree(int i)
-{
-	numLevels = i;
-}
+Tree::Tree()
+{}
 
-TreeNode<int> Tree::getFirst()
+TreeNode<double> Tree::getFirst()
 {
 	return first;
 }
 
 
-
-void Tree::findDataVal(int a, TreeNode<int> c, int j)
-{	
-	if(j-1)
-	{
-		if(c.getLeftChild().getData() == a)		
-			cout << c.getLeftChild().getLabel() << endl;
-		
-		if(c.getRightChild().getData() == a)
-			cout <<  c.getRightChild().getLabel() << endl;
-			
-		findDataVal(a, c.getRightChild(),j-1);
-		findDataVal(a, c.getLeftChild(),j-1);
-	}
-	
-}
-
 int Tree::getNumLevels() { return numLevels; }
 
 void Tree::buildNode(vector<double> a)
 {
-	treeNode n = findNextNode();
-	TreeNode nextOne;
-	nextOne->parent = n;
-	if(leftNode(n))
-		n->nextl = nextOne;
-	else n->nextr = nextOne;
+	TreeNode<double> c = getFirst();
+	TreeNode<double> n = findNextNode(c); //finds next available empty node
+	TreeNode<double> nextOne;
+	nextOne.setParent(n);
 	double average, sum=0;
 	for(int i=0;i<a.size();i++)
 		sum += a[i];
-	average=sum/a.size()
+	average=sum/a.size();
 	nextOne.setData(average);
+	if(leftNode(n))
+		n.setLeft(nextOne);
+	else
+		n.setRight(nextOne);
 }
 
-TreeNode<double> Tree::findNextNode()
+TreeNode<double> Tree::findNextNode(TreeNode<double>  &a)//needs to be fixed
 {
-	node a = first;
-	while(a != NULL)
-	{
-		a = a.getLeftChild();
-		if(a == NULL) break;
-		a = a.getRightChild();
-	}
-	return a;
+	if(a.getLeftChild() == NULL) return *(a.getLeftChild());
+	if(a.getRightChild() == NULL) return *(a.getLeftChild());
+	return findNextNode(*(a.getLeftChild()));
 }
 
-int Tree::leftNode(n)
+int Tree::leftNode(TreeNode<double> &n)
 {
-	if (n.getParent().getLeftChild == n)
-		return 1
+	if (n.getParent()->getLeftChild()->getData() ==  n.getData())
+		return 1;
 	else return 0;
 }
-
+#endif

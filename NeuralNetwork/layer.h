@@ -6,7 +6,6 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
-#include "dataset.h"
 #include "neuron.h"
 #include <map>
 using namespace std;
@@ -16,7 +15,10 @@ using namespace std;
 class Layer{
     public:
         Layer(vector<double>);
+        vector<double> computeLayer(); 
+        vector<double> getOutputs();
     private:
         vector<Neuron> neurons;
-        
+        vector<double> inputs; 
+        vector<double> outputs;
 };

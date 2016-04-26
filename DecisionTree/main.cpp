@@ -1,10 +1,10 @@
-
+#ifndef MAIN_H_
+#define MAIN_H_
 
 //Marco Bruscia
 
 #include "dt.h"
 #include "Tree.h"
-#include "dataset.h"
 #include <string>
 #include <iostream>
 #include <map>
@@ -16,20 +16,19 @@ int main()
 	cout << "tryna fam?" << endl;
 	
 	int numCorrect = 0, percentCorrect;
-	double actual;
-	dt("iris.csv",5) dtree;
-	dtree.split();
-	dtree.createTree();
+	string actual;
+	dt dtree("iris.csv",5);
 	for(int i=0;i<dtree.getData().tlength();i++)
 	{
 		vector<double> vals;
 		for(int j=0;j<dtree.getData().columns();j++)
 		{
 			if(j != dtree.getIndexOfLearn())
-				vals.push_back(getData().get(i).getData(j)
+				vals.push_back(dtree.getData().get(i).getData(j));
 		}
-		actual = getData().get(i).getData(5);
-		setMapVal(vals,dtree.getTree().getFirst(),0,actual);
+		actual = dtree.getData().get(i).getData(5);
+		actual = "tuddy";
+		dtree.setMapVal(vals,dtree.getTree().getFirst(),0,actual);
 	}
 
 	/*	
@@ -54,4 +53,6 @@ int main()
 	percentCorrect = numCorrect/double(dtree.getData().tlength());
 	cout << percentCorrect << endl;
 	*/
+	return 0;
 }
+#endif

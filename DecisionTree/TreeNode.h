@@ -1,5 +1,5 @@
-#ifndef _NODE_H_
-#define _NODE_H_
+#ifndef TNODE_H_
+#define TNODE_H_
 
 #include <iostream>
 #include <vector>
@@ -23,18 +23,21 @@ class TreeNode {
   TreeNode(TreeNode<T> &, TreeNode<T> &);
   T getData() const;   // get function
   string getLabel();
-  TreeNode<T> getLeftChild();
-  TreeNode<T> getRightChild();
-  TreeNode<T> getParent();
-  map<double> getMap(){return numOfResults;}
+  TreeNode<T> * getLeftChild();
+  TreeNode<T> * getRightChild();
+  TreeNode<T> * getParent();
+  map <string,double> getMap(){return numOfResults;}
   void setLabel(string s){label = s;}
   void setData(double a){data = a;}
-  double getMostPopularResult();
+  string getMostPopularResult();
+  void setParent(TreeNode<double> a){*parent = a;}
+  void setLeft(TreeNode<double> a){*nextl = a;}
+  void setRight(TreeNode<double> a){*nextr = a;}
 
  private:
   T data;           // data for linked list node 
   string label;
-  map <double> numOfResults;
+  map <string,double> numOfResults;
   TreeNode<T> *nextl;    // pointers to next object
   TreeNode<T> *nextr;
   TreeNode<T> *parent;
@@ -62,30 +65,30 @@ string TreeNode<T>::getLabel() { return label;}
 
 
 template<typename T>
-TreeNode<T> TreeNode<T>::getLeftChild()
+TreeNode<T> * TreeNode<T>::getLeftChild()
 {
-	return *nextl;
+	return nextl;
 }
 
 template<typename T>
-TreeNode<T> TreeNode<T>::getRightChild()
+TreeNode<T> * TreeNode<T>::getRightChild()
 {
-	return *nextr;
+	return nextr;
 }
 
 template<typename T>
-TreeNode<T> TreeNode<T>::getParent()
+TreeNode<T> * TreeNode<T>::getParent()
 {
-	return *parent;
+	return parent;
 }
 
 template<typename T>
-double TreeNode<T>::getMostPopularResult()
+string TreeNode<T>::getMostPopularResult()
 {
-	map <double>::iterator it = getMap().begin;
+	map <string,double>::iterator it = getMap().begin();
 	double popular = it->second;
-	double val = it->first;
-	for(it=getMap().begin();it!=getMap().end;it++)
+	string val = it->first;
+	for(it=getMap().begin();it != getMap().end();it++)
 	{
 		if (it->second > popular)
 			popular = it->second;
