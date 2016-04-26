@@ -51,6 +51,44 @@ void Neuron::trainData(vector<double> inputs){
 }
 */
 
+void Neuron::calculateOutputGradients(double ans){
+    double delta=ans-output;
+    gradient=delta*sigmoidDerivative(output);
+}
+
+void Neuron::calculateHiddenGradients(Neuron n){
+    double dow=calcDOW(n);
+    gradient=dow*sigmoidDerivative(n.getOutput()); 
+}
+
+double Neuron::calcDOW(Neuron n){
+    double summation=0;
+    for(int i=0; i<n.inputs.size(); i++){
+        summation+= n.inputs[i] * n.getGradient();
+    }
+    return summation;
+}
+
+void Neuron::updateWeights(Neuron n, vector<Neuron> neurons){
+    //updates the weights
+    double eta=.15;
+    double alpha=.05;
+    for(int i=0; i<neurons.size(); i++){
+        double oldDWeight=neurons[i].dweight;
+        double newDWeight=eta*neurons[i].getOutput()*n.getGradient()+alpha*oldDWeight;
+        neurons[i].dweight=newDWeight;
+        neurons[i].setOutput(neurons[i].getOutput()+newDWeight); 
+    }
+}
+
+/*
+void Neuron::updateWeights(Neuron n){
+    double eta=.15;
+    double alpha=.05;
+    oldDweight=
+}
+*/
+
 double Neuron::getRandomWeight(){
     unsigned seed=chrono::system_clock::now().time_since_epoch().count();
     default_random_engine generator (seed);
@@ -74,7 +112,7 @@ void Neuron::setWeights(int numWeights){
 
 //I summate from the layer and that works, but what about when I want to summate from the backpropagate function? idk
 double Neuron::summate(vector<double> Inputs){
-//    inputs=Inputs;
+    inputs=Inputs;
     double total=0;
     for(int i=0; i<weights.size(); i++){
         total+=weights[i]*Inputs[i];
@@ -90,6 +128,7 @@ void Neuron::printWeights(){
 }
 
 //double check that these are the parameters that you want
+/*
 void Neuron::backPropagate(double error, vector<double> Inputs){
     dweights.clear();
     double step=.10;
@@ -100,6 +139,7 @@ void Neuron::backPropagate(double error, vector<double> Inputs){
         weights[i]+=dweights[i];
     }
 }
+*/
 
 vector<double> Neuron::getWeights(){
     return weights;

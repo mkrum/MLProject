@@ -11,16 +11,16 @@ using namespace std;
 class NeuralNetwork{
     public:
         NeuralNetwork(string, int, vector<double>, double); //remove vector later
-        //NeuralNetwork(vector<double>);
+        NeuralNetwork(vector<double>, double);
         double feedForward();
         void train();
         Layer getHiddenLayer();
+        Neuron outputNeuron;
+        void backPropagate();
     private:
         double answer;
-        void backPropagate();
         Layer hiddenlayer;
-        dataset data; 
+        //dataset data; 
         vector<double> inputs; //temporary, just for testing REMOVE
-        Neuron outputNeuron;
         double error;
 };
