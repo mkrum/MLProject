@@ -26,6 +26,7 @@ class mln {
         vector<double> execute();
         void learn();
         double test();
+        void example();
     private:
         dataset data;
         kb dkb; //dynamic knowledge base

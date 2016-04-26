@@ -50,7 +50,6 @@ void mln::learn(){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
-//    debug();
 }
 
 void mln::classify(node n){
@@ -61,4 +60,13 @@ double mln::test(){
     data.test(std::bind(&mln::classify, this, std::placeholders::_1));
     return dkb.rate();
 }
+
+void mln::example(){ 
+    vector<double> ret = execute();
+    cout << "It took: " << ret[0] << " Seconds to classify the breast cancer data at a success rate of " << ret[1] << endl;
+    cout << "Here is the knowledge base that it compiled: " << endl;
+    debug();
+}
+
+
 

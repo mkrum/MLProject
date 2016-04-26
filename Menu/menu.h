@@ -9,5 +9,7 @@ void printMarkov(string, int);
 void printMainMenu();
 void testMenu();
 void test(string, int);
+void markovInfo();
+void algInfo();
 
 #endif
