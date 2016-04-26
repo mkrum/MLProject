@@ -86,13 +86,13 @@ void Neuron::printWeights(){
 
 //double check that these are the parameters that you want
 void Neuron::backPropagate(double error, vector<double> Inputs){
-    double dweight;
+    dweights.clear();
     double step=.10;
     double output=summate(Inputs);
     double delta=output*(1.0-output)*(error-output);
     for(int i=0; i<inputs.size(); i++){
-        dweight=step*delta*Inputs[i];
-        weights[i]+=dweight;
+        dweights.push_back(step*delta*Inputs[i]);
+        weights[i]+=dweights[i];
     }
 }
 

@@ -32,6 +32,7 @@ class Neuron{
         vector<double> inputs; //inputs vector; gets saved in the summate function
         //int type;
         void printWeights(); //prints all the weights
+        vector<double> dweights;
 };
 
 
