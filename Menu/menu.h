@@ -6,6 +6,7 @@
 
 void printHeader();
 void printMarkov(string, int);
+void printMultiNomLogReg(string, int);
 void printMainMenu();
 void testMenu();
 void test(string, int);
