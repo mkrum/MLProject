@@ -14,8 +14,7 @@ class Neuron{
         Neuron(int); //constructor that takes in the amount of weights
         ~Neuron();
         //Neuron(vector<double>, int); //inputs comes from the vector of nodes, int is how many different classifications there are
-        void setOutput(double);
-        double getOutput();
+        double getOutput() { return output; }
         //void trainData(vector<double>);
         double sigmoid(double); //returns the result of the sigmoid function
         void backPropagate(double, vector<double>); //back propagates 
@@ -34,6 +33,8 @@ class Neuron{
         //int type;
         void printWeights(); //prints all the weights
         vector<double> dweights;
+        double output;
+        void setOutput(double op) { output=op; }
 };
 
 

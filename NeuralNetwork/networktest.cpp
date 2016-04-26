@@ -17,7 +17,7 @@ int main(){
     tmp.push_back(.82);
     cout << "made vector" << endl;
     //NeuralNetwork network1("iris.csv", 4, tmp);
-    NeuralNetwork network1("iris.csv", 5, tmp);
+    NeuralNetwork network1("iris.csv", 5, tmp, .2);
     cout << "YOUR FEED FORWARD IS : " << network1.feedForward() << endl;
     cout << network1.getHiddenLayer().getNeurons()[1].getWeights()[2] << endl;
 }
