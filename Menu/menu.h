@@ -5,6 +5,8 @@
 #define MENU_H
 
 #include "mln.h"
+#inlcude "dt.h"
+#inlcude "multiNomLogReg.h"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -25,11 +27,13 @@ using std::cin;
 void printHeader();
 void printMarkov(string, int);
 void printMultiNomLogReg(string, int);
+void printDecisionTree(string, int);
 void printMainMenu();
 void testMenu();
 void test(string, int);
 void markovInfo();
 void multiNomLogRegInfo();
 void algInfo();
+void decisionTreeInfo();
 
 #endif

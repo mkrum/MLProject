@@ -46,7 +46,7 @@ void printMainMenu(){
 }
 
 void algInfo(){
-    vector<string> text = {"SELECT A ALGORITHM", "Markov Logic Network", "Multinomial Logistic Regression};
+    vector<string> text = {"SELECT A ALGORITHM", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -55,8 +55,11 @@ void algInfo(){
             markovInfo();
             break;
 	    case 2:
-	        multiNomLogRegInfo();
-            break;
+		multiNomLogRegInfo();
+	    break;
+	    case 3:
+	    	decisionTreeInfo();
+	    break;
         default:
             algInfo();
     }
@@ -66,6 +69,32 @@ void algInfo(){
 void markovInfo(){
     system("clear");
     std::ifstream mfile("markov.txt");
+    string line;
+    while (std::getline(mfile, line)){
+        cout << line << endl;
+    }
+    mfile.close();
+    cout << "Example Case (will take a second to load)\n";
+    mln net = mln("../datasets/breastcancer.csv", 2);
+    net.example();
+    int choice;
+    cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
+    cin >> choice;
+    switch (choice){
+        case 1:
+            printMainMenu();
+            break;
+        case 2:
+            algInfo();
+            break;
+        default:
+            algInfo();
+    }
+}
+
+void decisionTreeInfo(){
+    system("clear");
+    std::ifstream mfile("tree.txt");
     string line;
     while (std::getline(mfile, line)){
         cout << line << endl;
@@ -150,6 +179,7 @@ void test(string file, int index){
     printHeader();
     printMarkov(file, index);
     printMultiNomLogReg(file, index);
+    printDecisionTree(file, index);
     cout << "Re-Run (1), New Test (2), or Main Menu (3): ";
     int choice;
     cin >> choice;
@@ -185,4 +215,11 @@ void printMultiNomLogReg(string file, int index){
 	vector<double> ret;
 	ret = milner.exec();
 	cout << std::left << std::setw(35) << "Multinomial Logistic Regression" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
+}
+
+void printDecisionTree(string file, int index){
+	dt dtree(file, index);
+	vector<double> ret;
+	ret = dtree.execute();
+	cout << std::left << std::setw(35) << "Decision Tree" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
 }
