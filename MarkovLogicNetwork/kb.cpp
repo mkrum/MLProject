@@ -47,7 +47,7 @@ void kb::generate(int length, string ident, vector<insight*>& generation){
         generation[j] = new insight(base[ident].size(), ident);
     }
 }
-
+//find the default guessing value, looks for the class that has the most outliers
 void kb::findDef(){
     double min = 1;
     for(auto entry : lower){
@@ -56,7 +56,7 @@ void kb::findDef(){
         }
     }
 }
-
+//mutation function
 insight kb::mutate(insight dst, insight in){
     std::uniform_int_distribution<int> distribution(0, 1);
     std::uniform_int_distribution<int> d1(0, in.order.size() - 1);
@@ -69,6 +69,7 @@ insight kb::mutate(insight dst, insight in){
             dst.connectOrder   = in.connectOrder;
             dst.constants      = in.constants;
             std::uniform_real_distribution<double> dist(-.1, .1);
+            //copy and adjust slightly
             for(int i = 0; i < in.constants.size(); i++){
                 double delta = dist(generator);
                 double shifted = in.constants[i] + delta;
@@ -80,6 +81,7 @@ insight kb::mutate(insight dst, insight in){
             return dst;
         }
     }
+    //append
     dst.order.push_back(in.order[ord]);
     dst.compOrder.push_back(in.compOrder[ord]);
     dst.connectOrder.push_back(d2(generator));
@@ -87,7 +89,7 @@ insight kb::mutate(insight dst, insight in){
     dst.reset();
     return dst;
 }
-
+//tries to classify the node
 void kb::classify(node n){
     std::map<string, double> vals;
     string iMax = def;

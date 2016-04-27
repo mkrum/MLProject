@@ -23,15 +23,15 @@ using std::vector;
 
 class mln {
     public:
-        mln(std::string, int);
-        vector<double> execute();
-        void learn();
-        double test();
-        void example();
-        void tweaking();
+        mln(std::string, int);      //base constructor, takes in file and index of classifier   
+        vector<double> execute();   //Final run function, returns completion time and success rate
+        void learn();               //learning function
+        double test();              //testing function
+        void example();             //My example run for the menu
+        void tweaking();            //my testing function I used to tweak the weighting and iterations
     private:
         dataset data;
-        kb dkb; //dynamic knowledge base
+        kb dkb;                     //dynamic knowledge base
         int num;
         void debug();
         void learnWeights(node);

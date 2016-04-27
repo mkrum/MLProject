@@ -25,7 +25,7 @@ vector<double> mln::execute(){
     ret.push_back(test());
     return ret;
 }
-
+//Learning function, uses parallel to improve speed
 void mln::learnWeights(node n){
     std::thread t[knowledge.size()];
     for(int j = 0; j < knowledge.size(); j++){
@@ -36,17 +36,17 @@ void mln::learnWeights(node n){
         t[i].join();
     }
 }
-
+//code that is run in parallel
 void mln::learnVec(vector<insight*> vec, node n){
     for(auto &part : vec){
         part->check(n);    
     }    
 }
-
+//debug function that shows the knowledge base
 void mln::debug(){
     cout << dkb;
 }
-
+//changes the generation, "evolves" into a more fit one
 void mln::evolve(){
     for(auto &know : knowledge){
         dkb.update(know, know[0]->ident());
@@ -56,7 +56,7 @@ void mln::evolve(){
 
 void mln::learn(){
     for(int i = 0; i < 50; i++){
-        data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
+        data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1));
         evolve();
     }
 }

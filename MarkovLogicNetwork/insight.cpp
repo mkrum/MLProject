@@ -14,7 +14,7 @@ insight::insight(int len, string in) : identifier(in), ocur(0), verif(0), attemp
     constants.push_back(dist(gen));
     vectorInit();
 }
-
+//sets all weighting variables to zero when creating a copy of an insight
 void insight::reset(){
     attempts    = 0;
     successes   = 0;
@@ -24,28 +24,17 @@ void insight::reset(){
 }
 
 double insight::weight() const{
-    //Bayes
+    //I use a modified Bayes for my weights
     if (attempts > 0){
-        return verif/(1 + ocur)*successes/(attempts*(1.0 + verif - successes));
+        return verif/(1.0 + ocur)*successes/(attempts*(1.0 + verif - successes));
     } else {
         return 0.0;
     }
 }
-
+//Insight learning function, generates the weight
 void insight::check(node n) {
-    bool final = comparisions[compOrder[0]](n[order[0]], constants[0]);
-    for(int i = 1; i < order.size(); i++){
-        if (connectOrder[i] == 0){
-            final = final || comparisions[compOrder[i]](n[order[i]], constants[i]);
-        } else {
-            if(final){
-                final = comparisions[compOrder[i]](n[order[i]], constants[i]);
-            } else {
-                break;
-           }
-        }
-    }
-//this is overly verbose, but deal with it    
+    bool final = evaluate(n);
+    //weight variables
     attempts++;
     if(identifier.compare(n.getIdent()) == 0){
         ocur++;

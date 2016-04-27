@@ -19,16 +19,15 @@ using std::ostream;
 class insight {
     friend class kb;
     public:
-        insight(int, string);  //base constructor, starts with a single column for a column
-        void check(node);
-        double weight() const;
-        string ident() const;
-        int column() const;
+        insight(int, string);                               //base constructor, starts with a single column for a column
+        void check(node);                                   //Call this for learning, generates weights by checking against practice data
+        double weight() const;                              //Weight getter
+        string ident() const;                               //Identifier getter
+        int column() const;                                 //number of columns 
         int size() const;
-        bool condense(vector<int>);
-        bool evaluate(node n);
-        friend ostream& operator<<(ostream &, insight);
-        void reset();
+        bool evaluate(node n);                              //evaluates if the statement is true for the input node
+        friend ostream& operator<<(ostream &, insight);     //output overload
+        void reset();                                       //resets the nodes data counters to zero
     private:
         int attempts;
         int successes;
