@@ -1,0 +1,29 @@
+#!/bin/sh
+
+#compile all libraries and executables
+cd dataHandling
+if [ ! -e libdataset.a ];then    
+    make clean
+    make
+fi
+cd ../NeuralNetwork
+if [ ! -e libneural.a ]; then
+    make clean
+    make
+fi
+cd ../MultinomialLogisticRegression
+if [ ! -e libmnlr.a ]; then
+    make clean
+    make
+fi
+cd ../MarkovLogicNetwork
+if [ ! -e libmln.a ]; then
+    make clean
+    make
+fi
+cd ../Menu
+if [ ! -e  menu ];then
+    make
+fi
+
+./menu
