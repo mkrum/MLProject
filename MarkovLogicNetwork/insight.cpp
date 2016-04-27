@@ -25,8 +25,8 @@ void insight::reset(){
 
 double insight::weight() const{
     //I use a modified Bayes for my weights
-    if (attempts > 0){
-        return verif/(1.0 + ocur)*successes/(attempts*(1.0 + verif - successes));
+    if (verif > 0 && ocur > 0 && verif != successes){
+        return verif/(ocur)*successes/(ocur*(1.0 + verif - successes));
     } else {
         return 0.0;
     }

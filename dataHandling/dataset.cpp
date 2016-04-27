@@ -237,6 +237,12 @@ void dataset::learn(std::function<void (node)> learn, int tests){
     }
 }
 
+void dataset::learn(std::function<void (node)> learn){
+   std::for_each(begin(), end(), learn);
+   reset();
+}
+
+
 void dataset::test(std::function<void (node)> test){
         std::for_each(tbegin(), tend(), test);
         reset();

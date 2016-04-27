@@ -40,10 +40,10 @@ void kb::insert(insight *info, string ident){
 void kb::generate(int length, string ident, vector<insight*>& generation){
     std::uniform_int_distribution<int> distribution(0, base[ident].size() - 1);
     auto rand = std::bind(distribution, generator);
-    for(int i = 0; i < generation.size() * .25; i++){
+    for(int i = 0; i < generation.size() * .9; i++){
         generation[i] = new insight(mutate(*base[ident][rand()], *base[ident][rand()]));
     }
-    for(int j = generation.size() * .75; j < generation.size(); j++){
+    for(int j = generation.size() * .1; j < generation.size(); j++){
         generation[j] = new insight(base[ident].size(), ident);
     }
 }

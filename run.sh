@@ -1,9 +1,7 @@
 #!/bin/sh
 
-
 #compile all libraries and executables
-make clean
-cd ../dataHandling
+cd dataHandling
 make clean
 make
 cd ../NeuralNetwork
@@ -21,5 +19,4 @@ make
 cd ../Menu
 make
 
-#tryna fam
 ./menu
