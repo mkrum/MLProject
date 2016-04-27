@@ -19,7 +19,7 @@ class multiNomLogReg
 {
 	public:
 		multiNomLogReg(string, int);
-		double exec();	
+		vector<double> exec();	
 	private:
 		void learnData(node);
 		void addToMatrix(RowVectorXd, MatrixXd &);
