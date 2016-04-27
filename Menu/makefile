@@ -1,5 +1,5 @@
 FLAGS=-std=c++11 -static-libstdc++
-LINK=-I ../MarkovLogicNetwork -I../dataHandling -I ../MultiNomialLogisticRegression -L ../dataHandling
+LINK=-I ../MarkovLogicNetwork -I../dataHandling -I ../MultiNomialLogisticRegression  -L ../dataHandling
 
 main:menu
 
