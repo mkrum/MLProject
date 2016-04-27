@@ -24,10 +24,12 @@ using std::cin;
 
 void printHeader();
 void printMarkov(string, int);
+void printMultiNomLogReg(string, int);
 void printMainMenu();
 void testMenu();
 void test(string, int);
 void markovInfo();
+void multiNomLogRegInfo();
 void algInfo();
 
 #endif

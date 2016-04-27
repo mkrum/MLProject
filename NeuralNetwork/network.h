@@ -13,18 +13,22 @@ using namespace std;
 
 class NeuralNetwork{
     public:
-        NeuralNetwork(string, int, vector<double>, double); //constructor 
-        NeuralNetwork(vector<double>, double);
-        void feedForward(); //sends info through network
+        NeuralNetwork(string, int); //constructor 
+        void feedForward(vector<double>); //sends info through network
         void train(node); //function to train for a node
         Neuron neuron; //neuron for the network
         void learnWeights();
     private:
         void getData(node); //gets data from the node
         void createMap();
+        double calculatePercentage();
+        void printMap(); //prints keys and values of answers map
         double answer; //answer that comes from data
         dataset data; //dataset object
         vector<double> inputs; //inputs vector, gets updated with each node
         map<string, double> answers;
         vector<double> answerCenterPoints;
+        vector<int> successes;
+        void testNode(node);
+        void testData();
 };
