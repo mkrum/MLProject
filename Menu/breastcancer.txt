@@ -1,0 +1,15 @@
+The breast cancer data set contains information on breast cancer tumors. The classifications are malignant(M) and benign(B). There are 569 data points. The data point attributes include
+
+* radius
+* texture
+* perimeter
+* area
+* smoothness
+* compactness
+* concavity
+* concave points
+* symmetry
+* fractal dimension
+
+Sample data point
+ 
