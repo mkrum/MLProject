@@ -1,0 +1,7 @@
+The iris dataset contains 150 data objects. There are 3 different flowers, with 50 different data objects each. The
+different attributes are Sepal length, Sepal width, Petal length and Petal width.
+
+Below is a sample data point:
+
+5.1,3.5,1.4,0.2,Iris-Setosa
+

@@ -13,14 +13,18 @@ using namespace std;
 
 class NeuralNetwork{
     public:
+        //CONSTRUCTOR
         NeuralNetwork(string, int); //constructor 
-        void execute();
+        //PUBLIC FUNCTION TO RUN
+        void execute(); //runs the algorithm on the file
+        //GET AND SET FUNCTIONS
         double getPercentage() { return percentage; }
         double getDuration() { return duration; }
     private:
+
         Neuron neuron; //neuron for the network
-        double percentage;
-        double duration;
+        double percentage; //successes/trials
+        double duration; //how long it takes to execute
         void feedForward(vector<double>); //sends info through network
         void train(node); //function to train for a node
         void learnWeights();
