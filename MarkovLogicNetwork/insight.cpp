@@ -10,8 +10,8 @@ insight::insight(int len, string in) : identifier(in), ocur(0), verif(0), attemp
     std::uniform_int_distribution<int> d1(0, len);
     order.push_back(d1(gen));
     compOrder.push_back(d(gen));
-    std::normal_distribution<double> dist(0.0, 1.0);
-    constants.push_back( 1 - dist(gen));
+    std::uniform_real_distribution<double> dist(0.0, 1.0);
+    constants.push_back(dist(gen));
     vectorInit();
 }
 
