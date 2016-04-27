@@ -21,7 +21,7 @@ class TreeNode {
   TreeNode<T> * getRightChild();
   TreeNode<T> * getParent();
   map <string,double> getMap(){return numOfResults;}
-  void setData(double a){data = a;}
+  void setData(double a){dataval = a;}
   string getMostPopularResult();
   void setParent(TreeNode<double> a){*parent = a;}
   void setLeft(TreeNode<double> * a){nextl = a;}
@@ -29,7 +29,7 @@ class TreeNode {
   void setMap(map <string,double> a) {numOfResults = a;}
 
  private:
-  T data;           // data for linked list node 
+  T dataval;           // dataval for linked list node 
   map <string,double> numOfResults;
   TreeNode<T> *nextl;    // pointers to next object
   TreeNode<T> *nextr;
@@ -37,13 +37,13 @@ class TreeNode {
 };
 
 template<typename T>
-TreeNode<T>::TreeNode() : data(0), nextl(NULL),nextr(NULL){}
+TreeNode<T>::TreeNode() : dataval(0), nextl(NULL),nextr(NULL){}
 
 template<typename T>
 TreeNode<T>::~TreeNode(){}
 
 template<typename T>
-T TreeNode<T>::getData(void) const { return data; }
+T TreeNode<T>::getData(void) const { return dataval; }
 
 
 template<typename T>
@@ -58,17 +58,23 @@ TreeNode<T> * TreeNode<T>::getParent(){return parent;}
 template<typename T>
 string TreeNode<T>::getMostPopularResult()
 {
-	map <string,double>::iterator it = numOfResults.begin();
-	double popular = it->second;
-	string val = it->first;
-	for(it=getMap().begin();it != getMap().end();it++)
+	map <string,double>::iterator it;
+	it = numOfResults.begin();
+	string val;
+	if (it != numOfResults.end())
 	{
-		if (it->second > popular)
+		double popular = it->second;
+		val = it->first;
+		for(it=getMap().begin();it != getMap().end();it++)
 		{
-			popular = it->second;
-			val = it->first;
+			if (it->second > popular)
+			{
+				popular = it->second;
+				val = it->first;
+			}
 		}
 	}
+	else val = "wrong";
 	return val;
 }
 

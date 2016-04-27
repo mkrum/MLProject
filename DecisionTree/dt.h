@@ -19,7 +19,6 @@ class dt {
         dt(string, int);
         ~dt();
         void createTree();
-        dataset getData(){return data;};
         Tree getTree(){return newTree;};
         string assignTreeProb(vector<double>, TreeNode<double> &, int);
         void setMapVal(vector<double>, TreeNode<double> &, int,string, int);
@@ -36,7 +35,7 @@ dt::~dt(){}
 void dt::createTree()
 {
 	int i=0;
-	int b = getData().columns();
+	int b = data.columns();
 	TreeNode<double> chill = newTree.getFirst();
 	if (b>5) b = 4;
 	newTree.makeTree(b, chill,1);
@@ -45,9 +44,9 @@ void dt::createTree()
 	while (b>0)
 	{
 		vector<double> stats;
-		for(int j=0;j<getData().tlength()*4;j++)
+		for(int j=0;j<data.tlength()*4;j++)
 		{
-			stats.push_back(getData().get(j).getData(i));
+			stats.push_back(data.get(j).getData(i));
 		}
 		double average, sum=0;
 		for(int i=0;i<stats.size();i++)
@@ -149,40 +148,40 @@ vector<double> dt::execute()
 	createTree();
 	TreeNode<double> root = getTree().getFirst();
 	
-	for(int i=0;i<getData().tlength()*4;i++)
+	for(int i=0;i<data.tlength()*4;i++)
 	{
 		
 		vector<double> vals;
-		for(int j=0;j<getData().columns();j++)
+		for(int j=0;j<data.columns();j++)
 		{
-			vals.push_back(getData().get(i).getData(j));
+			vals.push_back(data.get(i).getData(j));
 		}
-		actual = getData().get(i).getIdent();
+		actual = data.get(i).getIdent();
 		setMapVal(vals,root,0,actual,1);
 		
 	}
 	
 	vector<string> testStats;
-	int sizeOfTest = getData().tlength();
+	int sizeOfTest = data.tlength();
 	root = getTree().getFirst();
 	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
 	{
 		vector<double> stats;
-		for(int j=0;j<getData().columns();j++)
+		for(int j=0;j<data.columns();j++)
 		{
-			stats.push_back(getData().get(i).getData(j));
+			stats.push_back(data.get(i).getData(j));
 		}
 		testStats.push_back(assignTreeProb(stats, root,0));
 		
 	}
 	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
 	{
-		if(getData().get(i).getIdent() == testStats[i-sizeOfTest*4])
+		if(data.get(i).getIdent() == testStats[i-sizeOfTest*4])
 			numCorrect++;
 	
 	}
 	
-	percentCorrect = numCorrect/double(getData().tlength());
+	percentCorrect = numCorrect/double(data.tlength());
 	double time = double(clock() - begin_time)/CLOCKS_PER_SEC;
 	finalResults.push_back(percentCorrect);
 	finalResults.push_back(time);
