@@ -1,7 +1,6 @@
 //Final visualization menu
 //Michael Krumdick
 
-#include "mln.h"
 #include "menu.h"
 
 int main() {
@@ -104,8 +103,7 @@ void networkInfo(){
     }
     mfile.close();
     cout << "Example Case (will take a second to load)\n";
-    NeuralNetwork network = neuralnetwork("../datasets/breastcancer.csv", 2);
-    neuralnetwork.example();
+    NeuralNetwork network = NeuralNetwork("../datasets/breastcancer.csv", 2);
     int choice;
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
     cin >> choice;
@@ -118,6 +116,7 @@ void networkInfo(){
             break;
         default:
             algInfo();
+    }
 }
 
 void decisionTreeInfo(){
