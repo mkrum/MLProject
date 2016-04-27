@@ -140,7 +140,7 @@ double multiNomLogReg::checkResults()
 	{
 		sum += results.at(i);
 	}
-	return sum / results.size() * 100;
+	return sum / results.size();
 }
 
 
