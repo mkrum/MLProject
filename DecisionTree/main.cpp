@@ -48,7 +48,7 @@ int main()
 	vector<string> testStats;
 	int sizeOfTest = dtree.getData().tlength();
 	root = dtree.getTree().getFirst();
-	for(int i=sizeOfTest*4;i<sizeOfTest*5;i++)
+	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
 	{
 		vector<double> stats;
 		for(int j=0;j<dtree.getData().columns();j++)
@@ -61,7 +61,7 @@ int main()
 		
 	}
 	cout << "dildo" << endl;
-	for(int i=sizeOfTest*4;i<sizeOfTest*5;i++)
+	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
 	{
 		if(dtree.getData().get(i).getIdent() == testStats[i-sizeOfTest*4])
 			numCorrect++;

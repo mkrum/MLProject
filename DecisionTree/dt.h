@@ -48,12 +48,13 @@ void dt::createTree()
 	int b = getData().columns();
 	TreeNode<double> chill = newTree.getFirst();
 	cout << "num columns: " << b << endl;
+	if (b>5) b = 4;
 	newTree.makeTree(b, chill,1);
 	chill = newTree.getFirst();
 	cout << "i'm here" << endl;
 	cout << newTree.getFirst().getData() << endl;
 	cout << newTree.getFirst().getLeftChild()->getData() << endl;
-	if (b>5) b = 5;
+	if (b>5) b = 4;
 	while (b>0)
 	{
 		vector<double> stats;
@@ -92,10 +93,8 @@ string dt::assignTreeProb(vector<double>vals, TreeNode<double> &a, int i) //test
 	string s;
 	if(vals[i] <= a.getData())
 	{	
-		cout << "swex" << endl;
 		if ( a.getLeftChild() != NULL)
 		{
-			cout << "tuddy" << endl;
 			s = assignTreeProb(vals,*a.getLeftChild(),i+1);
 		}
 		else
@@ -106,17 +105,13 @@ string dt::assignTreeProb(vector<double>vals, TreeNode<double> &a, int i) //test
 	}
 	else
 	{	
-		cout << "anal" << endl;
 		if ( a.getRightChild() != NULL)
 		{	
-			cout << "s" << endl;
 			s = assignTreeProb(vals,*a.getRightChild(),i+1);
-			cout << "fu" << endl;
 		}
 		else
 		{
 			s = a.getMostPopularResult();
-			//cout << s << endl;
 			return s;
 		}
 	}
