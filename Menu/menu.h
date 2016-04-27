@@ -5,7 +5,6 @@
 #define MENU_H
 
 #include "mln.h"
-#include "dt.h"
 #include "multiNomLogReg.h"
 #include "network.h"
 #include <iostream>

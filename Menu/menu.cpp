@@ -1,7 +1,6 @@
 //Final visualization menu
 //Michael Krumdick
 
-#include "mln.h"
 #include "menu.h"
 
 int main() {
@@ -104,8 +103,7 @@ void networkInfo(){
     }
     mfile.close();
     cout << "Example Case (will take a second to load)\n";
-    NeuralNetwork network = neuralnetwork("../datasets/breastcancer.csv", 2);
-    neuralnetwork.example();
+    NeuralNetwork network = NeuralNetwork("../datasets/breastcancer.csv", 2);
     int choice;
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
     cin >> choice;
@@ -118,6 +116,7 @@ void networkInfo(){
             break;
         default:
             algInfo();
+    }
 }
 
 void decisionTreeInfo(){
@@ -155,10 +154,11 @@ void multiNomLogRegInfo(){
     }
     mfile.close();
     cout << "Example Case (will take a second to load)\n" << endl;
-    mnlr example("../breastcancer.csv", 2);
+    multiNomLogReg example("../breastcancer.csv", 2);
     vector<double> ex = example.exec();
     cout << "Multinomial Logistic Regression ran in " << ex[1] << "seconds with " << ex[2] << "% accuracy";
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
+    int choice;
     cin >> choice;
     switch (choice){
         case 1:
@@ -169,6 +169,7 @@ void multiNomLogRegInfo(){
             break;
         default:
             algInfo();
+    }
 }
 
 void testMenu(){
@@ -232,9 +233,9 @@ void printNeuralNetwork(string file, int index){
     cout << std::left << std::setw(35) << "Neural Network" << std::setw(15) << network.getDuration() << std::setw(15) << network.getPercentage() << endl;
 }
 void printMultiNomLogReg(string file, int index){
-	mnlr minler(file, index);
+	multiNomLogReg minler(file, index);
 	vector<double> ret;
-	ret = milner.exec();
+	ret = minler.exec();
 	cout << std::left << std::setw(35) << "Multinomial Logistic Regression" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
 }
 
