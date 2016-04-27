@@ -45,7 +45,7 @@ void Neuron::printWeights(){
 //backpropagates, changing the weights depending on the answer
 void Neuron::backPropagate(double answer){
     dweights.clear();
-    double step=.10;
+    double step=.02;
     setOutput(summate(inputs));
     double outputLocal=summate(inputs);
     double delta=getOutput()*(1.0-getOutput())*(answer-getOutput());

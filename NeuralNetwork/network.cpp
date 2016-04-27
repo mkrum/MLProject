@@ -10,27 +10,33 @@
 using namespace std;
 
 //constructor
-NeuralNetwork::NeuralNetwork(string file, int index, vector<double> Inputs, double Answer):data(file, index), neuron(index-1){
+NeuralNetwork::NeuralNetwork(string file, int index):data(file, index), neuron(index-1){
+    //cout << "in the constructor " << endl;
     createMap();
+    //cout << "map" << endl;
     learnWeights();
+    //cout << "weights"<< endl;
     testData();
-    for(int i=0; i<successes.size(); i++){
-        cout << successes[i] << endl;
-    }
+    cout << "PERCENTAGE CORRECT " << calculatePercentage() << endl;   
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating
 void NeuralNetwork::train(node n){
-    cout << "FAM" << endl;
+    //cout << "start" << endl;
     feedForward(n.dataVector());
-    cout << "fam" << endl;
-    for(int i=0; i<200; i++){
+    //cout << answers[n.getIdent()] << endl;
+    //cout << "BOIEG " << answers["B"] << endl;
+    for(int i=0; i<100; i++){
+       /* cout << i << endl;
+        cout << n.getIdent() << endl;
+        cout << "GOT IDENT" << endl;
+        cout << answers[n.getIdent()] << endl;*/
         neuron.backPropagate(answers[n.getIdent()]);
     }
 }
 
 void NeuralNetwork::learnWeights(){
-    data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 1);
+    data.learn(std::bind(&NeuralNetwork::train, this, std::placeholders::_1), 20);
 }
 
 void NeuralNetwork::testData(){
@@ -46,11 +52,14 @@ void NeuralNetwork::createMap(){
         answerCenterPoints.push_back(j);
     }
 
+    
+}
+
+void NeuralNetwork::printMap(){
     for(auto it = answers.cbegin(); it != answers.cend(); ++it)
     {
         cout << it->first << " " << it->second << " " << endl;
     }
-    
 }
 
 //calls on neuron feed forward and sends inputs
@@ -61,22 +70,24 @@ void NeuralNetwork::feedForward(vector<double> Inputs){
 void NeuralNetwork::testNode(node n){
     feedForward(n.dataVector());
     double result=neuron.getOutput();
-    cout << "RESULT " << result << endl;
-    cout << n.getIdent() << endl;
     vector<double> difference;
     for(int i=0; i<answerCenterPoints.size(); i++){
         difference.push_back(abs(result-answerCenterPoints[i]));
     }
-    for(int i=0; i<difference.size(); i++){
-        cout << difference[i] << endl;
-    } 
     int answerIndex=min_element(difference.begin(), difference.end())-difference.begin();
-    cout << "index" << answerIndex << endl;
-    cout << answers[n.getIdent()] << endl;
     if(answerCenterPoints[answerIndex]==answers[n.getIdent()])
         successes.push_back(1);
     else
         successes.push_back(0);
+}
+
+double NeuralNetwork::calculatePercentage(){
+    int numSuccess;
+    for(int i=0; i<successes.size(); i++){
+        if(successes[i])
+            numSuccess++;
+    }
+    return double(numSuccess)/double(successes.size());
 }
 
 

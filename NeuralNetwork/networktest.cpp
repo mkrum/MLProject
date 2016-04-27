@@ -16,6 +16,6 @@ int main(){
     tmp.push_back(.8);
     tmp.push_back(.82);
     cout << "made vector" << endl;
-    NeuralNetwork network1("iris.csv", 5, tmp, .2);
+    NeuralNetwork network1("../dataSets/credit.csv", 16);
     return 0;
 }
