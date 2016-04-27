@@ -11,10 +11,7 @@ Luke Duane
 
 HOW TO RUN:
 
-To run our project for the first time, enter the Menu directory and run the 
-compile script. This will compile all the libraries for the data wrapper and 4 
-different machine learning algorithms and then execute. Later, if you would like 
-to run again, there is an executable named menu that can be ran. 
+To run our project, type run and press enter (easy as that).
 
 INSTRUCTIONS:
 
