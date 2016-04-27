@@ -17,7 +17,7 @@ int main()
 	{
 	
 	
-		dt dtree("../datasets/iris.csv",5);
+		dt dtree("../datasets/wine.csv",1);
 		vector <double> results;
 		results = dtree.execute();
 		cout << results[0] << " " << results[1] << endl;

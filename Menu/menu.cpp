@@ -93,7 +93,7 @@ void display(string file){
 }
 
 void datasetInfo(){
-    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Uncorrelated Data"};
+    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Wine", "Uncorrelated Data"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -108,6 +108,9 @@ void datasetInfo(){
             display("credit.txt");
             break;
         case 4:
+            display("wine.txt");
+            break;
+        case 5:
             display("uncorrelated.txt");
             break;
         default:
@@ -218,7 +221,7 @@ void multiNomLogRegInfo(){
 }
 
 void testMenu(){
-    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Uncorrelated Data"};
+    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit","Wine", "Uncorrelated Data"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -233,6 +236,9 @@ void testMenu(){
             test("../datasets/credit.csv", 16);
             break;
         case 4:
+            test("../datasets/wine.csv", 1);
+            break;
+        case 5:
             test("../datasets/uncorrelated.csv", 3);
             break;
         default:
