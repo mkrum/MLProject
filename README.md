@@ -29,7 +29,8 @@ There are four options in the main menu.
 	
 2) Learn more about the algorithms
 	
-        Here, you can choose any of the four algorithms and it will display information about the algorithm. After, you may choose another algorithm or return to the main menu.
+        Here, you can choose any of the four algorithms and it will display information about the algorithm. 
+        After, you may choose another algorithm or return to the main menu.
 	
 3) Learn more about the datasets
 	
