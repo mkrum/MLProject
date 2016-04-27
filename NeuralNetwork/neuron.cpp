@@ -28,35 +28,36 @@ double Neuron::sigmoid(double value){
 double Neuron::summate(vector<double> Inputs){
     inputs=Inputs;
     double total=0;
+    //goes through all weights and multiplies them by the inputs
     for(int i=0; i<weights.size(); i++){
         total+=weights[i]*Inputs[i];
     }
-    return sigmoid(total);
+    return sigmoid(total); //activation function
 }
 
 //function used to print weights during testing
 void Neuron::printWeights(){
+    //prints all weights
     for(auto i : weights)
         cout << i << endl;
 }
 
 //backpropagates, changing the weights depending on the answer
 void Neuron::backPropagate(double answer){
-    dweights.clear();
-    double step=.02;
-    output=summate(inputs);
-    double outputLocal=summate(inputs);
-    double delta=getOutput()*(1.0-getOutput())*(answer-getOutput());
+    dweights.clear(); //clears vector
+    double step=.02; //can be changed to tune algorithm
+    output=summate(inputs); //gets the output of the neuron
+    double delta=getOutput()*(1.0-getOutput())*(answer-getOutput()); //function * derivative * error
     for(int i=0; i<inputs.size(); ++i){
-        dweights.push_back(step*delta*inputs[i]);
-        weights[i]+=dweights[i];
+        dweights.push_back(step*delta*inputs[i]); //creates new dweight
+        weights[i]+=dweights[i]; //adjusts weights
     }
 }
 
 //gives weights random numbers
 void Neuron::setWeights(int numWeights){
     for(int i=0; i<numWeights; i++){
-        weights.push_back(getRandomWeight());
+        weights.push_back(getRandomWeight()); //pushes back a random double from 0-1
     }
 }
 
@@ -70,11 +71,11 @@ double Neuron::getRandomWeight(){
 
 //takes in inputs from the network and feeds them forward by summating
 void Neuron::feedForward(vector<double> Inputs){
-    output=summate(Inputs);
+    output=summate(Inputs); //sets output for the neuron
 }
 
 void Neuron::takeInputs(vector<double> datavector){
-    inputs=datavector;
+    inputs=datavector; //take in the inputs from data
 }
 
 
