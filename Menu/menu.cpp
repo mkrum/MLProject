@@ -54,8 +54,9 @@ void algInfo(){
         case 1:
             markovInfo();
             break;
-	case 2:
-	    multiNomLogRegInfo();
+	    case 2:
+	        multiNomLogRegInfo();
+            break;
         default:
             algInfo();
     }

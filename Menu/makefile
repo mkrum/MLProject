@@ -9,4 +9,4 @@ menu: menu.cpp ../MarkovLogicNetwork/mln.o ../MarkovLogicNetwork/insight.o ../Ma
 %.o: %.cpp
 	g++ $(FLAGS) -c $^ $(LINK) -ldataset -o $@  
 clean:
-	rm -rf test *.o
+	rm -rf menu *.o

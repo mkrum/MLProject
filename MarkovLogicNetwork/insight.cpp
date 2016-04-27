@@ -10,8 +10,8 @@ insight::insight(int len, string in) : identifier(in), ocur(0), verif(0), attemp
     std::uniform_int_distribution<int> d1(0, len);
     order.push_back(d1(gen));
     compOrder.push_back(d(gen));
-    std::uniform_real_distribution<double> dist(0.0, 1.0);
-    constants.push_back(dist(gen));
+    std::normal_distribution<double> dist(0.0, 1.0);
+    constants.push_back( 1 - dist(gen));
     vectorInit();
 }
 
@@ -26,10 +26,7 @@ void insight::reset(){
 double insight::weight() const{
     //Bayes
     if (attempts > 0){
-        double SgU = 1.0*successes / (successes+ ocur);
-        double U = (1.0*successes + ocur)/ attempts;
-        double S = 1.0*verif / attempts;
-        return U;
+        return verif/(1 + ocur)*successes/(attempts*(1.0 + verif - successes));
     } else {
         return 0.0;
     }
@@ -50,20 +47,14 @@ void insight::check(node n) {
     }
 //this is overly verbose, but deal with it    
     attempts++;
+    if(identifier.compare(n.getIdent()) == 0){
+        ocur++;
+    }
     if(final){
-        verif++;
-        if(identifier.compare(n.getIdent()) == 0){
+        if(final && identifier.compare(n.getIdent()) == 0){
             successes++;
-            return true;
-        } else {
-            failures++;
-            return false;
         }
-    } else {
-         if(identifier.compare(n.getIdent()) == 0){
-            ocur++;
-            return true;
-        } 
+        verif++;
     }
 }
 

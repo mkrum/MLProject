@@ -92,20 +92,16 @@ template<typename T>
 string TreeNode<T>::getMostPopularResult()
 {
 	map <string,double>::iterator it = numOfResults.begin();
-	cout << "literally" << endl;
 	double popular = it->second;
 	string val = it->first;
-	cout << "nah tho" << endl;
 	for(it=getMap().begin();it != getMap().end();it++)
 	{
-		cout << "fammin" << endl;
 		if (it->second > popular)
 		{
 			popular = it->second;
 			val = it->first;
 		}
 	}
-	cout << "hope you like fammin too" <<endl;
 	return val;
 }
 

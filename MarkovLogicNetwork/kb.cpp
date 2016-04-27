@@ -97,7 +97,8 @@ void kb::classify(node n){
         score = 0;
         for(auto in : base[classe]){
             if(in->evaluate(n)) {
-                score += in->weight();
+                score = in->weight();
+                break;
             }
         }
         if(score > max){
