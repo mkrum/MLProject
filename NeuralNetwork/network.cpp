@@ -7,15 +7,21 @@
 #include <time.h>
 #include <string>
 #include "network.h"
+#include <ctime>
 using namespace std;
 
 //constructor
 NeuralNetwork::NeuralNetwork(string file, int index):data(file, index),neuron(){
+}
+
+void NeuralNetwork::execute(){
+    const clock_t begin=clock();
     neuron.setWeights(data.columns());
     createMap();
     learnWeights();
     testData();
-    cout << "PERCENTAGE CORRECT " << calculatePercentage() << endl;   
+    duration=double(clock()-begin)/CLOCKS_PER_SEC;
+    percentage=calculatePercentage();
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating

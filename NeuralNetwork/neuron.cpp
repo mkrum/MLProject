@@ -11,11 +11,6 @@
 using namespace std;
 
 //constructor
-Neuron::Neuron(int numWeights){
-    setWeights(numWeights);
-}
-
-//constructor
 Neuron::Neuron(){
 }
 

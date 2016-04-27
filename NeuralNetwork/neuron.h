@@ -12,13 +12,10 @@ using namespace std;
 class Neuron{
     public:
         Neuron();
-        Neuron(int); //constructor that takes in the amount of weights
         ~Neuron();
         //GET SET FUNCTIONS
         double getOutput() { return output; }
         void setOutput(double op) { output=op; } //sets the output
-        vector<double> getWeights() const { return weights; }
-        vector<double> getDWeights() const { return dweights; }
         //FUNCTIONS USED IN THE NETWORK
         void feedForward(vector<double>);
         void backPropagate(double);
@@ -30,6 +27,8 @@ class Neuron{
         vector<double> weights; //vector of all the weights
         vector<double> dweights;
         vector<double> inputs; //inputs vector; gets saved in the summate function
+        vector<double> getWeights() const { return weights; }
+        vector<double> getDWeights() const { return dweights; }
         int numWeights; //number of weights
         double output; //output of the neuron 
         //PRIVATE FUNCTIONS OF THE NEURON
