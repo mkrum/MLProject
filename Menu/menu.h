@@ -27,6 +27,7 @@ void printHeader();
 void printMarkov(string, int);
 void printMultiNomLogReg(string, int);
 void printDecisionTree(string, int);
+void printNeuralNetwork(string, int);
 void printMainMenu();
 void testMenu();
 void test(string, int);
@@ -34,5 +35,6 @@ void markovInfo();
 void multiNomLogRegInfo();
 void algInfo();
 void decisionTreeInfo();
+void networkInfo();
 
 #endif
