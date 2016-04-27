@@ -33,8 +33,8 @@ There are four options in the main menu.
 	
 3) Learn more about the datasets
 	
-        With this option, you can learn more about individual datasets. After, you 
-	may choose another dataset or return to the main menu.
+        With this option, you can learn more about individual datasets. 
+        After, you may choose another dataset or return to the main menu.
 	
 4) Quit
 	
