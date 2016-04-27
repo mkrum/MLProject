@@ -7,6 +7,7 @@
 #include "mln.h"
 #include "multiNomLogReg.h"
 #include "network.h"
+#include "dt.h"
 #include <iostream>
 #include <vector>
 #include <map>
