@@ -237,12 +237,12 @@ void printMultiNomLogReg(string file, int index){
 	multiNomLogReg minler(file, index);
 	vector<double> ret;
 	ret = minler.exec();
-	cout << std::left << std::setw(35) << "Multinomial Logistic Regression" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
+	cout << std::left << std::setw(35) << "Multinomial Logistic Regression" << std::setw(15) << ret[1] << std::setw(15) << ret[0] << endl;
 }
 
 void printDecisionTree(string file, int index){
 	dt dtree(file, index);
 	vector<double> ret;
 	ret = dtree.execute();
-	cout << std::left << std::setw(35) << "Decision Tree" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
+	cout << std::left << std::setw(35) << "Decision Tree" << std::setw(15) << ret[1] << std::setw(15) << ret[0] << endl;
 }
