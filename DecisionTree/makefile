@@ -3,7 +3,7 @@ LINK=-I ../dataHandling -L ../dataHandling
 
 all:test
 
-test: main.cpp
+test: practice.cpp
 	g++ $(FLAGS) $^ -o $@ $(LINK) -ldataset 
 
 %.o: %.cpp
