@@ -3,7 +3,7 @@
 
 #include "mln.h"
 
-mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 20) {
+mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
     num = 500/objects.size();
     for(int i = 0; i < objects.size(); i++){
             vector<insight*> temp;
