@@ -1,4 +1,13 @@
 Decision Tree
 
 Description
-The decision tree, as used in this project for decision tree learning, 
+The decision tree, as used in this project for decision tree learning, is used as a predictive model for items of data.  The tree maps observations about each item, and arranges the tree in a way that a new item can follow a certain path, based on logic statements at each tree node, and be given a prediction.  The program and algorithm have three main parts: tree creation, tree training, and tree predicting.  The creation aspect creates a tree that has (2^n - 1) nodes, where n is equal to the number of predicting variables, up to a maximum of 5. All nodes at each level of the tree contain a data value that is the average value of all data items for that attribute (each level of the tree is a separate attribute).  "Tree training" is the process of applying 80% of the dataset, each node at a time, to be mapped at one of the bottom-most level.  Each node traverses the tree by comparing its value to the average value, and then moving right (greater than) or left (less than/equal) accordingly. Each bottom node contains a map that reveals the type(what you are trying to predict)  with the highest occurence at that node.  This value is then used to predict the type of the remaining 20% of the data ("tree predicting"). Each of the predicting items traverse the same tree, but instead of contributing to the map it retains a prediction string.
+
+Strengths
+*For datasets with smaller numbers of variables for each item, it is very fast, as the tree is relatively small
+*It is easy for the user to understand what is happening, as the mathematic equations are relatively simple and a tree is easy to visualize
+
+Weaknesses
+*For datasets with larger numbers of variables for each item, the number of levels of the tree must be capped (I cap it at 5 levels) in order to keep the very fast execution time
+*The tradeoff for more levels (increase in accuracy) results in much longer execution time
+*Can lose accuracy if two outcomes share similar statistics (only one guess is allowed per bottom node)
