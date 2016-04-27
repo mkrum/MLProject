@@ -1,0 +1,18 @@
+Markov Logic Network
+
+Description
+In its simplest form, a Markov Logic Network is a series a logic statements with corresponding weights. It uses these logic statements and weights to analyze the data, and then determine which
+outcome is the most likely. My implementation determines the logic statements using a Genetic Monte Carlo Method. It starts with simple first degree statements and then measures their individual 
+success rates. Those with higher success rates are saved into a knowledge base. It then takes these high success statements and mutates them into newer, more complex statements and repeats. This 
+process should find the optimal logic statements. For the weights of each of these statements, I just used their past probability of success. To make a prediction, I would run the unknown node 
+through all the optimized statements in the knowledge base, tracking the sum of the weights it accumulates. It the classifies the node as being the class with the highest weight score.
+
+Strengths
+   *Relatively high success rate
+   *Since it finds logic statements, it gives insights that are very easy to understand for humans
+
+Weaknesses
+   *Relatively slow
+   *Since it relies on randomly generated statements, it has a highly variable success rate
+
+

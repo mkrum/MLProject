@@ -4,7 +4,7 @@
 #include <utility>
 using namespace std;
 int main() {
-    mln net2 = mln("../datasets/iris.csv", 5);
+    mln net2 = mln("../datasets/credit.csv", 16);
     net2.tweaking();
 }
 

@@ -1,4 +1,4 @@
-FLAGS=-std=c++11 -static-libstdc++
+FLAGS=-std=c++11 -static-libstdc++ -pthread
 LINK=-I ../MarkovLogicNetwork -I../dataHandling -L ../dataHandling
 
 main:menu
@@ -10,4 +10,4 @@ menu: menu.cpp ../MarkovLogicNetwork/mln.o ../MarkovLogicNetwork/insight.o ../Ma
 	g++ $(FLAGS) -c $^ $(LINK) -ldataset -o $@  
 
 clean:
-	rm -rf test *.o
+	rm -rf menu *.o

@@ -4,7 +4,7 @@
 #include "mln.h"
 
 mln::mln(string file, int index):data(file, index), objects(data.classes()), dkb(data.classes(), 10) {
-    num = 100/objects.size();
+    num = 500/objects.size();
     for(int i = 0; i < objects.size(); i++){
             vector<insight*> temp;
             for(int z = 0; z < num; z++){
@@ -55,7 +55,7 @@ void mln::evolve(){
 }
 
 void mln::learn(){
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < 50; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
     }
@@ -81,7 +81,7 @@ void mln::tweaking(){
     data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
     evolve();
     debug();
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 50; i++){
         data.learn(std::bind(&mln::learnWeights, this, std::placeholders::_1), 1);
         evolve();
         cout << test() << endl;
