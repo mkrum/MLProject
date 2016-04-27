@@ -22,5 +22,8 @@ int main(){
     NeuralNetwork network4("../datasets/iris.csv", 5);
     network4.execute();
     cout << "Percentage: " <<network4.getPercentage() << endl << "Time: " << network4.getDuration()<< endl; 
+    NeuralNetwork network5("../datasets/poker.csv", 11);
+    network5.execute();
+    cout << "Percentage: " <<network5.getPercentage() << endl << "Time: " << network5.getDuration()<<endl;
     return 0;
 }
