@@ -152,8 +152,6 @@ void networkInfo(){
         cout << line << endl;
     }
     mfile.close();
-    cout << "Example Case (will take a second to load)\n";
-    NeuralNetwork network = NeuralNetwork("../datasets/breastcancer.csv", 2);
     int choice;
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
     cin >> choice;

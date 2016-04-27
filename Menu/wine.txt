@@ -1,0 +1,19 @@
+The wine dataset has 13 different attributes and 178 instances. The different attributes are:
+
+1) Alcohol 
+2) Malic acid 
+3) Ash 
+4) Alcalinity of ash 
+5) Magnesium 
+6) Total phenols 
+7) Flavanoids 
+8) Nonflavanoid phenols 
+9) Proanthocyanins 
+10)Color intensity 
+11)Hue 
+12)OD280/OD315 of diluted wines 
+13)Proline
+
+An example instance from this dataset is:
+
+1,14.23,1.71,2.43,15.6,127,2.8,3.06,.28,2.29,5.64,1.04,3.92,1065
