@@ -1,0 +1,21 @@
+Markov Logic Network
+
+Description
+A neural network is composed of an input layer, a number of hidden layers, and an output layer. The input layer is
+essentially sending every single attribute to the neurons that compose the hidden layer(s). In the hidden layer(s),
+random weights are calculated and multiplied to the inputs. Then all the inputs are summed together and sent to an
+activation function. In my neural network, I chose to use the Sigmoid function which is 1/(1-e^(-x)). The output from
+the activation function is then fed forward in the network, either to the next hidden layer or the output layer as an
+input. This is repeated until the results are sent to the output layer and a final output is calculated. This is
+compared to the expected answer and from that an error is calculated and through a process called back propagation, the
+weights of each neuron are adjusted. This is done a chosen amount of times to get the best weights. Then, the inputs
+of unknown data objects are fed forward with the trained weights to get an estimation.
+
+Strengths
+   *Can be adjusted and tuned a lot
+   *More neurons can be added and more layers can be added to increase learning
+
+Weaknesses
+   *Lots of small calculations take a lot of time
+   *Relies on random weights at the beginning so success varies, relying on initial weights
+
