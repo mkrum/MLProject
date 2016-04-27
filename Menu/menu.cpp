@@ -195,6 +195,7 @@ void testMenu(){
 void test(string file, int index){
     printHeader();
     printMarkov(file, index);
+    printNetwork(file, index);
     printMultiNomLogReg(file, index);
     printDecisionTree(file, index);
     cout << "Re-Run (1), New Test (2), or Main Menu (3): ";
