@@ -4,7 +4,7 @@
 
 #include <functional>
 #include "dataset.h"
-#include "layer.h"
+#include "neuron.h"
 #include <iostream>
 #include <vector>
 #include <map>
