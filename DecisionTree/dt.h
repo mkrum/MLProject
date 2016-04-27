@@ -164,7 +164,7 @@ vector<double> dt::execute()
 	vector<string> testStats;
 	int sizeOfTest = data.tlength();
 	root = getTree().getFirst();
-	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
+	for(int i=sizeOfTest*4;i<sizeOfTest*5-2;i++)
 	{
 		vector<double> stats;
 		for(int j=0;j<data.columns();j++)
@@ -174,7 +174,7 @@ vector<double> dt::execute()
 		testStats.push_back(assignTreeProb(stats, root,0));
 		
 	}
-	for(int i=sizeOfTest*4;i<sizeOfTest*5-1;i++)
+	for(int i=sizeOfTest*4;i<sizeOfTest*5-2;i++)
 	{
 		if(data.get(i).getIdent() == testStats[i-sizeOfTest*4])
 			numCorrect++;
