@@ -36,6 +36,9 @@ void printMainMenu(){
         case 2:
             algInfo();
             break;
+        case 3:
+            datasetInfo();
+            break;
         case 4:
             system("clear");
             return;
@@ -67,6 +70,50 @@ void algInfo(){
     }
 }
 
+void display(string file){
+    system("clear");
+    std::ifstream mfile(file);
+    string line;
+    while (std::getline(mfile, line)){
+        cout << line << endl;
+    }
+    int choice;
+    cout << "\nMain Menu (1) or Learn About Another Dataset (2): ";
+    cin >> choice;
+    switch (choice){
+        case 1:
+            printMainMenu();
+            break;
+        case 2:
+            datasetInfo();
+            break;
+        default:
+            datasetInfo();
+    }
+}
+
+void datasetInfo(){
+    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Uncorrelated Data"};
+    printScreen(text);
+    int choice;
+    cin >> choice;
+    switch(choice){
+        case 1:
+            display("iris.txt");
+            break;
+        case 2:
+            display("breastcancer.txt");
+            break;
+        case 3:
+            display("credit.txt");
+            break;
+        case 4:
+            display("uncorrelated.txt");
+            break;
+        default:
+            testMenu();
+    }
+}
 
 void markovInfo(){
     system("clear");
@@ -127,9 +174,6 @@ void decisionTreeInfo(){
         cout << line << endl;
     }
     mfile.close();
-    cout << "Example Case (will take a second to load)\n";
-    mln net = mln("../datasets/breastcancer.csv", 2);
-    net.example();
     int choice;
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
     cin >> choice;
@@ -174,7 +218,7 @@ void multiNomLogRegInfo(){
 }
 
 void testMenu(){
-    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit"};
+    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Uncorrelated Data"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -187,6 +231,9 @@ void testMenu(){
             break;
         case 3:
             test("../datasets/credit.csv", 16);
+            break;
+        case 4:
+            test("../datasets/uncorrelated.csv", 3);
             break;
         default:
             testMenu();

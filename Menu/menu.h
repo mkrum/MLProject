@@ -38,5 +38,7 @@ void multiNomLogRegInfo();
 void algInfo();
 void decisionTreeInfo();
 void networkInfo();
+void datasetInfo();
+void display(string);
 
 #endif

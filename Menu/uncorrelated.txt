@@ -1,0 +1,7 @@
+This data set we randomly generated to show that our algorithms were learning actual patterns instead of overfitting the
+testing data. It contains two random numbers and then a member of the teams first name. The algorithms should fail to
+classify this data succesfully.
+
+Sample Data Point:
+
+0.514659,0.446023,michael
