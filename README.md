@@ -23,8 +23,8 @@ There are four options in the main menu.
 1) Test
 	
         This pulls up all the data sets that you can test the 4 different algorithms. 
-        When you choose a dataset, it will run it each algorithm on it and display the time it took to run and the success rate. 
-        
+        When you choose a dataset, it will run it each algorithm on it and display the time it took to 
+        run and the success rate. 
         After, you can either re-run, do a new test or return to the main menu.
 	
 2) Learn more about the algorithms
