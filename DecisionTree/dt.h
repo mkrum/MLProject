@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <locale>
 #include <vector>
+#include <ctime>
 using namespace std;
 
 class dt {
@@ -140,8 +141,8 @@ void dt::setMapVal(vector<double> vals, TreeNode<double> &a, int i, string actua
 
 vector<double> dt::execute()
 {
+	const clock_t begin_time = clock();
 	vector <double> finalResults;
-	double time=.01;
 	int numCorrect = 0;
 	double percentCorrect;
 	string actual;
@@ -182,6 +183,7 @@ vector<double> dt::execute()
 	}
 	
 	percentCorrect = numCorrect/double(getData().tlength());
+	double time = double(clock() - begin_time)/CLOCKS_PER_SEC;
 	finalResults.push_back(percentCorrect);
 	finalResults.push_back(time);
 	return finalResults;
