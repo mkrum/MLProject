@@ -48,7 +48,7 @@ void printMainMenu(){
 }
 
 void algInfo(){
-    vector<string> text = {"SELECT A ALGORITHM", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree","Neural Network"};
+    vector<string> text = {"SELECT A ALGORITHM ", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree","Neural Network"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -93,7 +93,7 @@ void display(string file){
 }
 
 void datasetInfo(){
-    vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit", "Wine", "Uncorrelated Data"};
+    vector<string> text = {"SELECT A DATASET ", "Iris", "Breast Cancer", "Credit", "Wine", "Uncorrelated Data"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -225,20 +225,26 @@ void testMenu(){
     printScreen(text);
     int choice;
     cin >> choice;
+    std::system("clear");
     switch(choice){
         case 1:
+            cout << "Dataset: Iris" << endl;
             test("../datasets/iris.csv", 5);
             break;
         case 2:
+            cout << "Dataset: Breast Cancer" << endl;
             test("../datasets/breastcancer.csv", 2);
             break;
         case 3:
+            cout << "Dataset: Credit" << endl;
             test("../datasets/credit.csv", 16);
             break;
         case 4:
+            cout << "Dataset: Wine" << endl;
             test("../datasets/wine.csv", 1);
             break;
         case 5:
+            cout << "Dataset: Uncorrelated" << endl;
             test("../datasets/uncorrelated.csv", 3);
             break;
         default:
@@ -271,7 +277,6 @@ void test(string file, int index){
 }
 
 void printHeader(){
-    std::system("clear");
     cout << std::left << std::setw(35) << "Algorithm" << std::setw(15) << "Time (Seconds)" << std::setw(15) << "Success Rate" << endl;
     cout << std::setfill('-') << std::setw(64) << '-' << std::setfill(' ') << endl;
 }   
