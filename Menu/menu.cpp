@@ -154,10 +154,10 @@ void multiNomLogRegInfo(){
     }
     mfile.close();
     cout << "Example Case (will take a second to load)\n" << endl;
-    multiNomLogReg example("../breastcancer.csv", 2);
+    multiNomLogReg example("../datasets/breastcancer.csv" , 2);
     vector<double> ex;
     ex =  example.exec();
-    cout << "Multinomial Logistic Regression ran in " << ex[1] << "seconds with " << ex[2] << "% accuracy";
+    cout << "Multinomial Logistic Regression ran in " << ex[1] << " seconds with " << ex[0]*100 << "\% accuracy";
     cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
     int choice;
     cin >> choice;
