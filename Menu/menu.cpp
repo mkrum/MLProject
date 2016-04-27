@@ -6,7 +6,7 @@
 int main() {
     printMainMenu();
 }
-
+//a general menu printing function
 void printScreen(vector<string> inputs){
     std::system("clear");
     cout << std::left <<  '*' << std::setfill('*') << std::setw(65) << '*' << std::setfill(' ') << endl;
@@ -22,7 +22,7 @@ void printScreen(vector<string> inputs){
     cout << '*' << std::setfill('*') << std::setw(65) << '*' << std::setfill(' ') << endl;
     cout << "Choice : ";
 }
-
+//Main Menu function
 void printMainMenu(){
     vector<string> mainM = {"WELCOME TO THE MACHINE LEARNING PROJECT", "Test", "Learn more about the algorithms", "Learn more about the datasets", "Quit"};
     printScreen(mainM);
@@ -46,7 +46,7 @@ void printMainMenu(){
             printMainMenu();
     }
 }
-
+//Displays the algorithm info
 void algInfo(){
     vector<string> text = {"SELECT A ALGORITHM ", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree","Neural Network"};
     printScreen(text);
@@ -69,7 +69,7 @@ void algInfo(){
             algInfo();
     }
 }
-
+//displays the content of a file
 void display(string file){
     system("clear");
     std::ifstream mfile(file);
@@ -91,7 +91,7 @@ void display(string file){
             datasetInfo();
     }
 }
-
+//dataset information menu
 void datasetInfo(){
     vector<string> text = {"SELECT A DATASET ", "Iris", "Breast Cancer", "Credit", "Wine", "Uncorrelated Data"};
     printScreen(text);
@@ -117,7 +117,7 @@ void datasetInfo(){
             testMenu();
     }
 }
-
+//displays the information for markov
 void markovInfo(){
     system("clear");
     std::ifstream mfile("markov.txt");
@@ -143,7 +143,7 @@ void markovInfo(){
             algInfo();
     }
 }
-
+//Displays the info for a neural network
 void networkInfo(){
     system("clear");
     std::ifstream mfile("network.txt");
@@ -168,7 +168,7 @@ void networkInfo(){
             algInfo();
     }
 }
-
+//displays the info for the decision tree
 void decisionTreeInfo(){
     system("clear");
     std::ifstream mfile("tree.txt");
@@ -191,7 +191,7 @@ void decisionTreeInfo(){
             algInfo();
     }
 }
-
+//Displays info for MNLR
 void multiNomLogRegInfo(){
     system("clear");
     std::ifstream mfile("multiNomLogReg.txt");
@@ -219,7 +219,7 @@ void multiNomLogRegInfo(){
             algInfo();
     }
 }
-
+//Shows the menu for testing
 void testMenu(){
     vector<string> text = {"SELECT A DATASET", "Iris", "Breast Cancer", "Credit","Wine", "Uncorrelated Data"};
     printScreen(text);
@@ -251,7 +251,7 @@ void testMenu(){
             testMenu();
     }
 }
-
+//Test a dataset
 void test(string file, int index){
     printHeader();
     printMarkov(file, index);
@@ -275,30 +275,32 @@ void test(string file, int index){
             testMenu();
     }
 }
-
+//Prints the display header for testing a dataset
 void printHeader(){
     cout << std::left << std::setw(35) << "Algorithm" << std::setw(15) << "Time (Seconds)" << std::setw(15) << "Success Rate" << endl;
     cout << std::setfill('-') << std::setw(64) << '-' << std::setfill(' ') << endl;
 }   
-
+//Prints the results of Markov
 void printMarkov(string file, int index){
     mln net = mln(file, index);
     vector<double> ret;
     ret = net.execute();
     cout << std::left << std::setw(35) << "Markov Logic Network" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
 }
+//Prints the results for the Neural Network
 void printNeuralNetwork(string file, int index){
     NeuralNetwork network=NeuralNetwork(file, index);
     network.execute();
     cout << std::left << std::setw(35) << "Neural Network" << std::setw(15) << network.getDuration() << std::setw(15) << network.getPercentage() << endl;
 }
+//Prints the results for MNLR
 void printMultiNomLogReg(string file, int index){
 	multiNomLogReg minler(file, index);
 	vector<double> ret;
 	ret = minler.exec();
 	cout << std::left << std::setw(35) << "Multinomial Logistic Regression" << std::setw(15) << ret[1] << std::setw(15) << ret[0] << endl;
 }
-
+//Prints the results for Decision tree
 void printDecisionTree(string file, int index){
 	dt dtree(file, index);
 	vector<double> ret;
