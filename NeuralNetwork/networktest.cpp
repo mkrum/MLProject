@@ -10,6 +10,6 @@
 using namespace std;
 
 int main(){
-    NeuralNetwork network1("../dataSets/credit.csv", 16);
+    NeuralNetwork network1("../dataSets/wine.csv", 1);
     return 0;
 }
