@@ -14,11 +14,16 @@ using namespace std;
 class NeuralNetwork{
     public:
         NeuralNetwork(string, int); //constructor 
+        void execute();
+        double getPercentage() { return percentage; }
+        double getDuration() { return duration; }
+    private:
+        Neuron neuron; //neuron for the network
+        double percentage;
+        double duration;
         void feedForward(vector<double>); //sends info through network
         void train(node); //function to train for a node
-        Neuron neuron; //neuron for the network
         void learnWeights();
-    private:
         void getData(node); //gets data from the node
         void createMap();
         double calculatePercentage();

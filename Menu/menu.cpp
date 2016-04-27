@@ -46,7 +46,7 @@ void printMainMenu(){
 }
 
 void algInfo(){
-    vector<string> text = {"SELECT A ALGORITHM", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree"};
+    vector<string> text = {"SELECT A ALGORITHM", "Markov Logic Network", "Multinomial Logistic Regression","Decision Tree","Neural Network"};
     printScreen(text);
     int choice;
     cin >> choice;
@@ -54,12 +54,15 @@ void algInfo(){
         case 1:
             markovInfo();
             break;
-	    case 2:
-		multiNomLogRegInfo();
+	case 2:
+	    multiNomLogRegInfo();
 	    break;
-	    case 3:
-	    	decisionTreeInfo();
+	case 3:
+	    decisionTreeInfo();
 	    break;
+        case 4:
+            networkInfo();
+            break;
         default:
             algInfo();
     }
@@ -90,6 +93,31 @@ void markovInfo(){
         default:
             algInfo();
     }
+}
+
+void networkInfo(){
+    system("clear");
+    std::ifstream mfile("network.txt");
+    string line;
+    while (std::getline(mfile, line)){
+        cout << line << endl;
+    }
+    mfile.close();
+    cout << "Example Case (will take a second to load)\n";
+    NeuralNetwork network = neuralnetwork("../datasets/breastcancer.csv", 2);
+    neuralnetwork.example();
+    int choice;
+    cout << "\nMain Menu (1) or Learn About Another Algorithm (2): ";
+    cin >> choice;
+    switch (choice){
+        case 1:
+            printMainMenu();
+            break;
+        case 2:
+            algInfo();
+            break;
+        default:
+            algInfo();
 }
 
 void decisionTreeInfo(){
@@ -209,6 +237,11 @@ void printMarkov(string file, int index){
     vector<double> ret;
     ret = net.execute();
     cout << std::left << std::setw(35) << "Markov Logic Network" << std::setw(15) << ret[0] << std::setw(15) << ret[1] << endl;
+}
+void printNeuralNetwork(string file, int index){
+    NeuralNetwork network=NeuralNetwork(file, index);
+    network.execute();
+    cout << std::left << std::setw(35) << "Neural Network" << std::setw(15) << network.getDuration() << std::setw(15) << network.getPercentage() << endl;
 }
 void printMultiNomLogReg(string file, int index){
 	mnlr minler(file, index);
