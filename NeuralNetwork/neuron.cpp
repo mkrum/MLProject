@@ -15,6 +15,10 @@ Neuron::Neuron(int numWeights){
     setWeights(numWeights);
 }
 
+//constructor
+Neuron::Neuron(){
+}
+
 //deconstructor
 Neuron::~Neuron(){
 
@@ -37,7 +41,6 @@ double Neuron::summate(vector<double> Inputs){
 
 //function used to print weights during testing
 void Neuron::printWeights(){
-    cout << "below are the weights" << endl;
     for(auto i : weights)
         cout << i << endl;
 }
@@ -46,10 +49,10 @@ void Neuron::printWeights(){
 void Neuron::backPropagate(double answer){
     dweights.clear();
     double step=.02;
-    setOutput(summate(inputs));
+    output=summate(inputs);
     double outputLocal=summate(inputs);
     double delta=getOutput()*(1.0-getOutput())*(answer-getOutput());
-    for(int i=0; i<inputs.size(); i++){
+    for(int i=0; i<inputs.size(); ++i){
         dweights.push_back(step*delta*inputs[i]);
         weights[i]+=dweights[i];
     }
@@ -75,6 +78,8 @@ void Neuron::feedForward(vector<double> Inputs){
     output=summate(Inputs);
 }
 
-
+void Neuron::takeInputs(vector<double> datavector){
+    inputs=datavector;
+}
 
 

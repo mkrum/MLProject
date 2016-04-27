@@ -10,27 +10,19 @@
 using namespace std;
 
 //constructor
-NeuralNetwork::NeuralNetwork(string file, int index):data(file, index), neuron(index-1){
-    //cout << "in the constructor " << endl;
+NeuralNetwork::NeuralNetwork(string file, int index):data(file, index),neuron(){
+    neuron.setWeights(data.columns());
     createMap();
-    //cout << "map" << endl;
     learnWeights();
-    //cout << "weights"<< endl;
     testData();
     cout << "PERCENTAGE CORRECT " << calculatePercentage() << endl;   
 }
 
 //takes in a node and then trains the network by feeding forward and then backpropagating
 void NeuralNetwork::train(node n){
-    //cout << "start" << endl;
+    neuron.takeInputs(n.dataVector());
     feedForward(n.dataVector());
-    //cout << answers[n.getIdent()] << endl;
-    //cout << "BOIEG " << answers["B"] << endl;
-    for(int i=0; i<100; i++){
-       /* cout << i << endl;
-        cout << n.getIdent() << endl;
-        cout << "GOT IDENT" << endl;
-        cout << answers[n.getIdent()] << endl;*/
+    for(int i=0; i<10; i++){
         neuron.backPropagate(answers[n.getIdent()]);
     }
 }

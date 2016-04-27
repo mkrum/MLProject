@@ -11,6 +11,7 @@ using namespace std;
 
 class Neuron{
     public:
+        Neuron();
         Neuron(int); //constructor that takes in the amount of weights
         ~Neuron();
         //GET SET FUNCTIONS
@@ -22,6 +23,8 @@ class Neuron{
         void feedForward(vector<double>);
         void backPropagate(double);
         void printWeights(); //prints all the weights
+        void setWeights(int); //sets all the weights
+        void takeInputs(vector<double>);
     private:
         //PRIVATE DATA OF THE NEURON
         vector<double> weights; //vector of all the weights
@@ -30,7 +33,6 @@ class Neuron{
         int numWeights; //number of weights
         double output; //output of the neuron 
         //PRIVATE FUNCTIONS OF THE NEURON
-        void setWeights(int); //sets all the weights
         double getRandomWeight(); //returns a random weight
         //MATH FUNCTIONS
         double sigmoid(double); //returns the result of the sigmoid function
