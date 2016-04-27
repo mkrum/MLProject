@@ -148,25 +148,13 @@ void decisionTreeInfo(){
 
 void multiNomLogRegInfo(){
     system("clear");
-    cout << 
-"Markov Logic Network\n"
-"\n\n"
-"Description\n"
-"Multinomial Logistic Regression is, in itself, a mathematical technique for classifying data to certain classifiers by modeling the relationship as a dot product of the dependent variables with certain \n"
-"weights that are calculated via ordinary linear regression. This dot product comprises a predictor function that takes in a new data points dependent variables and outputs a value that lies within the\n"
-"range of classifier values (numbers that correspond to the string classifier of a datapoint). It essentially creates multiple gradients that separate the differnt class fields of data and can guess which\n"
-"classifier a new data point would fall under based on which gradient this data point lies within. \n"
-"\n"
-"\n"
-"Strengths\n"
-"   *Extremely fast due to mathematical nature\n"
-"   *Works very well with binarily classified data (data with only two classifiers)\n"
-"\n"
-"Weaknesses\n"
-"   *Inconsistent on small sample sizes and on data with more than four classifiers\n"
-"   *Inner workings are numerical weights which aren't the most intelligible to humans\n"
-"\n"
-"Example Case (will take a second to load)\n";
+    std::ifstream mfile("multiNomLogReg.txt");
+    string line;
+    while (std::getline(mfile, line)){
+        cout << line << endl;
+    }
+    mfile.close();
+    cout << "Example Case (will take a second to load)\n" << endl;
     mnlr example("../breastcancer.csv", 2);
     vector<double> ex = example.exec();
     cout << "Multinomial Logistic Regression ran in " << ex[1] << "seconds with " << ex[2] << "% accuracy";
