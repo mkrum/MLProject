@@ -5,8 +5,7 @@
 #define MENU_H
 
 #include "mln.h"
-#inlcude "dt.h"
-#inlcude "multiNomLogReg.h"
+#include "multiNomLogReg.h"
 #include <iostream>
 #include <vector>
 #include <map>
