@@ -3,17 +3,23 @@ MLProject
 Machine Learning project for FOC II.
 
 Team Members:
+
 Michael R. Krumdick
+
 Marco Bruscia
+
 Will Kudela
+
 Luke Duane
 
 
 HOW TO RUN:
 
-To run our project, make sure you are in the main forlder (MLProject), type run then press enter (easy as that).
+To run our project, make sure you are in the main folder (MLProject), type run then press enter (easy as that).
 
 INSTRUCTIONS:
+
+The user operates the program through a series of test menus in the command line. To navigate, simply enter the integer value that corresponds to you desired choice.
 
 There are four options in the main menu.
 
