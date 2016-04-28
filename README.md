@@ -11,7 +11,7 @@ Luke Duane
 
 HOW TO RUN:
 
-To run our project, type run and press enter (easy as that).
+To run our project, make sure you are in the main forlder (MLProject), type run then press enter (easy as that).
 
 INSTRUCTIONS:
 
